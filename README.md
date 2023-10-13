@@ -1,2 +1,1 @@
-# Projects
-All Projects
+Hello I'm Jemar E. Yorong
