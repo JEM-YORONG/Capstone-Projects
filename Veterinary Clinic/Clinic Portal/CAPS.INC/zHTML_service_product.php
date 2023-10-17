@@ -242,6 +242,11 @@
 
     function getInfo(imageName, imageSrc, title, categories, description, id) {
       const fileInput = document.getElementById("editImage");
+      const blob = dataURItoBlob(imageSrc); // Convert the data URI to a Blob
+      const file = new File([blob], imageName); // Create a File with the Blob and filename
+      const dataTransfer = new DataTransfer();
+      dataTransfer.items.add(file);
+      fileInput.files = dataTransfer.files;
 
       document.getElementById("id").value = id;
       document.getElementById("editPreview").src = imageSrc;
@@ -249,6 +254,21 @@
       document.getElementById("editCategories").value = categories;
       document.getElementById("editDescription").value = description;
     }
+
+    function dataURItoBlob(dataURI) {
+      // Convert a data URI to a Blob
+      const byteString = atob(dataURI.split(',')[1]);
+      const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+      const ab = new ArrayBuffer(byteString.length);
+      const ia = new Uint8Array(ab);
+      for (let i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+      }
+      return new Blob([ab], {
+        type: mimeString
+      });
+    }
+
 
     function openAddServProd() {
       document.getElementById("myForm-servprod").style.display = "block";

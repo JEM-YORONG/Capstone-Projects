@@ -20,7 +20,9 @@ function addData()
     $title = $_POST['title'];
 
     $img = $_FILES['addImage'];
-    $imageName = $title;
+    $imageExtension = strtolower(pathinfo($img['name'], PATHINFO_EXTENSION)); // Get the file extension
+    $imageName = $title . '.' . $imageExtension; // Add the extension to the image name
+
     $imageData = file_get_contents($img['tmp_name']);
     $imageType = $img['type'];
 
@@ -33,7 +35,6 @@ function addData()
     } else {
         $fileSize = $img["size"];
         $validImageExtensions = ['jpg', 'jpeg', 'png'];
-        $imageExtension = strtolower(pathinfo($img['name'], PATHINFO_EXTENSION));
 
         if (!in_array($imageExtension, $validImageExtensions)) {
             echo "Invalid Image Extension";
@@ -62,11 +63,16 @@ function addData()
 }
 
 
+
 function EditData()
 {
     global $conn;
     $img = $_FILES['AddImage'];
     $title = $_POST['Title'];
+    $imageExtension = strtolower(pathinfo($img['name'], PATHINFO_EXTENSION)); // Get the file extension
+    $imageName = $title . '.' . $imageExtension; // Add the extension to the image name
+    $imageData = file_get_contents($img['tmp_name']);
+    $imageType = $img['type'];
     $categories = $_POST['Categories'];
     $description = $_POST['Description'];
     $id = $_POST["Id"];
@@ -75,40 +81,34 @@ function EditData()
     if ($img["error"] === 4) {
         echo "Image does not exist";
     } else {
-        $fileName = $img["name"];
         $fileSize = $img["size"];
-        $tmpName = $img["tmp_name"];
         $validImageExtensions = ['jpg', 'jpeg', 'png'];
-        $imageExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
         if (!in_array($imageExtension, $validImageExtensions)) {
             echo "Invalid image extension";
-        } else if ($fileSize > 5000000) {
+        } else if ($fileSize > 1000000) {
             echo "Image size is too large";
         } else {
-            $checkQuery = "SELECT * FROM serviceandproduct WHERE image = '$fileName'";
-            $result = mysqli_query($conn, $checkQuery);
-
-            if (mysqli_num_rows($result) > 0) {
-                //echo "Image already exists in the database";
-                //$newImageName = uniqid() . '.' . $imageExtension;
-                //move_uploaded_file($tmpName, 'tempImage/' . $newImageName); //move uploaded file to temp image folder 
-                $query = "UPDATE serviceandproduct SET title = '$title', categories = '$categories', description = '$description', date = '$currentDate' WHERE id = '$id'";
-                mysqli_query($conn, $query);
-                mysqli_close($conn);
-                echo "Updated Successfully.";
+            // Use prepared statements to prevent SQL injection.
+            $query = "UPDATE serviceandproduct SET imagename = ?, imagedata = ?, imagetype = ?, title = ?, categories = ?, description = ?, date = ? WHERE id = ?";
+            $stmt = mysqli_prepare($conn, $query);
+            if (!$stmt) {
+                echo "Database Error: " . mysqli_error($conn);
             } else {
-                //echo "Image does not exist in the database";
-                $newImageName = uniqid() . '.' . $imageExtension;
-                move_uploaded_file($tmpName, 'tempImage/' . $newImageName); //move uploaded file to temp image folder 
-                $query = "UPDATE serviceandproduct SET image = '$newImageName', title = '$title', categories = '$categories', description = '$description', date = '$currentDate' WHERE id = '$id'";
-                mysqli_query($conn, $query);
-                mysqli_close($conn);
-                echo "Updated Successfully.";
+                // Bind the parameters and execute the query.
+                mysqli_stmt_bind_param($stmt, "sssssssi", $imageName, $imageData, $imageType, $title, $categories, $description, $currentDate, $id);
+                if (mysqli_stmt_execute($stmt)) {
+                    echo "Updated Successfully.";
+                } else {
+                    echo "Database Error: " . mysqli_error($conn);
+                }
+                mysqli_stmt_close($stmt);
             }
         }
     }
+    mysqli_close($conn);
 }
+
 
 function deleteData()
 {
