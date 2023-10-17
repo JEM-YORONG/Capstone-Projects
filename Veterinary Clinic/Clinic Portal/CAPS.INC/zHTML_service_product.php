@@ -240,12 +240,8 @@
       document.getElementById("filterValue").value = "";
     }
 
-    function getInfo(imageName, imageSrc, imageFile, title, categories, description, id) {
+    function getInfo(imageName, imageSrc, title, categories, description, id) {
       const fileInput = document.getElementById("editImage");
-      const file = new File([imageName], imageFile);
-      const dataTransfer = new DataTransfer();
-      dataTransfer.items.add(file);
-      fileInput.files = dataTransfer.files;
 
       document.getElementById("id").value = id;
       document.getElementById("editPreview").src = imageSrc;

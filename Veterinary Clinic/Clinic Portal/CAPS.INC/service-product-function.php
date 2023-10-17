@@ -16,8 +16,14 @@ if (isset($_POST["action"])) {
 function addData()
 {
     global $conn;
-    $img = $_FILES['addImage'];
+
     $title = $_POST['title'];
+
+    $img = $_FILES['addImage'];
+    $imageName = $title;
+    $imageData = file_get_contents($img['tmp_name']);
+    $imageType = $img['type'];
+
     $categories = $_POST['categories'];
     $description = $_POST['description'];
     $currentDate = date('Y-m-d');
@@ -25,28 +31,36 @@ function addData()
     if ($img["error"] === 4) {
         echo "Image Does Not Exist";
     } else {
-        $fileName = $img["name"];
         $fileSize = $img["size"];
-        $tmpName = $img["tmp_name"];
-        $validImageExtension = ['jpg', 'jpeg', 'png'];
-        $imageExtension = explode('.', $fileName);
-        $imageExtension = strtolower(end($imageExtension));
-        if (!in_array($imageExtension, $validImageExtension)) {
+        $validImageExtensions = ['jpg', 'jpeg', 'png'];
+        $imageExtension = strtolower(pathinfo($img['name'], PATHINFO_EXTENSION));
+
+        if (!in_array($imageExtension, $validImageExtensions)) {
             echo "Invalid Image Extension";
-        } else if ($fileSize > 5000000) //5mb limit
+        } else if ($fileSize > 1000000) // 1MB limit
         {
             echo "Image Size Is Too Large";
         } else {
-            $newImageName = uniqid() . '.' . $imageExtension;
-            move_uploaded_file($tmpName, 'tempImage/' . $newImageName); //move uploaded file to temp image folder
-
-            $query = "INSERT INTO serviceandproduct (image, title, categories, description, date) VALUES ('$newImageName', '$title', '$categories', '$description', '$currentDate')";
-            mysqli_query($conn, $query);
-            mysqli_close($conn);
-            echo "Added Successfully";
+            // Use prepared statements to prevent SQL injection.
+            $query = "INSERT INTO serviceandproduct (imagename, imagedata, imagetype, title, categories, description, date) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $stmt = mysqli_prepare($conn, $query);
+            if (!$stmt) {
+                echo "Database Error: " . mysqli_error($conn);
+            } else {
+                // Bind the parameters and execute the query.
+                mysqli_stmt_bind_param($stmt, "sssssss", $imageName, $imageData, $imageType, $title, $categories, $description, $currentDate);
+                if (mysqli_stmt_execute($stmt)) {
+                    echo "Added Successfully";
+                } else {
+                    echo "Database Error: " . mysqli_error($conn);
+                }
+                mysqli_stmt_close($stmt);
+            }
         }
     }
+    mysqli_close($conn);
 }
+
 
 function EditData()
 {
