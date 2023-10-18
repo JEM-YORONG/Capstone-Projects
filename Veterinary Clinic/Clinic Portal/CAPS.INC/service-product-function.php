@@ -42,19 +42,40 @@ function addData()
         {
             echo "Image Size Is Too Large";
         } else {
-            // Use prepared statements to prevent SQL injection.
-            $query = "INSERT INTO serviceandproduct (imagename, imagedata, imagetype, title, categories, description, date) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            $stmt = mysqli_prepare($conn, $query);
+            $checkerQuery = "SELECT * FROM serviceandproduct WHERE imagename = ?";
+
+            // Check if the image name already exists in the database
+            $stmt = mysqli_prepare($conn, $checkerQuery);
+
             if (!$stmt) {
                 echo "Database Error: " . mysqli_error($conn);
             } else {
-                // Bind the parameters and execute the query.
-                mysqli_stmt_bind_param($stmt, "sssssss", $imageName, $imageData, $imageType, $title, $categories, $description, $currentDate);
-                if (mysqli_stmt_execute($stmt)) {
-                    echo "Added Successfully";
+                mysqli_stmt_bind_param($stmt, "s", $imageName);
+                mysqli_stmt_execute($stmt);
+                mysqli_stmt_store_result($stmt);
+
+                // Check if any rows were returned
+                if (mysqli_stmt_num_rows($stmt) > 0) {
+                    echo "Image Name Already Exists";
                 } else {
-                    echo "Database Error: " . mysqli_error($conn);
+                    // Use prepared statements to prevent SQL injection.
+                    $insertQuery = "INSERT INTO serviceandproduct (imagename, imagedata, imagetype, title, categories, description, date) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    $stmt = mysqli_prepare($conn, $insertQuery);
+
+                    if (!$stmt) {
+                        echo "Database Error: " . mysqli_error($conn);
+                    } else {
+                        // Bind the parameters and execute the query.
+                        mysqli_stmt_bind_param($stmt, "sssssss", $imageName, $imageData, $imageType, $title, $categories, $description, $currentDate);
+
+                        if (mysqli_stmt_execute($stmt)) {
+                            echo "Added Successfully";
+                        } else {
+                            echo "Database Error: " . mysqli_error($conn);
+                        }
+                    }
                 }
+
                 mysqli_stmt_close($stmt);
             }
         }
