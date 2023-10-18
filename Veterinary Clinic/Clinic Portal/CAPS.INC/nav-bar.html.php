@@ -62,12 +62,12 @@
                         <span class="link-name">Staff</span>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="zHTML_inventory.php">
                         <i><span class="material-symbols-outlined">inventory</span></i>
                         <span class="link-name">Inventory</span>
                     </a>
-                </li>
+                </li> -->
                 <li>
                     <a href="zHTML_report_analytics.php">
                         <i><span class="material-symbols-outlined">analytics</span></i>
