@@ -23,7 +23,7 @@ function loop($result)
     $index = 0;
     while ($row = mysqli_fetch_assoc($result)) {
         $imageName = $row['imagename'];
-        $imageType = $row['imagetype'];
+        $imageType = $row['imagetype']; 
         $imageData = $row['imagedata'];
 ?>
         <div class="box box2" id="div-container">
