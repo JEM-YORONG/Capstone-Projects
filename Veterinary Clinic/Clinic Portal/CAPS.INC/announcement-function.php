@@ -16,33 +16,66 @@ if (isset($_POST["action"])) {
 function addData()
 {
     global $conn;
-    $img = $_FILES['addImage'];
     $title = $_POST['title'];
+
+    $img = $_FILES['addImage'];
+    $imageExtension = strtolower(pathinfo($img['name'], PATHINFO_EXTENSION)); // Get the file extension
+    $imageName = $title . '.' . $imageExtension; // Add the extension to the image name
+
+    $imageData = file_get_contents($img['tmp_name']);
+    $imageType = $img['type'];
+
     $description = $_POST['description'];
     $currentDate = date('Y-m-d');
 
     if ($img["error"] === 4) {
         echo "Image Does Not Exist";
     } else {
-        $fileName = $img["name"];
         $fileSize = $img["size"];
-        $tmpName = $img["tmp_name"];
-        $validImageExtension = ['jpg', 'jpeg', 'png'];
-        $imageExtension = explode('.', $fileName);
-        $imageExtension = strtolower(end($imageExtension));
-        if (!in_array($imageExtension, $validImageExtension)) {
+        $validImageExtensions = ['jpg', 'jpeg', 'png'];
+
+        if (!in_array($imageExtension, $validImageExtensions)) {
             echo "Invalid Image Extension";
-        } else if ($fileSize > 5000000) //5mb limit
+        } else if ($fileSize > 1000000) // 1MB limit
         {
             echo "Image Size Is Too Large";
         } else {
-            $newImageName = uniqid() . '.' . $imageExtension;
-            move_uploaded_file($tmpName, 'tempImage/' . $newImageName); //move uploaded file to temp image folder
+            $checkerQuery = "SELECT * FROM announcement WHERE imagename = ?";
 
-            $query = "INSERT INTO announcement (image, title, description, date) VALUES ('$newImageName', '$title', '$description', '$currentDate')";
-            mysqli_query($conn, $query);
-            mysqli_close($conn);
-            echo "Added Successfully";
+            // Check if the image name already exists in the database
+            $stmt = mysqli_prepare($conn, $checkerQuery);
+
+            if (!$stmt) {
+                echo "Database Error: " . mysqli_error($conn);
+            } else {
+                mysqli_stmt_bind_param($stmt, "s", $imageName);
+                mysqli_stmt_execute($stmt);
+                mysqli_stmt_store_result($stmt);
+
+                // Check if any rows were returned
+                if (mysqli_stmt_num_rows($stmt) > 0) {
+                    echo "Image Name Already Exists";
+                } else {
+                    // Use prepared statements to prevent SQL injection.
+                    $insertQuery = "INSERT INTO announcement (imagename, imagedata, imagetype, title, description, date) VALUES (?, ?, ?, ?, ?, ?)";
+                    $stmt = mysqli_prepare($conn, $insertQuery);
+
+                    if (!$stmt) {
+                        echo "Database Error: " . mysqli_error($conn);
+                    } else {
+                        // Bind the parameters and execute the query.
+                        mysqli_stmt_bind_param($stmt, "ssssss", $imageName, $imageData, $imageType, $title, $description, $currentDate);
+
+                        if (mysqli_stmt_execute($stmt)) {
+                            echo "Added Successfully";
+                        } else {
+                            echo "Database Error: " . mysqli_error($conn);
+                        }
+                    }
+                }
+
+                mysqli_stmt_close($stmt);
+            }
         }
     }
 }
@@ -52,6 +85,10 @@ function EditData()
     global $conn;
     $img = $_FILES['AddImage'];
     $title = $_POST['Title'];
+    $imageExtension = strtolower(pathinfo($img['name'], PATHINFO_EXTENSION)); // Get the file extension
+    $imageName = $title . '.' . $imageExtension; // Add the extension to the image name
+    $imageData = file_get_contents($img['tmp_name']);
+    $imageType = $img['type'];
     $description = $_POST['Description'];
     $id = $_POST["Id"];
     $currentDate = date('Y-m-d');
@@ -59,36 +96,28 @@ function EditData()
     if ($img["error"] === 4) {
         echo "Image does not exist";
     } else {
-        $fileName = $img["name"];
         $fileSize = $img["size"];
-        $tmpName = $img["tmp_name"];
         $validImageExtensions = ['jpg', 'jpeg', 'png'];
-        $imageExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
         if (!in_array($imageExtension, $validImageExtensions)) {
             echo "Invalid image extension";
-        } else if ($fileSize > 5000000) {
+        } else if ($fileSize > 1000000) {
             echo "Image size is too large";
         } else {
-            $checkQuery = "SELECT * FROM announcement WHERE image = '$fileName'";
-            $result = mysqli_query($conn, $checkQuery);
-
-            if (mysqli_num_rows($result) > 0) {
-                //echo "Image already exists in the database";
-                //$newImageName = uniqid() . '.' . $imageExtension;
-                //move_uploaded_file($tmpName, 'tempImage/' . $newImageName); //move uploaded file to temp image folder 
-                $query = "UPDATE announcement SET title = '$title', description = '$description', date = '$currentDate' WHERE id = '$id'";
-                mysqli_query($conn, $query);
-                mysqli_close($conn);
-                echo "Updated Successfully.";
+            // Use prepared statements to prevent SQL injection.
+            $query = "UPDATE announcement SET imagename = ?, imagedata = ?, imagetype = ?, title = ?, description = ?, date = ? WHERE id = ?";
+            $stmt = mysqli_prepare($conn, $query);
+            if (!$stmt) {
+                echo "Database Error: " . mysqli_error($conn);
             } else {
-                //echo "Image does not exist in the database";
-                $newImageName = uniqid() . '.' . $imageExtension;
-                move_uploaded_file($tmpName, 'tempImage/' . $newImageName); //move uploaded file to temp image folder 
-                $query = "UPDATE announcement SET image = '$newImageName', title = '$title', description = '$description', date = '$currentDate' WHERE id = '$id'";
-                mysqli_query($conn, $query);
-                mysqli_close($conn);
-                echo "Updated Successfully.";
+                // Bind the parameters and execute the query.
+                mysqli_stmt_bind_param($stmt, "ssssssi", $imageName, $imageData, $imageType, $title, $description, $currentDate, $id);
+                if (mysqli_stmt_execute($stmt)) {
+                    echo "Updated Successfully.";
+                } else {
+                    echo "Database Error: " . mysqli_error($conn);
+                }
+                mysqli_stmt_close($stmt);
             }
         }
     }
