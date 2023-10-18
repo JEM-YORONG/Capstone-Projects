@@ -4,12 +4,19 @@ $filter = $_GET["id"];
 $query = "SELECT * FROM announcement";
 
 $result = mysqli_query($conn, $query);
-function loop($result) {
+function loop($result)
+{
     $index = 0;
     while ($row = mysqli_fetch_assoc($result)) {
-        ?>
+        $imageName = $row['imagename'];
+        $imageType = $row['imagetype'];
+        $imageData = $row['imagedata'];
+?>
         <div class="box box2" id="div-container">
-            <img class="gumanaKa" src="tempImage/<?php echo $row["image"]; ?>" alt="" id="image<?php echo $index; ?>" />
+            <?php
+            $imageScr = "data:" . $imageType . ";base64," . base64_encode($imageData);
+            ?>
+            <img class="gumanaKa" src="<?php echo $imageScr; ?>" alt="" id="imagename<?php echo $index; ?>" />
             <h3 class="title" id="title"><?php echo $row["title"]; ?></h3>
             <p class="desc">
                 <?php echo $row["description"]; ?>
@@ -19,11 +26,7 @@ function loop($result) {
                 <p class="date" id="date"><?php echo $row["date"]; ?></p>
                 &nbsp; &nbsp; &nbsp;
                 <p class="edit-bttn">
-                    <?php
-                    $imageFile = "tempImage/" . $row["image"];
-                    // Get the image file path
-                    ?>
-                    <span class="material-symbols-outlined" onclick="openEditAnnouncement(); getInfo('<?php echo $row['image']; ?>', '<?php echo $imageFile; ?>', '<?php echo $row['image']; ?>', '<?php echo $row['title']; ?>', '<?php echo $row['description']; ?>', '<?php echo $row['id']; ?>');">
+                    <span class="material-symbols-outlined" onclick="openEditAnnouncement(); getInfo('<?php echo $row['imagename']; ?>', '<?php echo $imageScr; ?>', '<?php echo $row['title']; ?>', '<?php echo $row['description']; ?>', '<?php echo $row['id']; ?>');">
                         edit
                     </span>
                 </p>
@@ -33,7 +36,7 @@ function loop($result) {
                 </p>
             </div>
         </div>
-        <?php
+<?php
         $index++;
     }
 }
