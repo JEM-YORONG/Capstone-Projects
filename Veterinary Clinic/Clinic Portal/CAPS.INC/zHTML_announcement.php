@@ -119,9 +119,10 @@
       }
     });
 
-    function getInfo(imageName, imageSrc, imageFile, title, description, id) {
+    function getInfo(imageName, imageSrc, title, description, id) {
       const fileInput = document.getElementById("editImage");
-      const file = new File([imageName], imageFile);
+      const blob = dataURItoBlob(imageSrc); // Convert the data URI to a Blob
+      const file = new File([blob], imageName); // Create a File with the Blob and filename
       const dataTransfer = new DataTransfer();
       dataTransfer.items.add(file);
       fileInput.files = dataTransfer.files;
@@ -130,6 +131,20 @@
       document.getElementById("editPreview").src = imageSrc;
       document.getElementById("editTitle").value = title;
       document.getElementById("editDescription").value = description;
+    }
+
+    function dataURItoBlob(dataURI) {
+      // Convert a data URI to a Blob
+      const byteString = atob(dataURI.split(',')[1]);
+      const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+      const ab = new ArrayBuffer(byteString.length);
+      const ia = new Uint8Array(ab);
+      for (let i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+      }
+      return new Blob([ab], {
+        type: mimeString
+      });
     }
 
     function getRow(rowId) {
