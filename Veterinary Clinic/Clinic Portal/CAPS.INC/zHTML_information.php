@@ -149,46 +149,49 @@
             <label>End</label>
           </div>
           <div class="day">
-            <span>Monday</span>
-            <span class="time-start" onclick="timeOpen()">8:00 am</span>
-            <span class="time-end">5:00pm</span>
-            <input type="checkbox" />
+            <span id="monday">Monday</span>
+            <span id="mondayStart" class="time-start" onclick="timeOpen()">8:00 am</span>
+            <span id="mondayEnd" class="time-end">5:00pm</span>
+            <input id="mondayStatus" type="checkbox" />
           </div>
           <div class="day">
-            <span>Tuesday</span>
-            <span class="time-start">8:00 am</span>
-            <span class="time-end">5:00pm</span>
-            <input type="checkbox" />
+            <span id="tuesday">Tuesday</span>
+            <span id="tuesdayStart" class="time-start" onclick="timeOpen()">8:00 am</span>
+            <span id="tuesdayEnd" class="time-end">5:00pm</span>
+            <input id="tuesdayStatus" type="checkbox" />
           </div>
           <div class="day">
-            <span>Wednesday</span>
-            <span class="time-start">8:00 am</span>
-            <span class="time-end">5:00pm</span>
-            <input type="checkbox" />
+            <span id="wednesday">Wednesday</span>
+            <span id="wednesdayStart" class="time-start" onclick="timeOpen()">8:00 am</span>
+            <span id="wednesdayEnd" class="time-end">5:00pm</span>
+            <input id="wednesdayStatus" type="checkbox" />
           </div>
           <div class="day">
-            <span>Thursday</span>
-            <span class="time-start">8:00 am</span>
-            <span class="time-end">5:00pm</span>
-            <input type="checkbox" />
+            <span id="thursday">Thursday</span>
+            <span id="thursdayStart" class="time-start" onclick="timeOpen()">8:00 am</span>
+            <span id="thursdayEnd" class="time-end">5:00pm</span>
+            <input id="thursdayStatus" type="checkbox" />
           </div>
           <div class="day">
-            <span>Friday</span>
-            <span class="time-start">8:00 am</span>
-            <span class="time-end">5:00pm</span>
-            <input type="checkbox" />
+            <span id="friday">Friday</span>
+            <span id="fridayStart" class="time-start" onclick="timeOpen()">8:00 am</span>
+            <span id="fridayEnd" class="time-end">5:00pm</span>
+            <input id="fridayStatus" type="checkbox" />
           </div>
           <div class="day">
-            <span>Saturday</span>
-            <span class="time-start">8:00 am</span>
-            <span class="time-end">5:00pm</span>
-            <input type="checkbox" />
+            <span id="saturday">Saturday</span>
+            <span id="saturdayStart" class="time-start" onclick="timeOpen()">8:00 am</span>
+            <span id="saturdayEnd" class="time-end">5:00pm</span>
+            <input id="saturdayStatus" type="checkbox" />
           </div>
           <div class="day">
-            <span>Sunday</span>
-            <span class="time-start">8:00 am</span>
-            <span class="time-end">5:00pm</span>
-            <input type="checkbox" checked="false" />
+            <span id="sunday">Sunday</span>
+            <span id="sundayStart" class="time-start" onclick="timeOpen()">8:00 am</span>
+            <span id="sundayEnd" class="time-end">5:00pm</span>
+            <input id="sundayStatus" type="checkbox" />
+          </div>
+          <div class="day">
+            <input type="button" value="Save" id="saveSchedule" onclick="closeForm()" />
           </div>
         </div>
       </form>
