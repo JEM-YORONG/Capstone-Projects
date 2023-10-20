@@ -50,12 +50,12 @@ nav::-webkit-scrollbar {
 
 .nav div.logo a {
   text-decoration: none;
-  color: #fff;
+  color: #241b59;
   font-size: 2.5rem;
 }
 
 .nav div.logo a:hover {
-  color: #00e676;
+  color: #0000e6;
 }
 
 .nav div.main_list {
@@ -81,7 +81,7 @@ nav::-webkit-scrollbar {
 
 .nav div.main_list ul li a {
   text-decoration: none;
-  color: #fff;
+  color: #241b59;
   line-height: 65px;
   font-size: 2.4rem;
 }

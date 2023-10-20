@@ -24,8 +24,8 @@
       <div id="mainListDiv" class="main_list">
         <ul class="navlinks">
           <li><a href="website.php">About</a></li>
-          <li><a href="webiste-service.php">Services</a></li>
-          <li><a href="website-product.php">Products</a></li>
+          <li><a href="services.php">Services</a></li>
+          <li><a href="products.php">Products</a></li>
         </ul>
       </div>
       <span class="navTrigger">
@@ -63,7 +63,7 @@
   <div class="clinic-info">
     <div class="infos">
       <div class="infos-logo">
-        <img src=".vscode/Doc Lenon Logo.png" />
+        <img src=".vscode\Doc Lenon Logo.png" />
       </div>
       <div class="infos-about">
         <h1>About Us</h1>
@@ -142,7 +142,7 @@
         </table>
       </div>
       <div>
-        <img src=".vscode/bg-2.svg" style="width: 500px" />
+        <img src=".vscode/catbg.png" style="width: 600px" />
       </div>
     </div>
   </div>
@@ -194,11 +194,67 @@
   </div>
   <!--Announcements-->
   <h1>Announcements</h1>
-  <div class="clinic-announcement">
+  <div class="web-announcement">
+    <div class="clinic-announcement">
+      <div class="announcement">
+        <div class="announcement-image">
+          <img src=".vscode/announcement-1.svg" />
+        </div>
+        <div class="announcement-contents">
+          <h2>Succesful Delivery</h2>
+          <h3>mm/dd/yyyy</h3>
+          <p onclick="openFormAnnouncement()">Read Contents</p>
+        </div>
+      </div>
+    </div>
+    <div class="clinic-announcement">
+      <div class="announcement">
+        <div class="announcement-image">
+          <img src=".vscode/announcement-1.svg" />
+        </div>
+        <div class="announcement-contents">
+          <h2>Succesful Delivery</h2>
+          <h3>mm/dd/yyyy</h3>
+          <p onclick="openFormAnnouncement()">Read Contents</p>
+        </div>
+      </div>
+    </div>
+    <div class="clinic-announcement">
+      <div class="announcement">
+        <div class="announcement-image">
+          <img src=".vscode/announcement-1.svg" />
+        </div>
+        <div class="announcement-contents">
+          <h2>Succesful Delivery</h2>
+          <h3>mm/dd/yyyy</h3>
+          <p onclick="openFormAnnouncement()">Read Contents</p>
+        </div>
+      </div>
+    </div>
+    <div class="clinic-announcement">
+      <div class="announcement">
+        <div class="announcement-image">
+          <img src=".vscode/announcement-1.svg" />
+        </div>
+        <div class="announcement-contents">
+          <h2>Succesful Delivery</h2>
+          <h3>mm/dd/yyyy</h3>
+          <p onclick="openFormAnnouncement()">Read Contents</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="announcement-popup" id="myForm-announcement">
     <div class="announcement">
+      <div class="close-bttn" style="margin-left: 90%; margin-top: 20px" onclick="closeFormAnnouncement()">
+        <span class="material-symbols-outlined"> close </span>
+      </div>
+      <h1>Announcement</h1>
+
       <div class="announcement-image">
         <img src=".vscode/announcement-1.svg" />
       </div>
+
       <div class="announcement-contents">
         <h2>Succesful Delivery</h2>
         <h3>mm/dd/yyyy</h3>
@@ -213,72 +269,7 @@
         </p>
       </div>
     </div>
-    <div class="announcement">
-      <div class="announcement-image">
-        <img src=".vscode/announcement-1.svg" />
-      </div>
-      <div class="announcement-contents">
-        <h2>Succesful Delivery</h2>
-        <h3>mm/dd/yyyy</h3>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
-      </div>
-    </div>
-    <div class="announcement">
-      <div class="announcement-image">
-        <img src=".vscode/announcement-1.svg" />
-      </div>
-      <div class="announcement-contents">
-        <h2>Succesful Delivery</h2>
-        <h3>mm/dd/yyyy</h3>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-          ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-          veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-          ea commodo consequat. Duis aute irure dolor in reprehenderit in
-          voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-          officia deserunt mollit anim id est laborum.
-        </p>
-      </div>
-    </div>
   </div>
-
-  <!--Messenger ChatBox-->
-  <div id="fb-root"></div>
-  <div id="fb-customer-chat" class="fb-customerchat"></div>
-  <script>
-    var chatbox = document.getElementById('fb-customer-chat');
-    chatbox.setAttribute("page_id", "144479405406937"); //page id (144479405406937)
-    chatbox.setAttribute("attribution", "biz_inbox");
-  </script>
-  <script>
-    window.fbAsyncInit = function() {
-      FB.init({
-        xfbml: true,
-        version: 'v12.0'
-      });
-    };
-
-    (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s);
-      js.id = id;
-      js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-  </script>
-  <!--End Of Messenger ChatBox-->
 
   <div class="footer">
     <p>est. 2015</p>
@@ -307,4 +298,12 @@
     $("#mainListDiv").toggleClass("show_list");
     $("#mainListDiv").fadeIn();
   });
+
+  function openFormAnnouncement() {
+    document.getElementById("myForm-announcement").style.display = "block";
+  }
+
+  function closeFormAnnouncement() {
+    document.getElementById("myForm-announcement").style.display = "none";
+  }
 </script>

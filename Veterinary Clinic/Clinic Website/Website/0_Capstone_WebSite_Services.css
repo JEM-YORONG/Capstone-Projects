@@ -50,12 +50,12 @@ nav::-webkit-scrollbar {
 
 .nav div.logo a {
   text-decoration: none;
-  color: #fff;
+  color: #241b59;
   font-size: 2.5rem;
 }
 
 .nav div.logo a:hover {
-  color: #00E676;
+  color: #0000e6;
 }
 
 .nav div.main_list {
@@ -81,7 +81,7 @@ nav::-webkit-scrollbar {
 
 .nav div.main_list ul li a {
   text-decoration: none;
-  color: #fff;
+  color: #241b59;
   line-height: 65px;
   font-size: 2.4rem;
 }
@@ -137,7 +137,7 @@ h1{
 
   border-top-right-radius: 100px;
   border-bottom-left-radius: 100px;
-  margin: 0px 20px 50px 20px;
+  margin: 0px 20px 70px 20px;
 }
 
 .clinic-services .services {
@@ -151,17 +151,20 @@ h1{
 .clinic-services .services .services-image img {
   width: 350px;
   height: 350px;
+  max-height:350px ;
+  max-width: 350px;
   border-top-left-radius: 100px;
   border-bottom-right-radius: 100px;
-  border: 3px solid #fdfdff;
+  border: 3px solid #b6c1d25f;
 
 }
 .clinic-services .services .services-contents {
   padding: 25px;
-  background-color: #fdfdff;
+  background-color: #b6c1d25f;
   border-top-right-radius: 100px;
   border-bottom-left-radius: 100px;
   height: 300px;
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(124, 164, 250, 0.5) -3px -3px 6px 1px inset;
 }
 .clinic-services .services .services-contents h2 {
   font-size: 50px;
@@ -247,6 +250,7 @@ h1{
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
+    margin-bottom: 25px;
   }
   .clinic-services .services .services-image img {
     width: 100%;
