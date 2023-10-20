@@ -5,6 +5,11 @@
     box-sizing: border-box;
 }
 
+.as{
+    overflow: auto;
+    max-height: 300px;
+}
+
 body {
     font-family: Arial, sans-serif;
 }
