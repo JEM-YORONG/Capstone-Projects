@@ -7,9 +7,15 @@
                 //add appointment
                 date: $("#date").val(),
                 name: $("#name").val(),
-                petname: $("#petname").val(),
+                petname1: $("#petname1").val(),
+                petname2: $("#petname2").val(),
+                petname3: $("#petname3").val(),
+                petname4: $("#petname4").val(),
+                petname5: $("#petname5").val(),
                 type: $("#type").val(),
-                service: $("#service").val(),
+                service1: $("#service1").val(),
+                service2: $("#service2").val(),
+                service3: $("#service3").val(),
                 number: $("#number").val(),
 
                 //delete schedule
