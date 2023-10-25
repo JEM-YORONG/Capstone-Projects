@@ -676,7 +676,7 @@
                             </div>
                             <div class="inputfield-grid">
                                 <div class="inputfield">
-                                    <label>Owner Name</label>
+                                    <label>Owner</label>
                                     <input type="text" class="input" id="ownerName" disabled />
                                 </div>
                             </div>
