@@ -25,16 +25,20 @@ function addAppointment()
 
     $date = $_POST["date"];
     $name = $_POST["name"];
-    $petname = $_POST["petname"];
-    $type = $_POST["type"];
-    $service = $_POST["service"];
+    $petname = $_POST["petname1"];
+    $petname2 = $_POST["petname2"];
+    $petname3 = $_POST["petname3"];
+    $petname4 = $_POST["petname4"];
+    $petname5 = $_POST["petname5"];
+    $service1 = $_POST["service1"];
+    $service2 = $_POST["service2"];
+    $service3 = $_POST["service3"];
     $number = $_POST["number"];
     $customerName = "";
-    $customerPet = "";
     $status = "";
 
     // Validate input fields for empty values
-    if (empty($date) || empty($name) || empty($petname) || empty($type) || empty($service) || empty($number)) {
+    if (empty($date) || empty($name) || empty($number)) {
         echo "Empty Fields Detected.";
         return; // Stop execution if any field is empty
     }
@@ -48,36 +52,29 @@ function addAppointment()
         $customerName = $name;
         $ownerId = $row["id"]; // Get the customer's ID
 
-        // Query the pet data based on the customer's ID and pet name
-        $query2 = "SELECT * FROM pet WHERE ownerid = '$ownerId' AND petname = '$petname'";
-        $result2 = mysqli_query($conn, $query2);
+        // Convert the input date string to a DateTime object
+        $inputDate = new DateTime($date);
+        $currentDate = new DateTime();
 
-        // Check if the query was successful
-        if ($result2 && $row2 = mysqli_fetch_assoc($result2)) {
-            $customerPet = $petname;
+        if ($inputDate < $currentDate) {
+            $status = "Past";
+        } elseif ($inputDate > $currentDate) {
+            $status = "Upcoming";
+        }
 
-            // Convert the input date string to a DateTime object
-            $inputDate = new DateTime($date);
-            $currentDate = new DateTime();
+        // Create an array of services
+        $services = [$service1, $service2, $service3];
 
-            if ($inputDate < $currentDate) {
-                $status = "Past";
-            } elseif ($inputDate > $currentDate) {
-                $status = "Upcoming";
-            }
+        // Insert the appointment into the database with the determined status
+        $query = "INSERT INTO schedule (ownername, petname, petname2, petname3, petname4, petname5, service, service2, service3, date, number, status) VALUES ('$customerName', '$petname', '$petname2', '$petname3', '$petname4', '$petname5', '$services[0]', '$services[1]', '$services[2]', '$date', '$number', '$status')";
 
-            // Insert the appointment into the database with the determined status
-            $query3 = "INSERT INTO schedule (ownername, petname, type, service, date, number, status) VALUES ('$customerName', '$customerPet', '$type', '$service', '$date', '$number', '$status')";
-            if (mysqli_query($conn, $query3)) {
-                echo "Schedule Added Successfully.";
-            } else {
-                echo "Error inserting schedule: " . mysqli_error($conn);
-            }
+        if (mysqli_query($conn, $query)) {
+            echo "Schedule Added Successfully.";
         } else {
-            echo "Pet name " . $petname . " didn't exist in customer pet list.";
+            echo "Error inserting schedule: " . mysqli_error($conn);
         }
     } else {
-        echo "Customer " . $name . " didn't exist in customer list.";
+        echo "Customer $name didn't exist in customer list.";
     }
 }
 
