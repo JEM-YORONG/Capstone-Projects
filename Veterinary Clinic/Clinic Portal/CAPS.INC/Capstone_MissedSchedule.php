@@ -44,7 +44,6 @@
                 <th scope="col">Date</th>
                 <th scope="col">Name</th>
                 <th scope="col">Pet Name</th>
-                <th scope="col">Type</th>
                 <th scope="col">Service</th>
                 <th scope="col" colspan="2">Actions</th>
               </tr>
@@ -84,7 +83,7 @@
                 <input type="text" class="input" id="petname" autocomplete="off" disabled>
               </div>
 
-              <div class="inputfield">
+              <!-- <div class="inputfield">
                 <label>Type</label>
                 <div class="custom_select">
                   <select id="type" disabled>
@@ -92,7 +91,7 @@
                     <option value="Cat">Cat</option>
                   </select>
                 </div>
-              </div>
+              </div> -->
               <div class="inputfield">
                 <label>Service</label>
                 <div class="custom_select">
@@ -151,11 +150,10 @@
       }
     });
 
-    function openForm(date, name, petname, type, service, number) {
+    function openForm(date, name, petname, service, number) {
       document.getElementById("myForm").style.display = "block";
       document.getElementById("name").value = name;
       document.getElementById("petname").value = petname;
-      document.getElementById("type").value = type;
       document.getElementById("service").value = service;
       document.getElementById("number").value = number;
     }
