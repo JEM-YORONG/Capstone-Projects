@@ -65,14 +65,10 @@
                 <th scope="col"> Notify </th>
                 <th scope="col">Date</th>
                 <th scope="col">Name</th>
-                <th scope="col">Pet Name</th>
-                <th scope="col">Type</th>
-                <th scope="col">Service</th>
-                <th scope="col" colspan="2">Actions</th>
               </tr>
             </thead>
             <tbody id="table-body1"></tbody>
-            <?php require 'script files\schedule-today-refresh.js..php'; ?>
+            <?php require 'script files\dashboard-schedule-refresh.js.php'; ?>
           </table>
         </div>
 
