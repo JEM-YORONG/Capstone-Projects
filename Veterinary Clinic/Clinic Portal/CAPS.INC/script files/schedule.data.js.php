@@ -39,6 +39,10 @@
                 updateType: $("#updateType").val(),
                 updateService: $("#updateService").val(),
                 updateNumber: $("#updateNumber").val(),
+
+                //details data
+                ownername: $("#ownerName").val(),
+                detailID: $("#appointmentID").val(),
             }
 
             $.ajax({
@@ -47,7 +51,12 @@
                 data: data,
 
                 success: function(response) {
-                    alert(response);
+                    if(response == ""){
+                        //alert(response);
+                    }
+                    else{
+                        alert(response);
+                    }
                 }
             });
         });
