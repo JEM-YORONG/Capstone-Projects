@@ -18,14 +18,12 @@ while ($row = mysqli_fetch_assoc($result)) :
         <td><?php echo $row["date"]; ?></td>
         <td data-label="Owner Name"><?php echo $row["ownername"]; ?></td>
         <td data-label="Pet Name"><?php echo $row["petname"]; ?></td>
-        <td data-label="Type"><?php echo $row["type"]; ?></td>
         <td data-label="Service"><?php echo $row["service"]; ?></td>
         <td>
             <button type="button" class="edit-button" onclick="openForm(
                 '',
                 '<?php echo $row['ownername']; ?>',
                 '<?php echo $row['petname']; ?>',
-                '<?php echo $row['type']; ?>',
                 '<?php echo $row['service']; ?>',
                 '<?php echo $row['number']; ?>');">
                 <span class="material-symbols-outlined">edit</span>
