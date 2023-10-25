@@ -56,18 +56,23 @@ if ($result) {
                     '<?php echo $row['service']; ?>');"><button type="button" class="notify-button-1" style="background-color: #00000000; border-style: none; color: #5a81fa; cursor: pointer;" onclick="opensms(); infoSMS('<?php echo $row['date']; ?>', '<?php echo $row['number']; ?>', '<?php echo $row['ownername']; ?>', '<?php echo $row['petname']; ?>');"><span class="material-symbols-outlined">reminder</span></button></td>
                     <td><?php echo $row['date']; ?></td>
                     <td data-label="Owner Name"><?php echo $row['ownername']; ?></td>
-                    <td data-label="Pet Name"><?php echo $row['petname']; ?></td>
-                    <td data-label="Type"><?php echo $row['type']; ?></td>
-                    <td data-label="Service"><?php echo $row['service']; ?></td>
+
+                    <td>
+                        <button onclick="openFormDetails('<?php echo $row['ownername']; ?>', '<?php echo $row['id']; ?>'); submitID('id');">
+                            Details
+                        </button>
+                        <?php require 'script files\getDetailsID.js.php'; ?>
+                    </td>
+
                     <td> <button type="button" class="edit-button" onclick="openFormEdit(); 
                     getRowId('<?php echo $row['id']; ?>',
                     '<?php echo $row['date']; ?>',
                     '<?php echo $row['ownername']; ?>',
                     '<?php echo $row['petname']; ?>',
-                    '<?php echo $row['type']; ?>',
                     '<?php echo $row['service']; ?>',
                     '<?php echo $row['number']; ?>'
                     );"><span class="material-symbols-outlined">edit</span></button></td>
+
                     <td> <button type="button" class="delete-button" onclick="openFormDelete(); deleteRow('<?php echo $row['id']; ?>')"><span class="material-symbols-outlined">delete</span></button></td>
                 </tr>
             </div>
