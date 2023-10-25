@@ -50,7 +50,10 @@
             <br />
             <img id="preview" src=".vscode/Images/Doc Lenon Logo.png" />
           </div>
-          <input type="file" id="changeImage" accept="image/*">
+          <form>
+            <input type="file" id="changeImage" accept="image/*" onchange="submitData('editInformation')">
+            <?php require 'script files\information-data.js.php'; ?>
+          </form>
         </div>
       </div>
       <div class="web-content">
@@ -58,7 +61,8 @@
           <p class="edit" onclick="editTitle()"><u>Edit</u></p>
           <br />
           <h1 id="edit-title">Doc Lenon Veterinary Clinic</h1>
-          <button id="saveTitle" style="display: none;" onclick="saveTitle()">Save</button>
+          <button id="saveTitle" style="display: none;" onclick="saveTitle(); submitData('editInformation')">Save</button>
+          <?php require 'script files\information-data.js.php'; ?>
         </div>
         <div class="contact-edit">
           <label>Contact</label>
@@ -69,6 +73,7 @@
             <p id="num2">+63 900 000 0000</p>
           </div>
           <button id="saveContacts" onclick="saveContacts()" style="display: none;">Save</button>
+          <?php require 'script files\information-data.js.php'; ?>
         </div>
         <br />
         <div>
@@ -78,6 +83,7 @@
           <p id="email">himenohimko.pot@gmail.com</p>
         </div>
         <button id="saveEmail" onclick="saveEmail()" style="display: none;">Save</button>
+        <?php require 'script files\information-data.js.php'; ?>
         <br />
         <div>
           <label>Socials</label>
@@ -87,6 +93,7 @@
             <p id="social">Facebook</p>
           </div>
           <button id="saveSocial" onclick="saveSocial()" style="display: none;">Save</button>
+          <?php require 'script files\information-data.js.php'; ?>
         </div>
         <div>
           <br />
@@ -99,6 +106,7 @@
           </p>
         </div>
         <button id="saveAddress" onclick="saveAddress()" style="display: none;">Save</button>
+        <?php require 'script files\information-data.js.php'; ?>
       </div>
     </div>
     <div class="about-clinic">
@@ -111,6 +119,7 @@
           acts of the wicked are cruel Prov
         </p>
         <button id="saveIntro" onclick="saveIntro()" style="display: none;">Save</button>
+        <?php require 'script files\information-data.js.php'; ?>
         <br />
         <label>About</label>
         <p class="edit" onclick="editAbout()"><u>Edit</u></p>
@@ -122,9 +131,10 @@
           aliquip ex ea commodo consequat. Duis aute irure dolor in
           reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
+          culpa qui officia deserunt mollit anim id est laboru.
         </p>
         <button id="saveAbout" onclick="saveAbout()" style="display: none;">Save</button>
+        <?php require 'script files\information-data.js.php'; ?>
       </div>
     </div>
 
@@ -191,7 +201,8 @@
             <input id="sundayStatus" type="checkbox" />
           </div>
           <div class="day">
-            <input type="button" value="Save" id="saveSchedule" onclick="closeForm()" />
+            <input type="button" value="Save" id="saveSchedule" onclick="submitData('editInformation')" />
+            <?php require 'script files\information-data.js.php'; ?>
           </div>
         </div>
       </form>
