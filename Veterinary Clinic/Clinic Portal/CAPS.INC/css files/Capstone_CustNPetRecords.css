@@ -1126,7 +1126,7 @@ td {
     flex-direction: column;
   }
 
-  .savecancel{
+  .savecancel {
     column-gap: 10px;
     padding-left: 5%;
   }

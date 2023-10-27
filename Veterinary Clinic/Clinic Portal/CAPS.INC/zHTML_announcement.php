@@ -9,6 +9,7 @@
   <!----======== CSS ======== -->
   <link rel="stylesheet" href="css files\Capstone_ClinicAnnouncement.css" />
   <link rel="stylesheet" href="css files\Capstone_ClinicServNProd.css">
+  <link rel="stylesheet" href="css files\Capstone_ClinicAboutUs copy.css">
     <!----======== CSS ======== -->
     <link rel="stylesheet" href="css files\Capstone_CustNPetRecords.css" />
 

@@ -19,7 +19,6 @@ body {
   min-height: 100vh;
   background-color: #5782fa;
 }
-
 /* === Custom Scroll Bar CSS === */
 ::-webkit-scrollbar {
   width: 8px;

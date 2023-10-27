@@ -1,31 +1,35 @@
 /* ===== Google Font Import - Poppins ===== */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
-*{
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
 
-:root{
+:root {
     /* ====== Transition ====== */
     --tran-05: all 0.5s ease;
     --tran-03: all 0.3s ease;
     --tran-03: all 0.2s ease;
 }
 
-body{
+body {
     min-height: 100vh;
     background-color: #5782fa;
 
 }
+
 /* === Custom Scroll Bar CSS === */
 ::-webkit-scrollbar {
     width: 8px;
 }
+
 ::-webkit-scrollbar-track {
     background: #f1f1f1;
 }
+
 ::-webkit-scrollbar-thumb {
     background: #5782fa;
     border-radius: 12px;
@@ -35,13 +39,14 @@ body{
 ::-webkit-scrollbar-thumb:hover {
     background: #d5dffb;
 }
-nav::-webkit-scrollbar{
+
+nav::-webkit-scrollbar {
     display: none;
 }
 
 /* === Navigation === */
 
-nav{
+nav {
     position: fixed;
     top: 0;
     left: 0;
@@ -53,43 +58,49 @@ nav{
     transition: var(--tran-05);
     overflow-y: scroll;
 }
-nav.close{
+
+nav.close {
     width: 73px;
 }
-nav .logo-name{
+
+nav .logo-name {
     display: flex;
     align-items: center;
 }
-nav .system_title{
+
+nav .system_title {
     font-size: 18px;
     color: var(--text-color);
     margin-left: 30px;
     transition: var(--tran-05);
 }
-nav .logo-image{
+
+nav .logo-image {
     display: flex;
     justify-content: center;
     min-width: 45px;
 }
-nav .logo-image img{
+
+nav .logo-image img {
     width: 50px;
     object-fit: cover;
     border-radius: 50%;
 }
 
-nav .logo-name .logo_name{
+nav .logo-name .logo_name {
     font-size: 22px;
     font-weight: 600;
     color: var(--text-color);
     margin-left: 14px;
     transition: var(--tran-05);
 }
-nav.close .logo_name{
+
+nav.close .logo_name {
     opacity: 0;
     pointer-events: none;
 }
 
-nav .menu-items{
+nav .menu-items {
     margin-top: 20px;
     height: calc(100% - 90px);
     display: flex;
@@ -99,18 +110,21 @@ nav .menu-items{
     padding-top: 5px;
     border-top: 1px solid #e5e5e6;
 }
+
 /* === Navigation menu=== */
-.menu-items li{
+.menu-items li {
     list-style: none;
 }
-.menu-items li a{
+
+.menu-items li a {
     display: flex;
     align-items: center;
     height: 50px;
     text-decoration: none;
     position: relative;
 }
-.nav-links li a:hover:before{
+
+.nav-links li a:hover:before {
     content: "";
     position: absolute;
     left: -7px;
@@ -120,7 +134,7 @@ nav .menu-items{
     background-color: #5782fa;
 }
 
-.menu-items li a i{
+.menu-items li a i {
     font-size: 24px;
     min-width: 45px;
     height: 100%;
@@ -129,41 +143,47 @@ nav .menu-items{
     justify-content: center;
     color: #707070;
 }
-.menu-items li a .link-name{
+
+.menu-items li a .link-name {
     font-size: 15px;
     font-weight: 400;
-    color: #707070;    
+    color: #707070;
     transition: var(--tran-05);
 }
-nav.close li a .link-name{
+
+nav.close li a .link-name {
     opacity: 0;
     pointer-events: none;
 }
-.menu-items .clinic-management-link{
+
+.menu-items .clinic-management-link {
     padding-top: 5px;
     border-top: 1px solid #e5e5e6;
 }
-.menu-items .record-management-link{
+
+.menu-items .record-management-link {
     padding-top: 5px;
     border-top: 1px solid #e5e5e6;
 }
 
 
 .nav-links li a:hover i,
-.nav-links li a:hover .link-name{
+.nav-links li a:hover .link-name {
     color: #5782fa;
 }
 
-.menu-items .logout-mode{
+.menu-items .logout-mode {
     padding-top: 5px;
     border-top: 1px solid #e5e5e6;
 }
-.menu-items .mode{
+
+.menu-items .mode {
     display: flex;
     align-items: center;
     white-space: nowrap;
 }
-.menu-items .mode-toggle{
+
+.menu-items .mode-toggle {
     position: absolute;
     right: 14px;
     height: 50px;
@@ -176,7 +196,7 @@ nav.close li a .link-name{
 
 
 /* === Clinic Information pinaka taas === */
-.Contents{
+.Contents {
     position: relative;
     left: 250px;
     background-color: #F2F5FF;
@@ -185,11 +205,13 @@ nav.close li a .link-name{
     padding: 10px 14px;
     transition: var(--tran-05);
 }
-nav.close ~ .Contents{
+
+nav.close~.Contents {
     left: 73px;
     width: calc(100% - 73px);
 }
-.Contents .top{
+
+.Contents .top {
     position: fixed;
     top: 0;
     left: 250px;
@@ -202,45 +224,50 @@ nav.close ~ .Contents{
     transition: var(--tran-05);
     z-index: 10;
 }
-nav.close ~ .Contents .top{
+
+nav.close~.Contents .top {
     left: 73px;
     width: calc(100% - 73px);
 }
-.Contents .top .sidebar-toggle{
+
+.Contents .top .sidebar-toggle {
     font-size: 26px;
     color: var(--text-color);
     cursor: pointer;
 }
 
-.Contents .title{
+.Contents .title {
     position: relative;
     height: 45px;
-    max-width:95%;
+    max-width: 95%;
     width: 100%;
     margin: 0 30px;
 }
 
-.Contents .title .text{
+.Contents .title .text {
     font-size: 30px;
     font-weight: 500;
     color: var(--text-color);
 
 }
-.menu{
+
+.menu {
     display: grid;
     grid-template-columns: 75% 25%;
     margin-top: 15px;
 }
 
-.web-content .menu .search-box{
+.web-content .menu .search-box {
     position: relative;
     height: 35px;
     max-width: 600px;
     width: 80%;
 }
-.menu .search-box input{
+
+.menu .search-box input {
     position: absolute;
-    border: 1px solid #585757;;
+    border: 1px solid #585757;
+    ;
     background-color: #F2F5FF;
     padding: 0 25px 0 25px;
     border-radius: 5px;
@@ -251,6 +278,7 @@ nav.close ~ .Contents .top{
     font-weight: 400;
     outline: none;
 }
+
 .menu .search-box input {
     position: absolute;
     border: 1px solid #585757;
@@ -263,9 +291,9 @@ nav.close ~ .Contents .top{
     font-size: 12px;
     font-weight: 400;
     outline: none;
-  }
+}
 
-  .menu .filter{
+.menu .filter {
     background-color: #5a81fa;
     border: 1px solid #21305d00;
     border-radius: 8px;
@@ -275,29 +303,33 @@ nav.close ~ .Contents .top{
     font-size: 13px;
     padding-top: 3px;
     width: 40px;
-    float:right;
-    margin-left: 6% ;
-  }
-.Contents .web-content{
+    float: right;
+    margin-left: 6%;
+}
+
+.Contents .web-content {
     padding-top: 50px;
     margin-top: 15px;
 }
-.web-content .menu{
-    margin-left: 3% ;
+
+.web-content .menu {
+    margin-left: 3%;
 }
-.web-content .menu label{
+
+.web-content .menu label {
     font-size: 15px;
     margin-right: 5px;
 }
-.web-content .menu .input{
+
+.web-content .menu .input {
     font-size: 15px;
     margin-right: 5px;
     padding: 2px;
     width: 30%;
-    
+
 }
 
-.web-content .menu .add-button{
+.web-content .menu .add-button {
     background-color: #5a81fa;
     border: 1px solid #21305d00;
     border-radius: 8px;
@@ -309,148 +341,171 @@ nav.close ~ .Contents .top{
     padding: 0 10px 0 11px;
     width: 100px;
     float: right;
-    margin-right: 3% ;
+    margin-right: 3%;
 }
-.web-content .menu .add-button:hover{
+
+.web-content .menu .add-button:hover {
     background-color: #2d417e;
 }
 
-.web-content .upcoming-clinic-schedule table{
+.web-content .upcoming-clinic-schedule table {
     border-collapse: collapse;
     border-spacing: 0;
     table-layout: auto;
     width: 100%;
     border: 1px solid #ddd;
     margin-top: 20px;
-  
+
 }
-.web-content .upcoming-clinic-schedule{
-    overflow-x:auto;
+
+.web-content .upcoming-clinic-schedule {
+    overflow-x: auto;
 }
-.web-content .upcoming-clinic-schedule th,td{
+
+.web-content .upcoming-clinic-schedule th,
+td {
     text-align: center;
-  padding: 8px;
+    padding: 8px;
 }
-.web-content .upcoming-clinic-schedule .notify-button-1{
+
+.web-content .upcoming-clinic-schedule .notify-button-1 {
     background-color: #00000000;
-    border-style: none ;
+    border-style: none;
     color: #5a81fa;
     cursor: pointer;
 }
-.web-content .edit-button{
+
+.web-content .edit-button {
     background-color: #00000000;
-    border-style: none ;
+    border-style: none;
     color: #5a81fa;
     cursor: pointer;
-    
+
 }
-.web-content .delete-button{
+
+.web-content .delete-button {
     background-color: #00000000;
-    border-style: none ;
+    border-style: none;
     border-radius: 10px;
     color: #fa5d5a;
     cursor: pointer;
 }
-.web-content .edit-button:hover{
+
+.web-content .edit-button:hover {
     color: #2c3d8f;
 }
-.web-content .delete-button:hover{
+
+.web-content .delete-button:hover {
     color: #8f2c2c;
 }
 
-.web-content .notify-button:hover{
+.web-content .notify-button:hover {
     color: #2c3d8f;
 }
 
 @media (max-width: 1000px) {
-    nav{
+    nav {
         width: 73px;
     }
-    nav.close{
+
+    nav.close {
         width: 250px;
     }
-    nav .logo_name{
+
+    nav .logo_name {
         opacity: 0;
         pointer-events: none;
     }
-    nav.close .logo_name{
+
+    nav.close .logo_name {
         opacity: 1;
         pointer-events: auto;
     }
-    nav .logo-image img{
+
+    nav .logo-image img {
         width: 60px;
     }
-    nav li a .link-name{
+
+    nav li a .link-name {
         opacity: 0;
         pointer-events: none;
     }
-    nav.close li a .link-name{
+
+    nav.close li a .link-name {
         opacity: 1;
         pointer-events: auto;
     }
-    nav ~ .Contents{
+
+    nav~.Contents {
         left: 73px;
         width: calc(100% - 73px);
     }
-    nav.close ~ .Contents{
+
+    nav.close~.Contents {
         left: 250px;
         width: calc(100% - 250px);
     }
-    nav ~ .Contents .top{
+
+    nav~.Contents .top {
         left: 73px;
         width: calc(100% - 73px);
     }
-    nav.close ~ .Contents .top{
+
+    nav.close~.Contents .top {
         left: 250px;
         width: calc(100% - 250px);
     }
 }
 
-@media (max-width: 780px) {
+@media (max-width: 780px) {}
 
+@media (max-width: 560px) {}
 
-
-}
-@media (max-width: 560px) {
-
-
-}
 @media (max-width: 400px) {
-    nav{
+    nav {
         width: 0px;
     }
-    nav.close{
+
+    nav.close {
         width: 73px;
     }
-    nav .logo_name{
+
+    nav .logo_name {
         opacity: 0;
         pointer-events: none;
     }
-    nav.close .logo_name{
+
+    nav.close .logo_name {
         opacity: 0;
         pointer-events: none;
     }
-    nav li a .link-name{
+
+    nav li a .link-name {
         opacity: 0;
         pointer-events: none;
     }
-    nav.close li a .link-name{
+
+    nav.close li a .link-name {
         opacity: 0;
         pointer-events: none;
     }
-    nav ~ .Contents{
+
+    nav~.Contents {
         left: 0;
         width: 100%;
     }
-    nav.close ~ .Contents{
+
+    nav.close~.Contents {
         left: 73px;
         width: calc(100% - 73px);
     }
-    nav ~ .Contents .top{
+
+    nav~.Contents .top {
         left: 0;
         width: 100%;
     }
-    nav.close ~ .Contents .top{
+
+    nav.close~.Contents .top {
         left: 0;
         width: 100%;
     }

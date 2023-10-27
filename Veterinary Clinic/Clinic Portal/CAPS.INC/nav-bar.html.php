@@ -43,20 +43,20 @@
                                 <span class="link-name">&nbsp; Schedule Page</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="zHTML_announcement.php">
+                                <i><span class="material-symbols-outlined">campaign</span></i>
+                                <span class="link-name">Announcement</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="zHTML_service_product.php">
+                                <i><span class="material-symbols-outlined">sell</span></i>
+                                <span class="link-name">Service and Product</span>
+                            </a>
+                        </li>
                     </div>
                 </div>
-                <li>
-                    <a href="zHTML_announcement.php">
-                        <i><span class="material-symbols-outlined">campaign</span></i>
-                        <span class="link-name">Announcement</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="Capstone_ClinicServNProd.html">
-                        <i><span class="material-symbols-outlined">sell</span></i>
-                        <span class="link-name">Service and Product</span>
-                    </a>
-                </li>
             </ul>
             <!--=====Record Menus====-->
             <ul class="record-management-link">

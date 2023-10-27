@@ -287,8 +287,10 @@ nav.close~.dashboard .top {
   height: 100px;
   /*  height: auto;*/
   max-height: 150px;
-  object-fit: cover; /* Add this line to ensure the image fits within the container */
-  object-position: center; /* Add this line to center the image within the container */
+  object-fit: cover;
+  /* Add this line to ensure the image fits within the container */
+  object-position: center;
+  /* Add this line to center the image within the container */
 }
 
 .web-content .boxes-overview .box.box2 img {
@@ -298,8 +300,10 @@ nav.close~.dashboard .top {
   height: 133px;
   /*  height: auto;*/
   max-height: 150px;
-  object-fit: cover; /* Add this line to ensure the image fits within the container */
-  object-position: center; /* Add this line to center the image within the container */
+  object-fit: cover;
+  /* Add this line to ensure the image fits within the container */
+  object-position: center;
+  /* Add this line to center the image within the container */
 }
 
 .web-content .boxes-overview .box.box1:hover {
