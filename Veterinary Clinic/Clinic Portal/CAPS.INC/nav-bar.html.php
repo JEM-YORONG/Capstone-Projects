@@ -11,24 +11,40 @@
         <ul class="nav-links">
             <li>
                 <a href="zHTML_dashboard.php">
-                    <i><span class="material-symbols-outlined" style=" color:#5a81fa;">home</span></i>
-                    <span class="link-name" style=" color:#5a81fa;">Dashboard</span>
+                    <i><span class="material-symbols-outlined" style="color: #5a81fa">home</span></i>
+                    <span class="link-name" style="color: #5a81fa">Dashboard</span>
                 </a>
             </li>
             <!--=====Clinic Management Menu====-->
             <ul class="clinic-management-link">
-                <li>
-                    <a href="zHTML_information.php">
-                        <i><span class="material-symbols-outlined">help_clinic</span></i>
-                        <span class="link-name">Clinic Information</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="zHTML_schedule.php">
-                        <i><span class="material-symbols-outlined">event</span></i>
-                        <span class="link-name">Schedule</span>
-                    </a>
-                </li>
+                <div class="page-maintenance" id="menu-maintenance">
+                    <li>
+                        <a href="">
+                            <i><span class="material-symbols-outlined">help_clinic</span></i>
+                            <span class="link-name">Page Maintenance</span>
+                        </a>
+                    </li>
+                    <div class="page-maintenance-content">
+                        <li>
+                            <a href="Z_ClinicAboutUs.php">
+                                <i><span class="material-symbols-outlined">info</span></i>
+                                <span class="link-name">&nbsp; About Us</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Z_ClinicContact.php">
+                                <i><span class="material-symbols-outlined">call</span></i>
+                                <span class="link-name">&nbsp; Contacts</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Z_ClinicPSched.php">
+                                <i><span class="material-symbols-outlined">schedule</span></i>
+                                <span class="link-name">&nbsp; Schedule Page</span>
+                            </a>
+                        </li>
+                    </div>
+                </div>
                 <li>
                     <a href="zHTML_announcement.php">
                         <i><span class="material-symbols-outlined">campaign</span></i>
@@ -36,7 +52,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="zHTML_service_product.php">
+                    <a href="Capstone_ClinicServNProd.html">
                         <i><span class="material-symbols-outlined">sell</span></i>
                         <span class="link-name">Service and Product</span>
                     </a>
@@ -44,6 +60,13 @@
             </ul>
             <!--=====Record Menus====-->
             <ul class="record-management-link">
+                <li>
+                    <a href="zHTML_schedule.php">
+                        <i><span class="material-symbols-outlined">event</span></i>
+                        <span class="link-name">Appointment Schedule</span>
+                    </a>
+                </li>
+
                 <li>
                     <a href="zHTML_customer.php">
                         <i class="uil uil-share"><span class="material-symbols-outlined">groups</span></i>
@@ -62,20 +85,18 @@
                         <span class="link-name">Staff</span>
                     </a>
                 </li>
-                <!-- <li>
-                    <a href="zHTML_inventory.php">
-                        <i><span class="material-symbols-outlined">inventory</span></i>
-                        <span class="link-name">Inventory</span>
-                    </a>
-                </li> -->
                 <li>
                     <a href="zHTML_report_analytics.php">
                         <i><span class="material-symbols-outlined">analytics</span></i>
                         <span class="link-name">Report Analytics</span>
                     </a>
                 </li>
-                <li>
-                </li>
+                <!-- <li>
+                    <a href="Capstone_Bin.html">
+                        <i><span class="material-symbols-outlined">delete</span></i>
+                        <span class="link-name">Bin</span>
+                    </a>
+                </li> -->
             </ul>
         </ul>
         <!--=====Logout Menu====-->
