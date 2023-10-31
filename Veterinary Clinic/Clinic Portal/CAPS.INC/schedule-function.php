@@ -82,16 +82,20 @@ function updateAppointment()
 {
     global $conn;
 
-    $updateId = $_POST["updateId"];
-    $updateDate = $_POST["updateDate"];
-    $updateName = $_POST["updateName"];
-    $updatePetname = $_POST["updatePetname"];
-    $updateType = $_POST["updateType"];
-    $updateService = $_POST["updateService"];
-    $updateNumber = $_POST["updateNumber"];
+    $id = $_POST["updateId"];
+    $date = $_POST["updatedate"];
+    $name = $_POST["updatename"];
+    $petname = $_POST["updatepetname1"];
+    $petname2 = $_POST["updatepetname2"];
+    $petname3 = $_POST["updatepetname3"];
+    $petname4 = $_POST["updatepetname4"];
+    $petname5 = $_POST["updatepetname5"];
+    $service1 = $_POST["updateservice1"];
+    $service2 = $_POST["updateservice2"];
+    $service3 = $_POST["updateservice3"];
+    $number = $_POST["updatenumber"];
 
-    $query = "UPDATE schedule SET ownername = '$updateName', petname = '$updatePetname', type = '$updateType', service = '$updateService', 
-    date = '$updateDate', number = '$updateNumber' WHERE id = '$updateId'";
+    $query = "UPDATE schedule SET ownername = '$name', petname = '$petname', petname2 = '$petname2', petname3 = '$petname3', petname4 = '$petname4', petname5 = '$petname5', service = '$service1', service2 = '$service2', service3 = '$service3', date = '$date', number = '$number' WHERE id = '$id'";
     mysqli_query($conn, $query);
     mysqli_close($conn);
     echo "Schedule Updated Successfully.";

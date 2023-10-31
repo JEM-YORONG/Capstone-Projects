@@ -702,6 +702,270 @@
                         <button type="button" class="btn-close" onclick="closeFormDetails()">Close</button>
                     </form>
                 </div>
+
+                <!-- Update Appointment -->
+                <div class="form-popup" id="updateForm" style="overflow: auto; max-height: 500px;">
+                    <form action="/action_page.php" class="form-container">
+                        <div class="title">
+                            Update Appointment
+                        </div>
+                        <div class="form">
+                            <div class="inputfield">
+                                <label>Date</label>
+                                <input type="date" class="input" id="dateUpdate">
+                            </div>
+
+                            <div class="inputfield" style="display: none;">
+                                <label>ID</label>
+                                <input type="text" class="input" id="ownerIdUpdate">
+                            </div>
+                            <div class="inputfield">
+                                <div class="inputfield">
+                                    <label for="name">Name</label>
+                                    <div class="custom_select">
+                                        <div class="select-dropdown">
+                                            <input type="text" class="input" id="nameUpdate" name="name" oninput="filterOptions()" autocomplete="off">
+                                            <ul class="dropdown-options" id="customerNames">
+                                                <?php
+                                                require 'database-conn.php';
+
+                                                $query = "SELECT * FROM customer";
+                                                $result = mysqli_query($conn, $query);
+
+                                                // Check if the query was successful
+                                                if ($result) {
+                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                                        $customerName = $row["firstname"] . " " . $row["lastname"];
+                                                        $firstname = $row["firstname"];
+                                                        $lastname = $row["lastname"];
+
+                                                        // Execute another query to get additional information based on firstname and lastname
+                                                        $query2 = "SELECT id FROM customer WHERE firstname = '$firstname' AND lastname = '$lastname'";
+                                                        $result2 = mysqli_query($conn, $query2);
+
+                                                        if ($result2) {
+                                                            $row2 = mysqli_fetch_assoc($result2);
+                                                            $customerId = $row2["id"];
+                                                        } else {
+                                                            // Handle the case where the query failed
+                                                            echo "Error in query2: " . mysqli_error($conn);
+                                                        }
+
+                                                        echo "<li data-customer-id='$customerId'>$customerName</li>";
+                                                    }
+                                                } else {
+                                                    // Handle the case where the first query failed
+                                                    echo "Error in query1: " . mysqli_error($conn);
+                                                }
+
+                                                mysqli_close($conn);
+                                                ?>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="inputfield">
+                                <label>Number of Pets</label>
+                                <div class="custom_select">
+                                    <select id="numPetUpdate" onchange="petsUpdate()">
+                                        <option value="">SELECT</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="inputfield" id="pet1U" style="display: none;">
+                                <label>Pet 1</label>
+                                <div class="custom_select">
+                                    <select id="petname1Update">
+                                        <option value="">Select a pet</option>
+                                        <?php
+                                        require 'database-conn.php';
+                                        $query = "SELECT * FROM pet";
+                                        $result = mysqli_query($conn, $query);
+
+                                        // Check if the query was successful
+                                        if ($result) {
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                $petname = $row["petname"];
+                                                echo "<option value='$petname'>$petname</option>";
+                                            }
+                                        } else {
+                                            // Handle the case where the query failed
+                                            echo "Error: " . mysqli_error($conn);
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="inputfield" id="pet2U" style="display: none;">
+                                <label>Pet 2</label>
+                                <div class="custom_select">
+                                    <select id="petname2Update">
+                                        <option value="">Select a pet</option>
+                                        <?php
+                                        require 'database-conn.php';
+                                        $query = "SELECT * FROM pet";
+                                        $result = mysqli_query($conn, $query);
+
+                                        // Check if the query was successful
+                                        if ($result) {
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                $petname = $row["petname"];
+                                                echo "<option value='$petname'>$petname</option>";
+                                            }
+                                        } else {
+                                            // Handle the case where the query failed
+                                            echo "Error: " . mysqli_error($conn);
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="inputfield" id="pet3U" style="display: none;">
+                                <label>Pet 3</label>
+                                <div class="custom_select">
+                                    <select id="petname3Update">
+                                        <option value="">Select a pet</option>
+                                        <?php
+                                        require 'database-conn.php';
+                                        $query = "SELECT * FROM pet";
+                                        $result = mysqli_query($conn, $query);
+
+                                        // Check if the query was successful
+                                        if ($result) {
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                $petname = $row["petname"];
+                                                echo "<option value='$petname'>$petname</option>";
+                                            }
+                                        } else {
+                                            // Handle the case where the query failed
+                                            echo "Error: " . mysqli_error($conn);
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="inputfield" id="pet4U" style="display: none;">
+                                <label>Pet 4</label>
+                                <div class="custom_select">
+                                    <select id="petname4Update">
+                                        <option value="">Select a pet</option>
+                                        <?php
+                                        require 'database-conn.php';
+                                        $query = "SELECT * FROM pet";
+                                        $result = mysqli_query($conn, $query);
+
+                                        // Check if the query was successful
+                                        if ($result) {
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                $petname = $row["petname"];
+                                                echo "<option value='$petname'>$petname</option>";
+                                            }
+                                        } else {
+                                            // Handle the case where the query failed
+                                            echo "Error: " . mysqli_error($conn);
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="inputfield" id="pet5U" style="display: none;">
+                                <label>Pet 5</label>
+                                <div class="custom_select">
+                                    <select id="petname5Update">
+                                        <option value="">Select a pet</option>
+                                        <?php
+                                        require 'database-conn.php';
+                                        $query = "SELECT * FROM pet";
+                                        $result = mysqli_query($conn, $query);
+
+                                        // Check if the query was successful
+                                        if ($result) {
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                $petname = $row["petname"];
+                                                echo "<option value='$petname'>$petname</option>";
+                                            }
+                                        } else {
+                                            // Handle the case where the query failed
+                                            echo "Error: " . mysqli_error($conn);
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="inputfield">
+                                <label>Number of Services</label>
+                                <div class="custom_select">
+                                    <select id="numServicesUpdate" onchange="servicesUpdate()">
+                                        <option value="">SELECT</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="inputfield" id="s1U" style="display: none;">
+                                <label>Service 1</label>
+                                <div class="custom_select">
+                                    <select id="service1Update">
+                                        <option value="Vaccine">Vaccine</option>
+                                        <option value="Grooming">Grooming</option>
+                                        <option value="Consultation and Treatment">Consultation and Treatment</option>
+                                        <option value="Lab Test">Lab Test</option>
+                                        <option value="Surgery">Surgery</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="inputfield" id="s2U" style="display: none;">
+                                <label>Service 2</label>
+                                <div class="custom_select">
+                                    <select id="service2Update">
+                                        <option value="">SELECT</option>
+                                        <option value="Vaccine">Vaccine</option>
+                                        <option value="Grooming">Grooming</option>
+                                        <option value="Consultation">Consultation and Treatment</option>
+                                        <option value="Lab Test">Lab Test</option>
+                                        <option value="Surgery">Surgery</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="inputfield" id="s3U" style="display: none;">
+                                <label>Service 3</label>
+                                <div class="custom_select">
+                                    <select id="service3Update">
+                                        <option value="">SELECT</option>
+                                        <option value="Vaccine">Vaccine</option>
+                                        <option value="Grooming">Grooming</option>
+                                        <option value="Consultation and Treatment">Consultation and Treatment</option>
+                                        <option value="Lab Test">Lab Test</option>
+                                        <option value="Surgery">Surgery</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="inputfield">
+                                <label>Phone Number</label>
+                                <input type="number" class="input" placeholder="+63**********" id="numberUpdate" autocomplete="off">
+                            </div>
+                            <div class="inputfield">
+                                <input type="button" value="Update Appointment" class="btn-add" onclick="submitData('updateAppointment');">
+                                <button class="btn-create">
+                                    <a href="zHTML_customer.php" style="text-decoration: none;">Add Customer</a>
+                                </button>
+                                <?php require 'script files\schedule.data.js.php'; ?>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-close" onclick="closeUpdateForm()">Close</button>
+
+                    </form>
+                </div>
+
                 <!--=====Send SMS====-->
                 <div class="form-popup-sms" id="myForm-sms">
                     <form action="/action_page.php" class="form-container-sms">
@@ -740,58 +1004,6 @@
                     </form>
                 </div>
 
-                <!--=====Update====-->
-                <div class="form-popup-edit" id="myForm-edit">
-                    <form action="/action_page.php" class="form-container-edit">
-                        <div class="title">
-                            Edit Appointment
-                        </div>
-                        <div class="form-edit">
-                            <div class="inputfield" style="display: none;">
-                                <label>ID</label>
-                                <input type="text" class="input" id="updateId">
-                            </div>
-                            <div class="inputfield">
-                                <label>Date</label>
-                                <input type="date" class="input" id="updateDate">
-                            </div>
-                            <div class="inputfield">
-                                <label>Name</label>
-                                <input type="text" class="input" id="updateName">
-                            </div>
-                            <div class="inputfield">
-                                <label>Pet Name</label>
-                                <input type="text" class="input" id="updatePetname">
-                            </div>
-                            <div class="inputfield">
-                                <label>Type</label>
-                                <input type="text" class="input" id="updateType">
-                            </div>
-                            <div class="inputfield">
-                                <label>Service</label>
-                                <div class="custom_select">
-                                    <select id="updateService">
-                                        <option value="Vaccine">Vaccine</option>
-                                        <option value="Grooming">Grooming</option>
-                                        <option value="Consultation">Consultation</option>
-                                        <option value="Lab Test">Lab Test</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="inputfield">
-                                <label>Phone Number</label>
-                                <input type="number" class="input" placeholder="+63**********" id="updateNumber">
-                            </div>
-                            <div class="inputfield">
-                                <input type="button" value="Update Appointment" class="btn-update" onclick="submitData('updateAppointment');">
-                                <?php require 'script files\schedule.data.js.php'; ?>
-                            </div>
-                        </div>
-                        <button type="button" class="btn-close" onclick="closeFormEdit()">Cancel</button>
-
-                    </form>
-                </div>
-
                 <!--=====Delete====-->
                 <div class="form-popup-delete" id="myForm-delete">
                     <form action="/action_page.php" class="form-container-delete">
@@ -812,6 +1024,96 @@
             </div>
         </div>
     </section>
+    <script>
+        function openUpdateForm() {
+            document.getElementById("updateForm").style.display = "block";
+        }
+
+        function closeUpdateForm() {
+            document.getElementById("updateForm").style.display = "none";
+        }
+
+        function getRowId(rowId, date, name, pet1, pet2, pet3, pet4, pet5, ser1, ser2, ser3, num) {
+            document.getElementById("ownerIdUpdate").value = rowId;
+
+            document.getElementById("dateUpdate").value = date;
+            document.getElementById("nameUpdate").value = name;
+            document.getElementById("petname1Update").value = pet1;
+            document.getElementById("petname2Update").value = pet2;
+            document.getElementById("petname3Update").value = pet3;
+            document.getElementById("petname4Update").value = pet4;
+            document.getElementById("petname5Update").value = pet5;
+            document.getElementById("service1Update").value = ser1;
+            document.getElementById("service2Update").value = ser2;
+            document.getElementById("service3Update").value = ser3;
+            document.getElementById("numberUpdate").value = num;
+            document.getElementById("numPetUpdate").selectedIndex  = 5;
+            document.getElementById("pet1U").style.display = "block";
+            document.getElementById("pet2U").style.display = "block";
+            document.getElementById("pet3U").style.display = "block";
+            document.getElementById("pet4U").style.display = "block";
+            document.getElementById("pet5U").style.display = "block";
+            document.getElementById("numServicesUpdate").selectedIndex  = 3;
+            document.getElementById("s1U").style.display = "block";
+            document.getElementById("s2U").style.display = "block";
+            document.getElementById("s3U").style.display = "block";
+        }
+
+        function petsUpdate() {
+            var services = document.getElementById("numPetUpdate");
+            var selectedValue = services.value;
+            document.getElementById("pet1U").style.display = "none";
+            document.getElementById("pet2U").style.display = "none";
+            document.getElementById("pet3U").style.display = "none";
+            document.getElementById("pet4U").style.display = "none";
+            document.getElementById("pet5U").style.display = "none";
+            if (selectedValue == 1) {
+                document.getElementById("pet1U").style.display = "block";
+            }
+            if (selectedValue == 2) {
+                document.getElementById("pet1U").style.display = "block";
+                document.getElementById("pet2U").style.display = "block";
+            }
+            if (selectedValue == 3) {
+                document.getElementById("pet1U").style.display = "block";
+                document.getElementById("pet2U").style.display = "block";
+                document.getElementById("pet3U").style.display = "block";
+            }
+            if (selectedValue == 4) {
+                document.getElementById("pet1U").style.display = "block";
+                document.getElementById("pet2U").style.display = "block";
+                document.getElementById("pet3U").style.display = "block";
+                document.getElementById("pet4U").style.display = "block";
+            }
+            if (selectedValue == 5) {
+                document.getElementById("pet1U").style.display = "block";
+                document.getElementById("pet2U").style.display = "block";
+                document.getElementById("pet3U").style.display = "block";
+                document.getElementById("pet4U").style.display = "block";
+                document.getElementById("pet5U").style.display = "block";
+            }
+        }
+
+        function servicesUpdate() {
+            var services = document.getElementById("numServicesUpdate");
+            var selectedValue = services.value;
+            document.getElementById("s1U").style.display = "none";
+            document.getElementById("s2U").style.display = "none";
+            document.getElementById("s3U").style.display = "none";
+            if (selectedValue == 1) {
+                document.getElementById("s1U").style.display = "block";
+            }
+            if (selectedValue == 2) {
+                document.getElementById("s1U").style.display = "block";
+                document.getElementById("s2U").style.display = "block";
+            }
+            if (selectedValue == 3) {
+                document.getElementById("s1U").style.display = "block";
+                document.getElementById("s2U").style.display = "block";
+                document.getElementById("s3U").style.display = "block";
+            }
+        }
+    </script>
     <script>
         function openFormDetails(ownername, appID) {
             document.getElementById("detailsPopup").style.display = "block";
@@ -1007,16 +1309,6 @@ Doc Lenon Veterinary Clinic`;
             } else {
                 document.getElementById("search2").value = dateVal;
             }
-        }
-
-        function getRowId(rowId, date, name, petname, type, service, number) {
-            document.getElementById("updateId").value = rowId;
-            document.getElementById("updateDate").value = date;
-            document.getElementById("updateName").value = name;
-            document.getElementById("updatePetname").value = petname;
-            document.getElementById("updateType").value = type;
-            document.getElementById("updateService").value = service;
-            document.getElementById("updateNumber").value = number;
         }
 
         function deleteRow(rowId) {

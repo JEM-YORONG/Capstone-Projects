@@ -64,7 +64,7 @@ if ($result) {
                         <?php require 'script files\getDetailsID.js.php'; ?>
                     </td>
 
-                    <td> <button type="button" class="edit-button" onclick="openFormEdit(); 
+                    <td> <button type="button" class="edit-button" onclick="openUpdateForm(); 
                     getRowId('<?php echo $row['id']; ?>',
                     '<?php echo $row['date']; ?>',
                     '<?php echo $row['ownername']; ?>',

@@ -56,14 +56,19 @@ if (mysqli_num_rows($result) > 0) {
                         <?php require 'script files\getDetailsID.js.php'; ?>
                     </td>
 
-                    <td> <button type="button" class="edit-button" onclick="openForm(); 
+                    <td> <button type="button" class="edit-button" onclick="openUpdateForm(); 
                     getRowId('<?php echo $row['id']; ?>',
                     '<?php echo $row['date']; ?>',
                     '<?php echo $row['ownername']; ?>',
                     '<?php echo $row['petname']; ?>',
+                    '<?php echo $row['petname2']; ?>',
+                    '<?php echo $row['petname3']; ?>',
+                    '<?php echo $row['petname4']; ?>',
+                    '<?php echo $row['petname5']; ?>',
                     '<?php echo $row['service']; ?>',
-                    '<?php echo $row['number']; ?>'
-                    );"><span class="material-symbols-outlined">edit</span></button></td>
+                    '<?php echo $row['service2']; ?>',
+                    '<?php echo $row['service3']; ?>',
+                    '<?php echo $row['number']; ?>');"><span class="material-symbols-outlined">edit</span></button></td>
 
                     <td> <button type="button" class="delete-button" onclick="openFormDelete(); deleteRow('<?php echo $row['id']; ?>');"><span class="material-symbols-outlined">delete</span></button></td>
                 </tr>

@@ -32,13 +32,19 @@
                 smsMessage: $("#smsMessage").val(),
 
                 //update appointment info
-                updateId: $("#updateId").val(),
-                updateDate: $("#updateDate").val(),
-                updateName: $("#updateName").val(),
-                updatePetname: $("#updatePetname").val(),
-                updateType: $("#updateType").val(),
-                updateService: $("#updateService").val(),
-                updateNumber: $("#updateNumber").val(),
+                updateId: $("#ownerIdUpdate").val(),
+                updatedate: $("#dateUpdate").val(),
+                updatename: $("#nameUpdate").val(),
+                updatepetname1: $("#petname1Update").val(),
+                updatepetname2: $("#petname2Update").val(),
+                updatepetname3: $("#petname3Update").val(),
+                updatepetname4: $("#petname4Update").val(),
+                updatepetname5: $("#petname5Update").val(),
+                updatetype: $("#typeUpdate").val(),
+                updateservice1: $("#service1Update").val(),
+                updateservice2: $("#service2Update").val(),
+                updateservice3: $("#service3Update").val(),
+                updatenumber: $("#numberUpdate").val(),
 
                 //details data
                 ownername: $("#ownerName").val(),
