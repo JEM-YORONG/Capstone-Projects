@@ -14,8 +14,6 @@ function fetchData()
     if (isset($_POST['id'])) {
         $id = $_POST['id'];
 
-        echo $id;
-
         $query = "SELECT * FROM schedule WHERE id = '$id'";
         $result = mysqli_query($conn, $query);
 
