@@ -17,15 +17,26 @@ while ($row = mysqli_fetch_assoc($result)) :
     <tr>
         <td><?php echo $row["date"]; ?></td>
         <td data-label="Owner Name"><?php echo $row["ownername"]; ?></td>
-        <td data-label="Pet Name"><?php echo $row["petname"]; ?></td>
-        <td data-label="Service"><?php echo $row["service"]; ?></td>
+        <td data-label="Pet Name">
+            <?php echo $row["petname"]; ?><br>
+            <?php echo $row["petname2"]; ?><br>
+            <?php echo $row["petname3"]; ?><br>
+            <?php echo $row["petname4"]; ?><br>
+            <?php echo $row["petname5"]; ?>
+        </td>
+        <td data-label="Service">
+            <?php echo $row["service"]; ?><br>
+            <?php echo $row["service2"]; ?><br>
+            <?php echo $row["service3"]; ?>
+        </td>
         <td>
             <button type="button" class="edit-button" onclick="openForm(
                 '',
                 '<?php echo $row['ownername']; ?>',
                 '<?php echo $row['petname']; ?>',
                 '<?php echo $row['service']; ?>',
-                '<?php echo $row['number']; ?>');">
+                '<?php echo $row['number']; ?>',
+                '<?php echo $row['id']; ?>');">
                 <span class="material-symbols-outlined">edit</span>
             </button>
         </td>
