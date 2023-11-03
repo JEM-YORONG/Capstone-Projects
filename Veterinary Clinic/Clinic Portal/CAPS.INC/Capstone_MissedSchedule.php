@@ -36,6 +36,9 @@
           <div class="search-box">
             <input type="text" placeholder="Search here..." id="search" name="search" />
           </div>
+          <div class="search-box" style="display: none;">
+            <input type="text" id="rowId" value="">
+          </div>
         </div>
 
         <div class="upcoming-clinic-schedule">
@@ -60,7 +63,7 @@
         <div class="form-popup" id="myForm">
           <form action="/action_page.php" class="form-container">
             <div class="title">
-              New Appointment
+              Reschedule Appointment
             </div>
             <div class="form">
               <div class="inputfield">
@@ -68,7 +71,7 @@
                 <input type="date" class="input" id="date">
               </div>
 
-              <div class="inputfield" style="display: none;">
+              <div class="inputfield" style="display: block;">
                 <label>ID</label>
                 <input type="text" class="input" id="ownerId">
               </div>
@@ -80,37 +83,8 @@
               </div>
 
               <div class="inputfield">
-                <label>Pet Name</label>
-                <input type="text" class="input" id="petname" autocomplete="off" disabled>
-              </div>
-
-              <!-- <div class="inputfield">
-                <label>Type</label>
-                <div class="custom_select">
-                  <select id="type" disabled>
-                    <option value="Dog">Dog</option>
-                    <option value="Cat">Cat</option>
-                  </select>
-                </div>
-              </div> -->
-              <div class="inputfield">
-                <label>Service</label>
-                <div class="custom_select">
-                  <select id="service" disabled>
-                    <option value="Vaccine">Vaccine</option>
-                    <option value="Grooming">Grooming</option>
-                    <option value="Consultation">Consultation</option>
-                    <option value="Lab Test">Lab Test</option>
-                  </select>
-                </div>
-              </div>
-              <div class="inputfield">
-                <label>Phone Number</label>
-                <input type="number" class="input" placeholder="+63**********" id="number" autocomplete="off" disabled>
-              </div>
-              <div class="inputfield">
                 <input type="button" value="Add Appointment" class="btn-add" onclick="submitData('addAppointment');">
-                <?php require 'script files\schedule.data.js.php'; ?>
+                <?php require 'script files\missed-schedule-data.js.php'; ?>
               </div>
             </div>
             <button type="button" class="btn-close" onclick="closeForm()">Close</button>
@@ -127,7 +101,7 @@
               <div class="inputfield">
                 <input type="button" value="Cancel" class="btn-cancel" onclick="closeFormDelete()">
                 <input type="button" value="Delete" class="btn-delete" onclick="submitData('deleteSchedule')">
-                <?php require 'script files\schedule.data.js.php'; ?>
+                <?php require 'script files\missed-schedule-data.js.php'; ?>
               </div>
             </div>
           </form>
@@ -151,12 +125,17 @@
       }
     });
 
-    function openForm(date, name, petname, service, number) {
+    function openForm(date, name, petname, service, number, id) {
       document.getElementById("myForm").style.display = "block";
       document.getElementById("name").value = name;
+      document.getElementById("ownerId").value = id;
       document.getElementById("petname").value = petname;
       document.getElementById("service").value = service;
       document.getElementById("number").value = number;
+    }
+
+    function deleteRow(rowId) {
+      document.getElementById("rowId").value = rowId;
     }
 
     function closeForm() {
