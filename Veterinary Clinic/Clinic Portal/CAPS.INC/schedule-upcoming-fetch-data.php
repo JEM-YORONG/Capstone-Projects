@@ -45,7 +45,13 @@ if (mysqli_num_rows($result) > 0) {
                     <td data-label="Notify" onclick="setMessageUpcoming('<?php echo $row['ownername']; ?>',
                     '<?php echo $row['date']; ?>',
                     '<?php echo $row['petname']; ?>',
-                    '<?php echo $row['service']; ?>');"><button type="button" class="notify-button-1" onclick="opensms(); infoSMS('<?php echo $row['date']; ?>', '<?php echo $row['number']; ?>', '<?php echo $row['ownername']; ?>', '<?php echo $row['petname']; ?>');"><span class="material-symbols-outlined">reminder</span></button></td>
+                    '<?php echo $row['petname2']; ?>',
+                    '<?php echo $row['petname3']; ?>',
+                    '<?php echo $row['petname4']; ?>',
+                    '<?php echo $row['petname5']; ?>',
+                    '<?php echo $row['service']; ?>',
+                    '<?php echo $row['service2']; ?>',
+                    '<?php echo $row['service3']; ?>');"><button type="button" class="notify-button-1" onclick="opensms(); infoSMS('<?php echo $row['date']; ?>', '<?php echo $row['number']; ?>', '<?php echo $row['ownername']; ?>', '<?php echo $row['petname']; ?>');"><span class="material-symbols-outlined">reminder</span></button></td>
                     <td><?php echo $row['date']; ?></td>
                     <td data-label="Owner Name"><?php echo $row['ownername']; ?></td>
 
