@@ -206,7 +206,7 @@
     <!--Pet Information-->
     <hr class="seperator" />
     <br />
-    <button class="add-button" onclick="openAddRecords()">+ Add Record</button>
+    <button class="add-button" id="addRecord" onclick="openAddRecords()" style="display: none;">+ Add Record</button>
     <br />
     <div class="pet-content">
       <div class="pet-records">
@@ -261,7 +261,7 @@
 
       <!--Pet Record Table-->
       <div class="pet-records">
-        <div class="customer-pet-table">
+        <div class="customer-pet-table" id="petRecordTable" style="display: none;">
           <table width="100%">
             <thead>
               <tr>
@@ -270,7 +270,7 @@
                 <th>Service</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="pRcrd">
               <tr>
                 <td style="color: crimson">mm-dd-yyyy</td>
                 <td>n/a</td>
@@ -586,6 +586,11 @@
       document.getElementById("custContact").disabled = true;
       document.getElementById("custEmail").disabled = true;
       document.getElementById("custAddress").disabled = true;
+    }
+
+    function addRecord(){
+      document.getElementById("addRecord").style.display = "block";
+      document.getElementById("petRecordTable").style.display = "block";
     }
 
     function editPet() {

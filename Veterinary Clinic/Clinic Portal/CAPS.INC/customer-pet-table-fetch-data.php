@@ -33,7 +33,8 @@ function load()
                     '<?php echo $name; ?>', 
                     '<?php echo $rowPet['breed']; ?>', 
                     '<?php echo $species; ?>', 
-                    '<?php echo $rowPet['birthdate']; ?>');">
+                    '<?php echo $rowPet['birthdate']; ?>');
+                    addRecord();">
 
                     <span class="material-symbols-outlined"> toc </span>
                 </td>
