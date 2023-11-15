@@ -47,380 +47,188 @@
   <h4> Contact Us for more info!</h4>
   <h2>Pet Food</h2>
   <div class="slider-food" id="slider-food">
+
     <div class="slide" id="slideFood">
-      <div class="item">
-        <div class="services-gallery">
-          <img src=".vscode/Products/pet food-1.jpg" />
-        </div>
-        <div class="services-title">
-          <h3>Pet Food</h3>
-          <p>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+      <!--  -->
+      <?php
+      require 'database-conn.php';
+      slider_food();
+      function slider_food()
+      {
+        global $conn;
+        $category = "Pet Foods";
 
-          </p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="services-gallery">
-          <img src=".vscode/Products/pet food-2.jpg" />
-        </div>
-        <div class="services-title">
-          <h3>Pet Food</h3>
-          <p>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+        $query = "SELECT * FROM serviceandproduct WHERE categories = '$category'";
+        $result = mysqli_query($conn, $query);
 
-          </p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="services-gallery">
-          <img src=".vscode/Products/pet food-3.jpg" />
-        </div>
-        <div class="services-title">
-          <h3>Pet Food</h3>
-          <p>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+        if (!$result) {
+          die("Query failed: " . mysqli_error($conn));
+        }
 
-          </p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="services-gallery">
-          <img src=".vscode/Products/pet food-3.jpg" />
-        </div>
-        <div class="services-title">
-          <h3>Pet Food</h3>
-          <p>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+        foreach ($result as $row) {
+          $imageName = $row['imagename'];
+          $imageType = $row['imagetype'];
+          $imageData = $row['imagedata'];
 
-          </p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="services-gallery">
-          <img src=".vscode/Products/pet food-3.jpg" />
-        </div>
-        <div class="services-title">
-          <h3>Pet Food</h3>
-          <p>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-
-          </p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="services-gallery">
-          <img src=".vscode/Products/pet food-3.jpg" />
-        </div>
-        <div class="services-title">
-          <h3>Pet Food</h3>
-          <p>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-
-          </p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="services-gallery">
-          <img src=".vscode/Products/pet food-3.jpg" />
-        </div>
-        <div class="services-title">
-          <h3>Pet Food</h3>
-          <p>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-
-          </p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="services-gallery">
-          <img src=".vscode/Products/pet food-3.jpg" />
-        </div>
-        <div class="services-title">
-          <h3>Pet Food</h3>
-          <p>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-
-          </p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="services-gallery">
-          <img src=".vscode/Products/pet food-3.jpg" />
-        </div>
-        <div class="services-title">
-          <h3>Pet Food</h3>
-          <p>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-
-          </p>
-        </div>
-      </div>
-
+          $imageScr = "data:" . $imageType . ";base64," . base64_encode($imageData);
+          $name = $row['title'];
+          $description = $row['description'];
+      ?>
+          <div class="item">
+            <div class="services-gallery">
+              <img src="<?php echo $imageScr; ?>" />
+            </div>
+            <div class="services-title">
+              <h3><?php echo $name; ?></h3>
+              <p><?php echo $description; ?></p>
+            </div>
+          </div>
+      <?php
+        }
+      }
+      ?>
     </div>
-    <button class="ctrl-btn pro-prev-food">&#8592;</button>
-    <button class="ctrl-btn pro-next-food"> &#8594;</button>
+  </div>
+  <button class="ctrl-btn pro-prev-food">&#8592;</button>
+  <button class="ctrl-btn pro-next-food"> &#8594;</button>
   </div>
 
   <!---->
   <h2>Accessories</h2>
   <div class="slider-accesories" id="slider-accesories">
     <div class="slide" id="slideaccesories">
-      <div class="item">
-        <div class="prodbath-gallery">
-          <img src=".vscode/Products/accessories-1.jpg" />
-        </div>
-        <div class="services-title">
-          <h3>Accessories 1</h3>
-          <p>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+      <?php
+      require 'database-conn.php';
+      slider_accesories();
+      function slider_accesories()
+      {
+        global $conn;
+        $category = "Accessories";
 
-          </p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="services-gallery">
-          <img src=".vscode/Products/accessories-2.jpg" />
-        </div>
-        <div class="services-title">
-          <h3>Accessories 2</h3>
-          <p>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+        $query = "SELECT * FROM serviceandproduct WHERE categories = '$category'";
+        $result = mysqli_query($conn, $query);
 
-          </p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="services-gallery">
-          <img src=".vscode/Products/accessories-3.jpg" />
-        </div>
-        <div class="services-title">
-          <h3>Accessories 3</h3>
-          <p>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+        if (!$result) {
+          die("Query failed: " . mysqli_error($conn));
+        }
 
-          </p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="services-gallery">
-          <img src=".vscode/Products/accessories-4.jpg" />
-        </div>
-        <div class="services-title">
-          <h3>Accessories 4</h3>
-          <p>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+        foreach ($result as $row) {
+          $imageName = $row['imagename'];
+          $imageType = $row['imagetype'];
+          $imageData = $row['imagedata'];
 
-          </p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="services-gallery">
-          <img src=".vscode/Products/accessories-5.jpg" />
-        </div>
-        <div class="services-title">
-          <h3>Accessories 1</h3>
-          <p>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+          $imageScr = "data:" . $imageType . ";base64," . base64_encode($imageData);
+          $name = $row['title'];
+          $description = $row['description'];
+      ?>
+          <div class="item">
+            <div class="prodbath-gallery">
+              <img src="<?php echo $imageScr; ?>" />
+            </div>
+            <div class="services-title">
+              <h3><?php echo $name; ?></h3>
+              <p><?php echo $description; ?></p>
+            </div>
+          </div>
 
-          </p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="services-gallery">
-          <img src=".vscode/Products/accessories-6.jpg" />
-        </div>
-        <div class="services-title">
-          <p>Consultation</p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="services-gallery">
-          <img src=".vscode/Services-consultation.jpg" />
-        </div>
-        <div class="services-title">
-          <p>Consultation</p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="services-gallery">
-          <img src=".vscode/Services-consultation.jpg" />
-        </div>
-        <div class="services-title">
-          <p>Consultation</p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="services-gallery">
-          <img src=".vscode/Services-consultation.jpg" />
-        </div>
-        <div class="services-title">
-          <p>Consultation</p>
-        </div>
-      </div>
+      <?php
+        }
+      }
+      ?>
     </div>
     <button class="ctrl-btn pro-prev-accesories">&#8592;</button>
     <button class="ctrl-btn pro-next-accesories"> &#8594;</button>
   </div>
+
   <!--Bath Products-->
   <h2>Bath Products</h2>
   <div class="clinic-products-bath">
     <div class="clinic-products">
-      <div class="prodBath">
-        <div class="prodbath-gallery">
-          <img src=".vscode/Products/bath product-1.jpg" />
-        </div>
-        <div class="services-title">
-          <h3>Bath Product 1</h3>
-          <p>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+      <?php
+      require 'database-conn.php';
+      slider_Bath();
+      function slider_Bath()
+      {
+        global $conn;
+        $category = "Bath Products";
 
-          </p>
-        </div>
-      </div>
-      <div class="prodBath">
-        <div class="prodbath-gallery">
-          <img src=".vscode/Products/bath product-2.jpg" />
-        </div>
-        <div class="services-title">
-          <h3>Bath Product 1</h3>
-          <p>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+        $query = "SELECT * FROM serviceandproduct WHERE categories = '$category'";
+        $result = mysqli_query($conn, $query);
 
-          </p>
-        </div>
-      </div>
-      <div class="prodBath">
-        <div class="prodbath-gallery">
-          <img src=".vscode/Products/bath-product-3.jpg" />
-        </div>
-        <div class="services-title">
-          <h3>Bath Product 1</h3>
-          <p>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+        if (!$result) {
+          die("Query failed: " . mysqli_error($conn));
+        }
 
-          </p>
-        </div>
-      </div>
-      <div class="prodBath">
-        <div class="prodbath-gallery">
-          <img src=".vscode/Products/bath product-4.jpg" />
-        </div>
-        <div class="services-title">
-          <h3>Bath Product 1</h3>
-          <p>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+        foreach ($result as $row) {
+          $imageName = $row['imagename'];
+          $imageType = $row['imagetype'];
+          $imageData = $row['imagedata'];
 
-          </p>
-        </div>
-      </div>
-      <div class="prodBath">
-        <div class="prodbath-gallery">
-          <img src=".vscode/Services-surgery.jpg" />
-        </div>
-        <div class="services-title">
-          <h3>Bath Product 1</h3>
-          <p>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+          $imageScr = "data:" . $imageType . ";base64," . base64_encode($imageData);
+          $name = $row['title'];
+          $description = $row['description'];
+      ?>
+          <div class="prodBath">
+            <div class="prodbath-gallery">
+              <img src="<?php echo $imageScr; ?>" />
+            </div>
+            <div class="services-title">
+              <h3><?php echo $name; ?></h3>
+              <p><?php echo $description; ?></p>
+            </div>
+          </div>
 
-          </p>
-        </div>
-      </div>
+      <?php
+        }
+      }
+      ?>
     </div>
   </div>
   <!--Others-->
   <h2>Others</h2>
   <div class="clinic-products-others">
     <div class="clinic-products">
-      <div class="prodothers">
-        <div class="prodbath-gallery">
-          <img src=".vscode/Products/bath product-1.jpg" />
-        </div>
-        <div class="services-title">
-          <h3>Bath Product 1</h3>
-          <p>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+      <?php
+      require 'database-conn.php';
+      slider_Other();
+      function slider_Other()
+      {
+        global $conn;
+        $category = "Others";
 
-          </p>
-        </div>
-      </div>
-      <div class="prodBath">
-        <div class="prodbath-gallery">
-          <img src=".vscode/Products/bath product-2.jpg" />
-        </div>
-        <div class="services-title">
-          <h3>Bath Product 1</h3>
-          <p>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+        $query = "SELECT * FROM serviceandproduct WHERE categories = '$category'";
+        $result = mysqli_query($conn, $query);
 
-          </p>
-        </div>
-      </div>
-      <div class="prodBath">
-        <div class="prodbath-gallery">
-          <img src=".vscode/Products/bath-product-3.jpg" />
-        </div>
-        <div class="services-title">
-          <h3>Bath Product 1</h3>
-          <p>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+        if (!$result) {
+          die("Query failed: " . mysqli_error($conn));
+        }
 
-          </p>
-        </div>
-      </div>
-      <div class="prodBath">
-        <div class="prodbath-gallery">
-          <img src=".vscode/Products/bath product-4.jpg" />
-        </div>
-        <div class="services-title">
-          <h3>Bath Product 1</h3>
-          <p>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+        foreach ($result as $row) {
+          $imageName = $row['imagename'];
+          $imageType = $row['imagetype'];
+          $imageData = $row['imagedata'];
 
-          </p>
-        </div>
-      </div>
-      <div class="prodBath">
-        <div class="prodbath-gallery">
-          <img src=".vscode/Services-surgery.jpg" />
-        </div>
-        <div class="services-title">
-          <h3>Bath Product 1</h3>
-          <p>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-
-          </p>
-        </div>
-      </div>
+          $imageScr = "data:" . $imageType . ";base64," . base64_encode($imageData);
+          $name = $row['title'];
+          $description = $row['description'];
+      ?>
+          <div class="prodothers">
+            <div class="prodbath-gallery">
+              <img src="<?php echo $imageScr; ?>" />
+            </div>
+            <div class="services-title">
+              <h3><?php echo $name; ?></h3>
+              <p><?php echo $description; ?></p>
+            </div>
+          </div>
+      <?php
+        }
+      }
+      ?>
     </div>
-  </div>
-  <div class="footer">
-    <p>est. 2015</p>
-  </div>
+    <div class="footer">
+      <p>est. 2015</p>
+    </div>
 </body>
 
 </html>
