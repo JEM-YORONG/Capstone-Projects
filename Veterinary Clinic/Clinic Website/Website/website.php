@@ -42,40 +42,57 @@
       <p>Paws-itively passionate about pets!</p>
     </div>
 
+    <?php
+    require 'database-conn.php';
+
+    $query1 = "SELECT * FROM aboutus WHERE id = '1'";
+    $result1 = mysqli_query($conn, $query1);
+    $row1 = mysqli_fetch_assoc($result1);
+
+    $imageName = $row1['imagename'];
+    $imageType = $row1['imagetype'];
+    $imageData = $row1['imagedata'];
+
+    $logoSrc = "data:" . $imageType . ";base64," . base64_encode($imageData);
+    $title = $row1['title'];
+    $address = $row1['address'];
+    $intro = $row1['intro'];
+    $about = $row1['about'];
+    ?>
+
     <div class="clinic-name">
-      <button>Location</button>
+      <!-- <button>Location</button> -->
+      <p><?php echo $address; ?></p>
     </div>
     <div class="clinic-contacts">
       <p>Got a concern? Contact us!</p>
+      <?php
+      global $conn;
+      $queryC = "SELECT * FROM cliniccontact WHERE id = '1'";
+      $resultC = mysqli_query($conn, $queryC);
+      $rowC = mysqli_fetch_assoc($resultC);
+
+      $c1 = $rowC["contact1"];
+      $c2 = $rowC["contact2"]
+      ?>
       <div style="display: flex; flex: row">
-        <p class="contacts">0912 456 7890</p>
-        <p class="contacts">0912 456 7890</p>
+        <p class="contacts"><?php echo $c1; ?></p>
+        <p class="contacts"><?php echo $c2; ?></p>
       </div>
     </div>
   </section>
   <div class="intro-info">
-    <p>
-      The righteous care for the needs of their animals, but the kindest acts
-      of the wicked are cruel. PROVERBS 12:10
-    </p>
+    <p><?php echo $intro; ?></p>
   </div>
   <!--About us-->
   <div class="clinic-info">
     <div class="infos">
       <div class="infos-logo">
-        <img src=".vscode\Doc Lenon Logo.png" />
+        <img src="<?php echo $logoSrc; ?>" />
       </div>
       <div class="infos-about">
         <h1>About Us</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-          ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </p>
+        <p><?php echo $about; ?></p>
       </div>
     </div>
   </div>
@@ -85,6 +102,58 @@
   <h1>Our Schedule</h1>
   <div class="clinic-schedule">
     <div class="sched">
+      <?php
+      require 'database-conn.php';
+
+      $query1 = "SELECT * FROM clinicschedule WHERE id = '1'";
+      $result1 = mysqli_query($conn, $query1);
+      $row1 = mysqli_fetch_assoc($result1);
+      $mts = date('h:i A', strtotime($row1["start"]));
+      $mte = date('h:i A', strtotime($row1["end"]));
+      $ms = ($row1["status"] == 'Open') ? 'checked' : '';
+
+      $query2 = "SELECT * FROM clinicschedule WHERE id = '2'";
+      $result2 = mysqli_query($conn, $query2);
+      $row2 = mysqli_fetch_assoc($result2);
+      $tts = date('h:i A', strtotime($row2["start"]));
+      $tte = date('h:i A', strtotime($row2["end"]));
+      $ts = ($row2["status"] == 'Open') ? 'checked' : '';
+
+      $query3 = "SELECT * FROM clinicschedule WHERE id = '3'";
+      $result3 = mysqli_query($conn, $query3);
+      $row3 = mysqli_fetch_assoc($result3);
+      $wts = date('h:i A', strtotime($row3["start"]));
+      $wte = date('h:i A', strtotime($row3["end"]));
+      $ws = ($row3["status"] == 'Open') ? 'checked' : '';
+
+      $query4 = "SELECT * FROM clinicschedule WHERE id = '4'";
+      $result4 = mysqli_query($conn, $query4);
+      $row4 = mysqli_fetch_assoc($result4);
+      $thts = date('h:i A', strtotime($row4["start"]));
+      $thte = date('h:i A', strtotime($row4["end"]));
+      $ths = ($row4["status"] == 'Open') ? 'checked' : '';
+
+      $query5 = "SELECT * FROM clinicschedule WHERE id = '5'";
+      $result5 = mysqli_query($conn, $query5);
+      $row5 = mysqli_fetch_assoc($result5);
+      $fts = date('h:i A', strtotime($row5["start"]));
+      $fte = date('h:i A', strtotime($row5["end"]));
+      $fs = ($row5["status"] == 'Open') ? 'checked' : '';
+
+      $query6 = "SELECT * FROM clinicschedule WHERE id = '6'";
+      $result6 = mysqli_query($conn, $query6);
+      $row6 = mysqli_fetch_assoc($result6);
+      $sts = date('h:i A', strtotime($row6["start"]));
+      $ste = date('h:i A', strtotime($row6["end"]));
+      $ss = ($row6["status"] == 'Open') ? 'checked' : '';
+
+      $query7 = "SELECT * FROM clinicschedule WHERE id = '7'";
+      $result7 = mysqli_query($conn, $query7);
+      $row7 = mysqli_fetch_assoc($result7);
+      $suts = date('h:i A', strtotime($row7["start"]));
+      $sute = date('h:i A', strtotime($row7["end"]));
+      $sus = ($row7["status"] == 'Open') ? 'checked' : '';
+      ?>
       <div class="table-clinic">
         <table>
           <thead>
@@ -98,45 +167,45 @@
           <tbody>
             <tr>
               <td data-label="Day">Monday</td>
-              <td data-label="">9:00 am</td>
-              <td data-label="">5:00 pm</td>
-              <td data-label="">Open</td>
+              <td data-label=""><?php echo $mts; ?></td>
+              <td data-label=""><?php echo $mte; ?></td>
+              <td data-label=""><?php echo $row1['status']; ?></td>
             </tr>
             <tr>
               <td data-label="Day">Tuesday</td>
-              <td data-label="">9:00 am</td>
-              <td data-label="">5:00 pm</td>
-              <td data-label="">Open</td>
+              <td data-label=""><?php echo $tts; ?></td>
+              <td data-label=""><?php echo $tte; ?></td>
+              <td data-label=""><?php echo $row2['status']; ?></td>
             </tr>
             <tr>
               <td data-label="Day">Wednesday</td>
-              <td data-label="">9:00 am</td>
-              <td data-label="">5:00 pm</td>
-              <td data-label="">Open</td>
+              <td data-label=""><?php echo $wts; ?></td>
+              <td data-label=""><?php echo $wte; ?></td>
+              <td data-label=""><?php echo $row3['status']; ?></td>
             </tr>
             <tr>
               <td data-label="Day">Thursday</td>
-              <td data-label="">9:00 am</td>
-              <td data-label="">5:00 pm</td>
-              <td data-label="">Open</td>
+              <td data-label=""><?php echo $thts; ?></td>
+              <td data-label=""><?php echo $thte; ?></td>
+              <td data-label=""><?php echo $row4['status']; ?></td>
             </tr>
             <tr>
               <td data-label="Day">Friday</td>
-              <td data-label="">9:00 am</td>
-              <td data-label="">5:00 pm</td>
-              <td data-label="">Open</td>
+              <td data-label=""><?php echo $fts; ?></td>
+              <td data-label=""><?php echo $fte; ?></td>
+              <td data-label=""><?php echo $row5['status']; ?></td>
             </tr>
             <tr>
               <td data-label="Day">Saturday</td>
-              <td data-label="">9:00 am</td>
-              <td data-label="">5:00 pm</td>
-              <td data-label="">Open</td>
+              <td data-label=""><?php echo $sts; ?></td>
+              <td data-label=""><?php echo $ste; ?></td>
+              <td data-label=""><?php echo $row6['status']; ?></td>
             </tr>
             <tr>
               <td data-label="Day">Sunday</td>
-              <td data-label="">9:00 am</td>
-              <td data-label="">5:00 pm</td>
-              <td data-label="">Open</td>
+              <td data-label=""><?php echo $suts; ?></td>
+              <td data-label=""><?php echo $sute; ?></td>
+              <td data-label=""><?php echo $row7['status']; ?></td>
             </tr>
           </tbody>
         </table>
@@ -150,123 +219,104 @@
   <h1>Services</h1>
   <div class="clinic-services-main">
     <div class="clinic-services">
-      <div class="services">
-        <div class="services-gallery">
-          <img src=".vscode/Services-consultation.jpg" />
-        </div>
-        <div class="services-title">
-          <p>Consultation</p>
-        </div>
-      </div>
-      <div class="services">
-        <div class="services-gallery">
-          <img src=".vscode/Services-grooming.jpg" />
-        </div>
-        <div class="services-title">
-          <p>Grooming</p>
-        </div>
-      </div>
-      <div class="services">
-        <div class="services-gallery">
-          <img src=".vscode/Services-lab tes.jpg" />
-        </div>
-        <div class="services-title">
-          <p>Laboratory Test</p>
-        </div>
-      </div>
-      <div class="services">
-        <div class="services-gallery">
-          <img src=".vscode/Services-Vaccination.jpg" />
-        </div>
-        <div class="services-title">
-          <p>Vaccination</p>
-        </div>
-      </div>
-      <div class="services">
-        <div class="services-gallery">
-          <img src=".vscode/Services-surgery.jpg" />
-        </div>
-        <div class="services-title">
-          <p>Surgery</p>
-        </div>
-      </div>
+      <?php
+      require 'database-conn.php';
+      slider_services();
+      function slider_services()
+      {
+        global $conn;
+        $category = "Services";
+
+        $query = "SELECT * FROM serviceandproduct WHERE categories = '$category'";
+        $result = mysqli_query($conn, $query);
+
+        if (!$result) {
+          die("Query failed: " . mysqli_error($conn));
+        }
+
+        foreach ($result as $row) {
+          $imageName = $row['imagename'];
+          $imageType = $row['imagetype'];
+          $imageData = $row['imagedata'];
+
+          $imageScr = "data:" . $imageType . ";base64," . base64_encode($imageData);
+          $name = $row['title'];
+          $description = $row['description'];
+      ?>
+          <div class="services">
+            <div class="services-gallery">
+              <img src="<?php echo $imageScr; ?>" />
+            </div>
+            <div class="services-title">
+              <p><?php echo $name; ?></p>
+            </div>
+          </div>
+      <?php
+        }
+      }
+      ?>
     </div>
   </div>
   <!--Announcements-->
   <h1>Announcements</h1>
   <div class="web-announcement">
-    <div class="clinic-announcement">
-      <div class="announcement">
-        <div class="announcement-image">
-          <img src=".vscode/announcement-1.svg" />
+    <?php
+    require 'database-conn.php';
+    announcement();
+    function announcement()
+    {
+      global $conn;
+
+      $query = "SELECT * FROM announcement";
+      $result = mysqli_query($conn, $query);
+
+      if (!$result) {
+        die("Query failed: " . mysqli_error($conn));
+      }
+
+      foreach ($result as $row) {
+        $imageName = $row['imagename'];
+        $imageType = $row['imagetype'];
+        $imageData = $row['imagedata'];
+
+        $imageScr = "data:" . $imageType . ";base64," . base64_encode($imageData);
+        $name = $row['title'];
+        $description = $row['description'];
+        $date = $row['date'];
+    ?>
+        <div class="clinic-announcement">
+          <div class="announcement">
+            <div class="announcement-image">
+              <img src="<?php echo $imageScr; ?>" />
+            </div>
+            <div class="announcement-contents">
+              <h2><?php echo $name; ?></h2>
+              <h3><?php echo $date; ?></h3>
+              <p onclick="openFormAnnouncement('<?php echo $name; ?>', '<?php echo $description; ?>', '<?php echo $date; ?>', '<?php echo $imageScr; ?>')">Read Contents</p>
+            </div>
+          </div>
         </div>
-        <div class="announcement-contents">
-          <h2>Succesful Delivery</h2>
-          <h3>mm/dd/yyyy</h3>
-          <p onclick="openFormAnnouncement()">Read Contents</p>
-        </div>
-      </div>
-    </div>
-    <div class="clinic-announcement">
-      <div class="announcement">
-        <div class="announcement-image">
-          <img src=".vscode/announcement-1.svg" />
-        </div>
-        <div class="announcement-contents">
-          <h2>Succesful Delivery</h2>
-          <h3>mm/dd/yyyy</h3>
-          <p onclick="openFormAnnouncement()">Read Contents</p>
-        </div>
-      </div>
-    </div>
-    <div class="clinic-announcement">
-      <div class="announcement">
-        <div class="announcement-image">
-          <img src=".vscode/announcement-1.svg" />
-        </div>
-        <div class="announcement-contents">
-          <h2>Succesful Delivery</h2>
-          <h3>mm/dd/yyyy</h3>
-          <p onclick="openFormAnnouncement()">Read Contents</p>
-        </div>
-      </div>
-    </div>
-    <div class="clinic-announcement">
-      <div class="announcement">
-        <div class="announcement-image">
-          <img src=".vscode/announcement-1.svg" />
-        </div>
-        <div class="announcement-contents">
-          <h2>Succesful Delivery</h2>
-          <h3>mm/dd/yyyy</h3>
-          <p onclick="openFormAnnouncement()">Read Contents</p>
-        </div>
-      </div>
-    </div>
+    <?php
+      }
+    }
+    ?>
   </div>
+
   <div class="announcement-popup" id="myForm-announcement">
     <div class="announcement">
       <div class="close-bttn" style="margin-left: 90%; margin-top: 20px" onclick="closeFormAnnouncement()">
         <span class="material-symbols-outlined"> close </span>
       </div>
-      <h1>Announcement</h1>
+      <h1 id="name"></h1>
 
       <div class="announcement-image">
-        <img src=".vscode/announcement-1.svg" />
+        <img src=".vscode/announcement-1.svg" id="imageV" />
       </div>
 
       <div class="announcement-contents">
-        <h2>Succesful Delivery</h2>
-        <h3>mm/dd/yyyy</h3>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-          ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </p>
+        <h2 id="title"></h2>
+        <h3 id="date"></h3>
+        <p id="des"></p>
       </div>
     </div>
   </div>
@@ -299,8 +349,13 @@
     $("#mainListDiv").fadeIn();
   });
 
-  function openFormAnnouncement() {
+  function openFormAnnouncement(name, description, date, src) {
     document.getElementById("myForm-announcement").style.display = "block";
+    document.getElementById("name").innerText = name;
+    document.getElementById("title").innerText = name;
+    document.getElementById("des").innerText = description;
+    document.getElementById("date").innerText = date;
+    document.getElementById("imageV").src = src;
   }
 
   function closeFormAnnouncement() {
