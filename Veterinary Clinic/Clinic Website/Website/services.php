@@ -46,57 +46,43 @@
   <!--Services-->
   <h1>Services</h1>
   <div class="clinic-services">
-    <div class="services">
-      <div class="services-image">
-        <img src=".vscode/Services-consultation.jpg" />
-      </div>
-      <div class="services-contents">
-        <h2>Consultation</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-          ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-      </div>
-    </div>
-    <div class="services">
-      <div class="services-image">
-        <img src=".vscode/Services-Vaccination.jpg" />
-      </div>
-      <div class="services-contents">
-        <h2>Vaccination</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-          ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-      </div>
-    </div>
-    <div class="services">
-      <div class="services-image">
-        <img src=".vscode/Services-surgery.jpg" />
-      </div>
-      <div class="services-contents">
-        <h2>Surgery</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-          ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-      </div>
-    </div>
+    <?php
+    require 'database-conn.php';
+    slider_services();
+    function slider_services()
+    {
+      global $conn;
+      $category = "Services";
+
+      $query = "SELECT * FROM serviceandproduct WHERE categories = '$category'";
+      $result = mysqli_query($conn, $query);
+
+      if (!$result) {
+        die("Query failed: " . mysqli_error($conn));
+      }
+
+      foreach ($result as $row) {
+        $imageName = $row['imagename'];
+        $imageType = $row['imagetype'];
+        $imageData = $row['imagedata'];
+
+        $imageScr = "data:" . $imageType . ";base64," . base64_encode($imageData);
+        $name = $row['title'];
+        $description = $row['description'];
+    ?>
+        <div class="services">
+          <div class="services-image">
+            <img src="<?php echo $imageScr; ?>" />
+          </div>
+          <div class="services-contents">
+            <h2><?php echo $name; ?></h2>
+            <p><?php echo $description; ?></p>
+          </div>
+        </div>
+    <?php
+      }
+    }
+    ?>
   </div>
 
 
