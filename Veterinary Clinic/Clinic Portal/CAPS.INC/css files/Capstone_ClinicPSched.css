@@ -330,7 +330,7 @@ input[type="checkbox"] {
   height: 20px;
   -webkit-appearance: none;
   appearance: none;
-  background: rgb(0, 255, 34);
+  background: #ed0000;
   outline: none;
   border-radius: 2rem;
   cursor: pointer;
@@ -355,7 +355,7 @@ input[type="checkbox"]:checked::before {
 }
 
 input[type="checkbox"]:checked {
-  background: #ed0000;
+  background: rgb(0, 255, 34);
 }
 
 /**/
