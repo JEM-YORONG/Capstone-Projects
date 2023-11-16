@@ -4,14 +4,13 @@
         $(document).ready(function() {
             var data = {
                 action: action,
-                id: $("#schedID").val(),
-                name: $("#name").val(),
-                date: $("#date").val(),
-                rowId: $("#rowId").val(),
+                //customer data
+                getID: $("#Petid").val(),
             }
 
+            
             $.ajax({
-                url: 'missed-schedule-function.php',
+                url: 'visit-date-fetch-table.php',
                 type: 'post',
                 data: data,
 
@@ -19,6 +18,7 @@
                     alert(response);
                 }
             });
+            
         });
     }
 </script>

@@ -4,14 +4,17 @@
         $(document).ready(function() {
             var data = {
                 action: action,
-                id: $("#schedID").val(),
-                name: $("#name").val(),
-                date: $("#date").val(),
-                rowId: $("#rowId").val(),
+                //customer
+                c1: $("#contact1").val(),
+                c2: $("#contact2").val(),
+                e: $("#email").val(),
+                s1: $("#social1").val(),
+                s2: $("#social2").val(),
+                s3: $("#social3").val(),
             }
 
             $.ajax({
-                url: 'missed-schedule-function.php',
+                url: 'page-maintenance-function.php',
                 type: 'post',
                 data: data,
 
