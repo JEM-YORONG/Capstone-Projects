@@ -2,24 +2,31 @@
 <script>
     function submitData(action) {
         $(document).ready(function() {
-            var data = {
-                action: action,
-                //customer
-                addId: $("#addId").val(),
-                addLastName: $("#addLastName").val(),
-                addFirstName: $("#addFirstName").val(),
-                addContact: $("#addContact").val(),
-                addEmail: $("#addEmail").val(),
-                addAddress: $("#addAddress").val(),
-            }
+            var data = new FormData();
+            data.append('action', action);
+            data.append('addImage', $('#uploadimg')[0].files[0]);
+            data.append('title', $("#title").text());
+            data.append('address', $("#address").text());
+            data.append('intro', $("#intro").text());
+            data.append('about', $("#about").text());
 
             $.ajax({
-                url: 'customer-function.php',
+                url: 'page-maintenance-function.php',
                 type: 'post',
                 data: data,
-
+                processData: false,
+                contentType: false,
                 success: function(response) {
-                    alert(response);
+                    if (response == 'success') {
+                        console.log(response);
+
+                        successAlert("Information updated successfully");
+
+                    } else {
+
+                        errorAlert(response);
+
+                    }
                 }
             });
         });

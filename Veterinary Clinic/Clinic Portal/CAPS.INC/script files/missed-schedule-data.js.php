@@ -16,7 +16,18 @@
                 data: data,
 
                 success: function(response) {
-                    alert(response);
+                    if (response != "") {
+                        switch (response) {
+                            case "Rescheduledsuccessfully":
+                                successAlert("Rescheduled successfully");
+                                break;
+                            case "ScheduleDeletedSuccessfully":
+                                successAlert("Deleted successfully");
+                                break;
+                            default:
+                            errorAlert(response);
+                        }
+                    }
                 }
             });
         });

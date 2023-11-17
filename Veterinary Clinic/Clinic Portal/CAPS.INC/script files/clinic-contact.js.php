@@ -19,7 +19,16 @@
                 data: data,
 
                 success: function(response) {
-                    alert(response);
+                    if (response == 'success') {
+                        console.log(response);
+
+                        successAlert("Contact updated successfully");
+
+                    } else {
+
+                        errorAlert(response);
+
+                    }
                 }
             });
         });

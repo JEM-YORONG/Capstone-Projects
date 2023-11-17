@@ -19,7 +19,23 @@
                 data: data,
 
                 success: function(response) {
-                    alert(response);
+                    if (response != "") {
+                        if (response == "CustomerAddedSuccessfully") {
+                            $("#addFirstName").val("");
+                            $("#addLastName").val("");
+                            $("#addContact").val("");
+                            $("#addEmail").val("");
+                            $("#addAddress").val("");
+
+                            successAlert("Customer added successfully");
+                        } else if (response == "CustomerDeletedSuccessfully") {
+                            successAlert("Customer deleted successfully");
+                        } else {
+                            errorAlert(response);
+                        }
+                    } else {
+                        console.log(response);
+                    }
                 }
             });
         });

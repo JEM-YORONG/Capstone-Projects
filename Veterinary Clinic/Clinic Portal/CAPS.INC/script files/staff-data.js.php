@@ -25,25 +25,7 @@
                 data: data,
 
                 success: function(response) {
-                    /*
-                    alert(response);
-                    clearForm();
-                    closeForm();
-                    */
-
-                    if (response == "Staff Added Successfully.") {
-                        //alert(response);
-                        closeForm();
-                        clearForm();
-                    } else if (response == "Empty Fields Detected.") {
-                        alert(response);
-                    } else if (response == "Email is already used.") {
-                        alert(response);
-                    } else if (response == "Staff Updated Successfully.") {
-                        //alert(response);
-                    } else {
-                        alert(response);
-                    }
+                    successAlert(response);
                 }
             });
         });

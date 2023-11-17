@@ -21,11 +21,27 @@
                 processData: false,
                 contentType: false,
                 success: function(response) {
-                    if (response === "") {
-                        alert("No response");
-                    }
-                    else{
-                        alert(response);
+                    if (response !== "") {
+                        switch (response) {
+                            case "AddedSuccessfully":
+                                successAlert("Announcement added successfully");
+                                $('#preview').prop('src', '.vscode/Images/didunkow.jpg');
+                                $('#addTitle').val("");
+                                $('#addDescription').val("");
+                                var newFileInput = $("<input type='file' id='addImage' accept='image/*' value='Upload Image'>");
+                                $('#addImage').replaceWith(newFileInput);
+                                break;
+                            case "UpdatedSuccessfully":
+                                successAlert("Announcement updated successfully");
+                                break;
+                            case "DeletedSuccessfully":
+                                successAlert("Announcement deleted successfully");
+                                break;
+                            default:
+                                errorAlert(response);
+                        }
+                    } else {
+                        errorAlert(response);
                     }
                 }
             });

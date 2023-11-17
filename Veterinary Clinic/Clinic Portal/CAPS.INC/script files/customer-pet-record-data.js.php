@@ -87,6 +87,8 @@
                 enService3: $("#eservice3").val(),
                 enNumber: $("#custContact").val(),
 
+                idSearch: $("#searchInput").val(),
+
             }
 
 
@@ -101,36 +103,77 @@
                     } else {
                         if (response == 'emptyFields') {
                             //
+                            successAlert("Empty fields detected");
                         }
 
                         if (response == 'customerUpdated') {
                             //
+                            successAlert("Customer record updated successfully");
                         }
 
                         if (response == 'petAdded') {
                             //
+                            $("#petName").val("");
+                            $("#gender").prop("selectedIndex", 0);
+                            $("#birthDate").val("");
+                            $("#type").val("");
+                            $("#breed").val("");
+                            $("#species").val("");
+
+                            successAlert("Pet added successfully");
                         }
 
                         if (response == 'pedUpdated') {
                             //
+                            successAlert("Pet updated successfully");
                         }
 
                         if (response == 'petDeleted') {
-                            //
+                            //alert(response);
+                            successAlert("Pet deleted successfully");
+                        }
+
+                        if (response == 'petRDeleted') {
+                            //alert("pet record deleted");
+                            $("#searchInput").val("");
+                            successAlert("Pet record deleted successfully");
                         }
 
                         // edit per record
                         if (response == 'esPetRecord') {
-                            alert("Pet record updated successfully.");
+                            //alert("Pet record updated successfully.");
+                            successAlert("Pet record updated successfully");
                         } else if (response == 'eePetRecord') {
-                            alert("Error updating pet record");
+                            errorAlert("Error updating pet record");
                         } else {
-                            // 
+                            //errorAlert(response);
                         }
 
                         // add pet record
                         if (response == 'sPetRecord') {
-                            alert("Pet record added successfully.");
+                            //alert("Pet record added successfully.");
+                            $("#rDate").val("");
+                            $("#rWeight").val("");
+                            $("#rAbout").val("");
+                            $("#nDate").val("");
+                            $("#rNote").val("");
+
+                            $("#numServices").prop("selectedIndex", 0);
+                            $("#service1").prop("selectedIndex", 0);
+                            $("#service2").prop("selectedIndex", 0);
+                            $("#service3").prop("selectedIndex", 0);
+                            $("#vaccine1").prop("selectedIndex", 0);
+                            $("#vaccine2").prop("selectedIndex", 0);
+                            $("#vaccine3").prop("selectedIndex", 0);
+
+                            $("#s1").css("display", "none");
+                            $("#s2").css("display", "none");
+                            $("#s3").css("display", "none");
+                            $("#v1").css("display", "none");
+                            $("#v2").css("display", "none");
+                            $("#v3").css("display", "none");
+
+                            successAlert("Pet record added successfully");
                         } else if (response == 'ePetRecord') {
                             alert("Error adding pet record");
                         } else {

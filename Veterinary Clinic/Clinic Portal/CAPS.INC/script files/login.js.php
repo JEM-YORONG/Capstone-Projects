@@ -20,15 +20,15 @@
                 success: function(response) {
                     //alert(response);
                     //let username = $_SESSION['username'];
-                    if (response == "Admin") {
-                        alert("test admin");
+                    if (response == "admin") {
+                        successAlert("Welcome Admin");
                         location.replace("zHTML_dashboard.php");
-                    } else if(response == "Staff") {
-                        alert("test staff");
-                        location.replace("zHTML_dashboard.php");
+                    } else if(response == "staff") {
+                        successAlert("Welcome Staff");
+                        location.replace("zStaff_dashboard.php");
                     }
                     else{
-                        alert(response);
+                        successAlert(response);
                     }
                 }
             });

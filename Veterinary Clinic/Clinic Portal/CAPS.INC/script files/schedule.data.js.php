@@ -47,7 +47,7 @@
                 updatepetname32: $("#petname3Update2").val(),
                 updatepetname42: $("#petname4Update2").val(),
                 updatepetname52: $("#petname5Update2").val(),
-                
+
                 updatetype: $("#typeUpdate").val(),
                 updateservice1: $("#service1Update").val(),
                 updateservice2: $("#service2Update").val(),
@@ -65,11 +65,42 @@
                 data: data,
 
                 success: function(response) {
-                    $("#petname1Update2").html(response);
-                    $("#petname2Update2").html(response);
-                    $("#petname3Update2").html(response);
-                    $("#petname4Update2").html(response);
-                    $("#petname5Update2").html(response);
+                    // Update petname elements with the response
+                    $("#petname1Update2, #petname2Update2, #petname3Update2, #petname4Update2, #petname5Update2").html(response);
+
+                    // Check if the response is not empty before proceeding
+                    if (response != "") {
+                        if (response == "ScheduleAddedSuccessfully") {
+                            // Reset input values
+                            $("#date, #name, #numPet, #numServices, #number").val("");
+
+                            // Reset petname and service dropdowns
+                            $("#petname1, #petname2, #petname3, #petname4, #petname5, #service1, #service2, #service3").prop("selectedIndex", 0);
+
+                            // Hide pet and service sections
+                            $("#pet1, #pet2, #pet3, #pet4, #pet5, #s1, #s2, #s3").hide();
+
+                            successAlert("Schedule added successfully");
+                        }
+
+                        if (response == "ScheduleUpdatedSuccessfully") {
+                            successAlert("Schedule updated successfully");
+                        }
+
+                        if (response == "ScheduleDeletedSuccessfully") {
+                            errorAlert("Schedule deleted successfully");
+                        }
+                        if (response == "Please fill in all the fields") {
+                            errorAlert("Please fill in all the fields");
+                        }
+                        if (response == "CustomerDidntExist") {
+                            errorAlert("Customer did not exist");
+                        }
+                    } else {
+                        // Handle the case when the response is empty
+                        console.error("Empty response received");
+                    }
+
                 }
             });
         });
