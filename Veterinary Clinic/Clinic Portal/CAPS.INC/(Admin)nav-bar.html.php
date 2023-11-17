@@ -15,6 +15,49 @@
                     <span class="link-name" style="color: #5a81fa">Dashboard</span>
                 </a>
             </li>
+            <!--=====Clinic Management Menu====-->
+            <ul class="clinic-management-link">
+                <div class="page-maintenance" id="menu-maintenance">
+                    <li>
+                        <a href="">
+                            <i><span class="material-symbols-outlined">help_clinic</span></i>
+                            <span class="link-name">Page Maintenance</span>
+                        </a>
+                    </li>
+                    <div class="page-maintenance-content">
+                        <li>
+                            <a href="Z_ClinicAboutUs.php">
+                                <i><span class="material-symbols-outlined">info</span></i>
+                                <span class="link-name">&nbsp; About Us</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Z_ClinicContact.php">
+                                <i><span class="material-symbols-outlined">call</span></i>
+                                <span class="link-name">&nbsp; Contacts</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Z_ClinicPSched.php">
+                                <i><span class="material-symbols-outlined">schedule</span></i>
+                                <span class="link-name">&nbsp; Schedule Page</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="zHTML_announcement.php">
+                                <i><span class="material-symbols-outlined">campaign</span></i>
+                                <span class="link-name">Announcement</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="zHTML_service_product.php">
+                                <i><span class="material-symbols-outlined">sell</span></i>
+                                <span class="link-name">Service and Product</span>
+                            </a>
+                        </li>
+                    </div>
+                </div>
+            </ul>
             <!--=====Record Menus====-->
             <ul class="record-management-link">
                 <li>
