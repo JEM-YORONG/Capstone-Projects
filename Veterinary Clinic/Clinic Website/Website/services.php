@@ -12,6 +12,14 @@
   <!----===== Icons ===== -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
   <!--=====Change name mo na lang====-->
+
+  <style>
+    .services{
+      display: grid;
+      grid-template-columns: 25% 75%;
+      width: 100%;
+    }
+  </style>
   <title>Services</title>
 </head>
 
@@ -72,7 +80,7 @@
     ?>
         <div class="services">
           <div class="services-image">
-            <img src="<?php echo $imageScr; ?>" />
+            <img src="<?php echo $imageScr; ?>"/>
           </div>
           <div class="services-contents">
             <h2><?php echo $name; ?></h2>
