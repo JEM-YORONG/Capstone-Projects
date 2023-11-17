@@ -15,6 +15,9 @@
 
     <!----===== Icons ===== -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <?php require 'alert-notif-function.php'; ?>
 
     <!-- drop down names -->
     <style>
@@ -294,6 +297,7 @@
                 </span></i>
             <div class="title">
                 <span class="text">Clinic Schedule</span>
+                <?php require 'alert-notif.php'; ?>
             </div>
         </div>
         <!--=====Customer/Pet/ Pet Grooming====-->
@@ -337,7 +341,8 @@
                     <table class="clinic-schedule" width=100%>
                         <thead>
                             <tr>
-                                <th scope="col" width=5%> Status </th>
+                                <th scope="col" width=5%></th>
+                                <th scope="col">Status</th>
                                 <th scope="col"> Notify </th>
                                 <th scope="col">Date</th>
                                 <th scope="col">Name</th>
@@ -572,7 +577,7 @@
                                 <input type="number" class="input" placeholder="+63**********" id="number" autocomplete="off">
                             </div>
                             <div class="inputfield">
-                                <input type="button" value="Add Appointment" class="btn-add" onclick="submitData('addAppointment');">
+                                <input type="button" value="Add Appointment" class="btn-add" onclick="submitData('addAppointment'); closeForm();">
                                 <button class="btn-create">
                                     <a href="zHTML_customer.php" style="text-decoration: none;">Add Customer</a>
                                 </button>
@@ -941,7 +946,7 @@
                             <div class="inputfield">
                                 <input type="button" value="Update Appointment" class="btn-add" onclick="submitData('updateAppointment'); viewPetsDome();">
                                 <button class="btn-create">
-                                    <a href="zHTML_customer.php" style="text-decoration: none;">Add Customer</a>
+                                    <a href="CAPS.INC/zHTML_customer.php" style="text-decoration: none;">Add Customer</a>
                                 </button>
                                 <?php require 'script files\schedule.data.js.php'; ?>
                             </div>
@@ -980,8 +985,9 @@
                             </div>
 
                             <div class="inputfield-sms">
-                                <input type="button" value="Send Message" class="btn-send" onclick="submitData('sendSMS')">
+                                <input type="button" value="Send Message" class="btn-send" onclick="submitData('sendSMS'); closeFormsms();">
                             </div>
+                            <?php require 'script files\schedule.data.js.php'; ?>
                             <div class="inputfield-sms">
                                 <input type="button" value="Close" class="btn-send" onclick="closeFormsms()">
                             </div>
@@ -999,7 +1005,7 @@
                             <label>This will be permanently deleted</label>
                             <div class="inputfield">
                                 <input type="button" value="Cancel" class="btn-cancel" onclick="closeFormDelete()">
-                                <input type="button" value="Delete" class="btn-delete" onclick="submitData('deleteSchedule')">
+                                <input type="button" value="Delete" class="btn-delete" onclick="submitData('deleteSchedule'); closeFormDelete();">
                                 <?php require 'script files\schedule.data.js.php'; ?>
                             </div>
                         </div>
@@ -1013,7 +1019,7 @@
                             Are you sure?
                         </div>
                         <div class="form-delete">
-                            <label>This will be permanently deleted</label>
+                            <label>This will remove todays appointment</label>
                             <div class="inputfield">
                                 <input type="button" value="No" class="btn-cancel" onclick="closeConfirmForm()">
                                 <input type="button" value="Yes" class="btn-delete" onclick="submitData('statusDone'); closeConfirmForm();">

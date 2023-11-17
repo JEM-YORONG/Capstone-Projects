@@ -18,6 +18,8 @@
 
   <!----===== Icons ===== -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+  <?php require 'alert-notif-function.php'; ?>
   <!--=====Change name mo na lang====-->
   <title>Admin Clinic Information Panel</title>
 </head>
@@ -31,6 +33,7 @@
       <i class="sidebar-toggle"><span class="material-symbols-outlined"> menu </span></i>
       <div class="title">
         <span class="text">Service and Product</span>
+        <?php require 'alert-notif.php'; ?>
       </div>
     </div>
 
@@ -75,6 +78,7 @@
               <label>Categories</label>
               <div class="custom_select">
                 <select id="addCategories">
+                  <option value="">SELECT</option>
                   <option value="Services">Services</option>
                   <option value="Pet Foods">Pet Foods</option>
                   <option value="Bath Products">Bath Products</option>
@@ -89,7 +93,7 @@
             </div>
 
             <div class="inputfield">
-              <input type="button" value="Upload" class="btn-send" onclick="submitData('Add')" />
+              <input type="button" value="Upload" class="btn-send" onclick="submitData('Add'); closeAddServProd();" />
               <?php require 'script files\service-product-data.js.php'; ?>
             </div>
             <input type="button" value="Close" class="btn-cancel" onclick="closeAddServProd()" />
@@ -133,7 +137,7 @@
             </div>
 
             <div class="inputfield">
-              <input type="button" value="Upload" class="btn-send" onclick="submitData('Edit')" />
+              <input type="button" value="Upload" class="btn-send" onclick="submitData('Edit'); closeEditServProd();" />
               <?php require 'script files\service-product-data.js.php'; ?>
             </div>
             <input type="button" value="Close" class="btn-cancel" onclick="closeEditServProd()" />

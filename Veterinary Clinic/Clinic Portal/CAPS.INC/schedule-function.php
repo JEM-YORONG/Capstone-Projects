@@ -40,10 +40,11 @@ function addAppointment()
     $customerName = "";
     $status = "";
 
-    // Validate input fields for empty values
-    if (empty($date) || empty($name) || empty($number)) {
-        echo "Empty Fields Detected.";
-        return; // Stop execution if any field is empty
+    
+    if (empty(trim($date)) || empty(trim($name)) || empty(trim($number))) {
+        // At least one of the values is empty or only contains whitespace
+        echo "Please fill in all the fields";
+        return;
     }
 
     // Query the customer data based on the given name
@@ -69,15 +70,15 @@ function addAppointment()
         $services = [$service1, $service2, $service3];
 
         // Insert the appointment into the database with the determined status
-        $query = "INSERT INTO schedule (ownername, petname, petname2, petname3, petname4, petname5, service, service2, service3, date, number, status) VALUES ('$customerName', '$petname', '$petname2', '$petname3', '$petname4', '$petname5', '$services[0]', '$services[1]', '$services[2]', '$date', '$number', '$status')";
+        $query = "INSERT INTO schedule (ownerid, ownername, petname, petname2, petname3, petname4, petname5, service, service2, service3, date, number, status) VALUES ('$ownerId', '$customerName', '$petname', '$petname2', '$petname3', '$petname4', '$petname5', '$services[0]', '$services[1]', '$services[2]', '$date', '$number', '$status')";
 
         if (mysqli_query($conn, $query)) {
-            echo "Schedule Added Successfully.";
+            echo "ScheduleAddedSuccessfully";
         } else {
             echo "Error inserting schedule: " . mysqli_error($conn);
         }
     } else {
-        echo "Customer $name didn't exist in customer list.";
+        echo "CustomerDidntExist"; 
     }
 }
 
@@ -101,6 +102,7 @@ function updateAppointment()
     $petname3Update = $_POST["updatepetname32"];
     $petname4Update = $_POST["updatepetname42"];
     $petname5Update = $_POST["updatepetname52"];
+
     //holders
     $p1 = $petnameUpdate;
     $p2 = $petname2Update;
@@ -148,7 +150,7 @@ function updateAppointment()
 
     mysqli_query($conn, $query);
     mysqli_close($conn);
-    echo "Schedule Updated Successfully.";
+    echo "ScheduleUpdatedSuccessfully";
 }
 
 function statusDone()
@@ -162,7 +164,7 @@ function statusDone()
     mysqli_query($conn, $query);
     mysqli_close($conn);
 
-    echo "Done";
+    //echo "Done";
 }
 
 
@@ -174,7 +176,7 @@ function deleteSchedule()
 
     $query = "DELETE FROM schedule WHERE id = '$id'";
     mysqli_query($conn, $query);
-    echo "Schedule Deleted Successfully";
+    echo "ScheduleDeletedSuccessfully";
 }
 
 function sendSMS()

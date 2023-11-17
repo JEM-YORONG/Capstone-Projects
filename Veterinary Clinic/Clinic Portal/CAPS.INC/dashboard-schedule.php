@@ -42,18 +42,28 @@ if ($result) {
 ?>
             <div class="table-body">
                 <tr>
-                    <td><button type="button" class="done-button" onclick="rowStatus('<?php echo $row['id']; ?>'); submitData('statusDone')" style=" background-color: #00000000;
+                    <!-- <td>
+                        <button type="button" class="done-button" style=" background-color: #00000000;
                             border-style: none;
                             color: #5a81fa;
                             cursor: pointer;">
-                            <span class="material-symbols-outlined">check_circle</span>
+                            <a href="customer-and-pet-records.php?custId=<?php //echo $row["ownerid"]; 
+                                                                            ?>">
+                                <span class="material-symbols-outlined">
+                                    mouse
+                                </span>
+                            </a>
                         </button>
-                    </td>
+                    </td> -->
                     <?php require 'script files\schedule.data.js.php'; ?>
                     <td data-label="Notify" onclick="setMessageToday('<?php echo $row['ownername']; ?>',
                     '<?php echo $row['date']; ?>',
                     '<?php echo $row['petname']; ?>',
-                    '<?php echo $row['service']; ?>');"><button type="button" class="notify-button-1" style="background-color: #00000000; border-style: none; color: #5a81fa; cursor: pointer;" onclick="opensms(); infoSMS('<?php echo $row['date']; ?>', '<?php echo $row['number']; ?>', '<?php echo $row['ownername']; ?>', '<?php echo $row['petname']; ?>');"><span class="material-symbols-outlined">reminder</span></button></td>
+                    '<?php echo $row['service']; ?>');"><button type="button" class="notify-button-1" style="background-color: #00000000; border-style: none; color: #5a81fa; cursor: pointer;" onclick="opensms(); infoSMS('<?php echo $row['date']; ?>', '<?php echo $row['number']; ?>', '<?php echo $row['ownername']; ?>', '<?php echo $row['petname']; ?>');">
+                            <span class="material-symbols-outlined">
+                                sms
+                            </span>
+                        </button></td>
                     <td><?php echo $row['date']; ?></td>
                     <td data-label="Owner Name"><?php echo $row['ownername']; ?></td>
                 </tr>

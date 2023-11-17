@@ -17,6 +17,9 @@ require 'script files\disable-paste.js.php'; ?>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
   <!----===== Icons ===== -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+  
+  <?php require 'alert-notif-function.php'; ?>
+
   <!--=====Change name mo na lang====-->
   <title>Admin Dashboard Panel</title>
 </head>
@@ -30,6 +33,7 @@ require 'script files\disable-paste.js.php'; ?>
       <i class="sidebar-toggle"><span class="material-symbols-outlined"> menu </span></i>
       <div class="title">
         <span class="text">Customer</span>
+        <?php require 'alert-notif.php'; ?>
       </div>
     </div>
 
@@ -97,7 +101,7 @@ require 'script files\disable-paste.js.php'; ?>
             </div>
             <div class="inputfield">
               <input type="button" value="Cancel" class="btn-create" onclick="closeForm(); clearForm();" />
-              <input type="button" value="Add Customer" class="btn-add" onclick="submitData('addCustomer');" />
+              <input type="button" value="Add Customer" class="btn-add" onclick="submitData('addCustomer'); closeForm();" />
               <?php
               require 'script files\customer-data.js.php';
               ?>

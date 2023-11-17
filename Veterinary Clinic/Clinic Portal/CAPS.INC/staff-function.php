@@ -36,13 +36,13 @@ function addStaff()
 
     // Validate input
     if (empty($idClean) || empty($nameClean) || empty($roleClean) || empty($contactClean) || empty($emailClean) || empty($passwordClean)) {
-        echo "Empty Fields Detected.";
+        echo "Empty Fields Detected";
     } else if (strlen($contactClean) !== 11 || !ctype_alnum($contactClean)) {
-        echo "Contact must be 11 digit.";
+        echo "Contact must be 11 digit";
     } else if (strlen($passwordClean) !== 8 || !ctype_alnum($passwordClean)) {
-        echo "Password must be at least 8 characters.";
+        echo "Password must be at least 8 characters";
     } else if (substr($email, -10) !== "@gmail.com") {
-        echo "Invalid Email.";
+        echo "Invalid Email";
     } else {
         /*
         echo $idClean;
@@ -70,7 +70,7 @@ function addStaff()
             $query = "INSERT INTO staffs VALUES ('', '$idClean', '$nameClean', '$roleClean', '$contactClean', '$emailClean', '$passwordClean')";
             mysqli_query($conn, $query);
             mysqli_close($conn);
-            echo "Staff Added Successfully.";
+            echo "Staff added successfully";
         }
     }
 }
@@ -106,13 +106,13 @@ function editStaff()
 
     // Validate input
     if (empty($idClean) || empty($nameClean) || empty($roleClean) || empty($contactClean) || empty($emailClean) || empty($passwordClean)) {
-        echo "Empty Fields Detected.";
+        echo "Empty Fields Detected";
     } else if (strlen($contactClean) !== 11 || !ctype_alnum($contactClean)) {
-        echo "Contact must be 11 digit.";
+        echo "Contact must be 11 digit";
     } else if (strlen($passwordClean) !== 8 || !ctype_alnum($passwordClean)) {
-        echo "Password must be at least 8 characters.";
+        echo "Password must be at least 8 characters";
     } else if (substr($email, -10) !== "@gmail.com") {
-        echo "Invalid Email.";
+        echo "Invalid Email";
     } else {
         /*
             echo $idClean;
@@ -148,7 +148,7 @@ function editStaff()
         $query = "UPDATE staffs SET name = '$nameClean', role = '$roleClean', contact = '$contactClean', email = '$emailClean', password = '$passwordClean' WHERE cliniId = '$id'";
             mysqli_query($conn, $query);
             mysqli_close($conn);
-            echo "Staff Updated Successfully.";
+            echo "Staff updated Successfully.";
     }
 }
 
@@ -160,5 +160,5 @@ function deleteStaff()
 
     $query = "DELETE FROM staffs WHERE cliniId = '$id'";
     mysqli_query($conn, $query);
-    echo "Staff Deleted Successfully";
+    echo "Staff deleted successfully";
 }

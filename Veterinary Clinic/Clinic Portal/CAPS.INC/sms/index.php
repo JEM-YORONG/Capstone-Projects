@@ -7,7 +7,7 @@ use Twilio\Rest\Client;
 function send($number, $message)
 {
     $sid    = "AC49fba0b65605b2a656902f4b634a0c20";
-    $token  = "b88b24ac625c61d36bcd0e4fdec5bd0b";
+    $token  = "82d26e7488f5f139e2e229d937ebf64a";
     $twilioNumber = "+12566935328";
 
     $twilio = new Client($sid, $token);

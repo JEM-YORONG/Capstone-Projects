@@ -50,7 +50,7 @@ function addCustomer()
             $query = "INSERT INTO customer VALUES ('', '$custIdS', '$custLastNameS', '$custFirstNameS', '$custContactS', '$custEmailS', '$custAddressS')";
             mysqli_query($conn, $query);
             mysqli_close($conn);
-            echo "Customer Information Added Successfully.";
+            echo "CustomerAddedSuccessfully";
         }
     }
 }
@@ -75,7 +75,7 @@ function deleteCustomer()
         $result2 = mysqli_stmt_execute($stmt2);
 
         if ($result1 && $result2) {
-            echo "Customer Records Deleted Successfully";
+            echo "CustomerDeletedSuccessfully";
         } else {
             echo "Error: " . mysqli_error($conn);
         }

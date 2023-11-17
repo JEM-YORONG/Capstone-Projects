@@ -51,13 +51,21 @@ if (mysqli_num_rows($result) > 0) {
                     '<?php echo $row['petname5']; ?>',
                     '<?php echo $row['service']; ?>',
                     '<?php echo $row['service2']; ?>',
-                    '<?php echo $row['service3']; ?>');"><button type="button" class="notify-button-1" onclick="opensms(); infoSMS('<?php echo $row['date']; ?>', '<?php echo $row['number']; ?>', '<?php echo $row['ownername']; ?>', '<?php echo $row['petname']; ?>');"><span class="material-symbols-outlined">reminder</span></button></td>
+                    '<?php echo $row['service3']; ?>');"><button type="button" class="notify-button-1" onclick="opensms(); infoSMS('<?php echo $row['date']; ?>', '<?php echo $row['number']; ?>', '<?php echo $row['ownername']; ?>', '<?php echo $row['petname']; ?>');">
+                            <span class="material-symbols-outlined">
+                                sms
+                            </span></button></td>
                     <td><?php echo $row['date']; ?></td>
                     <td data-label="Owner Name"><?php echo $row['ownername']; ?></td>
 
                     <td>
-                        <button onclick="openFormDetails('<?php echo $row['ownername']; ?>', '<?php echo $row['id']; ?>'); submitID('id');">
-                            Details
+                        <button type="button" class="done-button" style=" background-color: #00000000;
+                            border-style: none;
+                            color: #5a81fa;
+                            cursor: pointer;" onclick="openFormDetails('<?php echo $row['ownername']; ?>', '<?php echo $row['id']; ?>'); submitID('id');">
+                            <span class="material-symbols-outlined">
+                                toc
+                            </span>
                         </button>
                         <?php require 'script files\getDetailsID.js.php'; ?>
                     </td>

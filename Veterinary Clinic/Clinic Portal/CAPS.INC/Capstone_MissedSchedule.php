@@ -14,6 +14,8 @@
 
   <!----===== Icons ===== -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+  <?php require 'alert-notif-function.php'; ?>
   <!--=====Change name mo na lang====-->
   <title>Admin Dashboard Panel</title>
 </head>
@@ -27,6 +29,7 @@
       <i class="sidebar-toggle"><span class="material-symbols-outlined"> menu </span></i>
       <div class="title">
         <span class="text">Missed Schedule</span>
+        <?php require 'alert-notif.php'; ?>
       </div>
     </div>
 
@@ -71,9 +74,9 @@
                 <input type="date" class="input" id="date">
               </div>
 
-              <div class="inputfield" style="display: block;">
+              <div class="inputfield" style="display: none;">
                 <label>ID</label>
-                <input type="text" class="input" id="ownerId">
+                <input type="text" class="input" id="schedID">
               </div>
               <div class="inputfield">
                 <div class="inputfield">
@@ -83,7 +86,7 @@
               </div>
 
               <div class="inputfield">
-                <input type="button" value="Add Appointment" class="btn-add" onclick="submitData('addAppointment');">
+                <input type="button" value="Add Appointment" class="btn-add" onclick="submitData('addAppointment'); closeForm();">
                 <?php require 'script files\missed-schedule-data.js.php'; ?>
               </div>
             </div>
@@ -100,7 +103,7 @@
               <label>This will be permanently deleted</label>
               <div class="inputfield">
                 <input type="button" value="Cancel" class="btn-cancel" onclick="closeFormDelete()">
-                <input type="button" value="Delete" class="btn-delete" onclick="submitData('deleteSchedule')">
+                <input type="button" value="Delete" class="btn-delete" onclick="submitData('deleteSchedule'); closeFormDelete();">
                 <?php require 'script files\missed-schedule-data.js.php'; ?>
               </div>
             </div>
@@ -128,7 +131,7 @@
     function openForm(date, name, petname, service, number, id) {
       document.getElementById("myForm").style.display = "block";
       document.getElementById("name").value = name;
-      document.getElementById("ownerId").value = id;
+      document.getElementById("schedID").value = id;
       document.getElementById("petname").value = petname;
       document.getElementById("service").value = service;
       document.getElementById("number").value = number;

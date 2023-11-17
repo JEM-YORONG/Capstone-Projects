@@ -15,6 +15,7 @@
 
   <!----===== Icons ===== -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+  <?php require 'alert-notif-function.php'; ?>
   <!--=====Change name mo na lang====-->
   <title>Admin Clinic Information Panel</title>
 </head>
@@ -28,6 +29,7 @@
       <i class="sidebar-toggle"><span class="material-symbols-outlined"> menu </span></i>
       <div class="title">
         <span class="text">Clinic Announcement</span>
+        <?php require 'alert-notif.php'; ?>
       </div>
     </div>
 
@@ -68,7 +70,7 @@
 
             <div class="inputfield">
               <?php require 'script files\announcement-data.js.php'; ?>
-              <input type="button" value="Upload" class="btn-send" onclick="submitData('Add');" />
+              <input type="button" value="Upload" class="btn-send" onclick="submitData('Add'); closeFormAnnouncement();" />
             </div>
             <input type="button" value="Close" class="btn-cancel" onclick="closeFormAnnouncement()" />
           </div>
@@ -97,7 +99,7 @@
 
             <div class="inputfield">
               <?php require 'script files\announcement-data.js.php'; ?>
-              <input type="button" value="Upload" class="btn-send" onclick="submitData('Edit')" />
+              <input type="button" value="Upload" class="btn-send" onclick="submitData('Edit'); closeEditFormAnnouncement();" />
             </div>
             <input type="button" value="Close" class="btn-cancel" onclick="closeEditFormAnnouncement(); clearId();" />
           </div>

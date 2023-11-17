@@ -17,6 +17,8 @@ require 'script files\staff-data.js.php';
 
   <!----===== Icons ===== -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+  <?php require 'alert-notif-function.php'; ?>
   <!--=====Change name mo na lang====-->
   <title>Admin Dashboard Panel</title>
 </head>
@@ -30,6 +32,7 @@ require 'script files\staff-data.js.php';
       <i class="sidebar-toggle"><span class="material-symbols-outlined"> menu </span></i>
       <div class="title">
         <span class="text">Staff</span>
+        <?php require 'alert-notif.php'; ?>
       </div>
     </div>
 
@@ -99,7 +102,7 @@ require 'script files\staff-data.js.php';
             </div>
             <div class="inputfield">
               <input type="button" value="Cancel" class="btn-create" onclick="closeForm(); clearForm();" />
-              <input type="button" value="Add Staff" class="btn-add" onclick="submitData('addStaff');" />
+              <input type="button" value="Add Staff" class="btn-add" onclick="submitData('addStaff'); closeForm();" />
               <?php
               require 'script files\staff-data.js.php';
               ?>

@@ -1,5 +1,6 @@
 <?php
 require 'database-conn.php';
+date_default_timezone_set('Asia/Manila');
 
 if (isset($_POST["action"])) {
     if ($_POST["action"] == "addAppointment") {
@@ -15,8 +16,14 @@ function add()
     global $conn;
 
     $date = $_POST["date"];
-    $name = $_POST["name"];
+    $id = $_POST["id"];
     $status = "";
+
+    if (empty(trim($date))) {
+        // At least one of the values is empty or only contains whitespace
+        echo "Please fill in all the fields.";
+        return;
+    }
 
     // Convert the input date string to a DateTime object
     $inputDate = new DateTime($date);
@@ -24,19 +31,24 @@ function add()
 
     if ($inputDate < $currentDate) {
         $status = "Past";
-    } elseif ($inputDate > $currentDate) {
+    } else {
         $status = "Upcoming";
     }
 
-    //Update the date of the schedule
-    $query = "Update schedule SET date = '$date', status = '$status' WHERE ownername = '$name'";
-    $result = mysqli_query($conn, $query);
+    // Update the date and status of the schedule
+    $query = "UPDATE schedule SET date = ?, status = ? WHERE id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "sss", $date, $status, $id);
+
+    if (mysqli_stmt_execute($stmt)) {
+        echo "Rescheduledsuccessfully";
+    } else {
+        echo "Error updating the schedule.";
+    }
+
     mysqli_close($conn);
-
-    echo "Rescheduled successfully.";
-
-    // echo $date . " " . $name;
 }
+
 
 function delete()
 {
@@ -46,5 +58,5 @@ function delete()
 
     $query = "DELETE FROM schedule WHERE id = '$id'";
     mysqli_query($conn, $query);
-    echo "Schedule Deleted Successfully";
+    echo "ScheduleDeletedSuccessfully";
 }

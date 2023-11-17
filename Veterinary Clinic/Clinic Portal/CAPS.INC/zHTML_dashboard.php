@@ -35,18 +35,76 @@
     <!--=====Customer/Pet/ Pet Grooming====-->
     <div class="dash-content">
       <div class="overview">
+        <!-- Daily -->
+        <?php
+        require 'database-conn.php';
+
+        $currentDate = new DateTime();
+        $currentDateFormatted = $currentDate->format('Y-m-d');
+        // customer
+        // get the count of scheduled items where date is the current date
+        $query = "SELECT COUNT(*) as count FROM schedule WHERE date = '$currentDateFormatted'";
+        $result = mysqli_query($conn, $query);
+
+        if ($result) {
+          $row = mysqli_fetch_assoc($result);
+          $dailyCustomers = $row['count'];
+        } else {
+          //echo "Error in query: " . mysqli_error($conn);
+        }
+
+        // pet
+        // get the count of scheduled items where date is the current date
+        $query2 = "SELECT petname, petname2, petname3, petname4, petname5 FROM schedule WHERE date = '$currentDateFormatted'";
+        $result2 = mysqli_query($conn, $query2);
+
+        if ($result2) {
+          $dailyPets = 0;
+
+          while ($row2 = mysqli_fetch_assoc($result2)) {
+            // Loop through each column and count the pets
+            foreach ($row2 as $pet) {
+              if (!empty($pet)) {
+                $dailyPets++;
+              }
+            }
+          }
+        } else {
+          // echo "Error in query: " . mysqli_error($conn);
+        }
+
+        // grooming
+        // get the count of scheduled items where date is the current date
+        $query3 = "SELECT service, service2, service3 FROM schedule WHERE date = '$currentDateFormatted'";
+        $result3 = mysqli_query($conn, $query3);
+
+        if ($result3) {
+          $dailyGrooming = 0;
+
+          while ($row3 = mysqli_fetch_assoc($result3)) {
+            // Loop through each column and count the grooming services
+            foreach ($row3 as $service) {
+              if (!empty($service) && $service == "Grooming") {
+                $dailyGrooming++;
+              }
+            }
+          }
+        } else {
+          // echo "Error in query: " . mysqli_error($conn);
+        }
+        ?>
         <div class="boxes-overview">
           <div class="box box1">
             <span class="text">Customer</span>
-            <span class="number">0</span>
+            <span class="number"><?php echo $dailyCustomers; ?></span>
           </div>
           <div class="box box2">
             <span class="text">Pets</span>
-            <span class="number">0</span>
+            <span class="number"><?php echo $dailyPets; ?></span>
           </div>
           <div class="box box3">
             <span class="text">Pet Grooming</span>
-            <span class="number">0</span>
+            <span class="number"><?php echo $dailyGrooming; ?></span>
           </div>
         </div>
       </div>
@@ -62,7 +120,7 @@
           <table class="clinic-schedule" width=100%>
             <thead>
               <tr>
-                <th scope="col" width=5%> Status </th>
+                <!-- <th scope="col" width=5%></th> -->
                 <th scope="col"> Notify </th>
                 <th scope="col">Date</th>
                 <th scope="col">Name</th>
@@ -73,44 +131,7 @@
           </table>
         </div>
 
-        <!--=====Report Analytics====-->
-        <div class="report-analytics">
-          <div class="title-report-analytics">
-            <span class="text">Report Analytics</span>
-          </div>
-          <div class="boxes-report">
-            <div class="box-report box1-report">
-              <i class="uil uil-thumbs-up"></i>
-              <span class="text">Chart</span>
-              <span class="number">0</span>
-            </div>
-            <div class="box-report box2-report">
-              <i class="uil uil-comments"></i>
-              <span class="text">Chart</span>
-              <span class="number">0</span>
-            </div>
-            <div class="box-report box3-report">
-              <i class="uil uil-share"></i>
-              <span class="text">Chart</span>
-              <span class="number">0</span>
-            </div>
-            <div class="box-report box4-report">
-              <i class="uil uil-thumbs-up"></i>
-              <span class="text">Chart</span>
-              <span class="number">0</span>
-            </div>
-            <div class="box-report box5-report">
-              <i class="uil uil-comments"></i>
-              <span class="text">Chart</span>
-              <span class="number">0</span>
-            </div>
-            <div class="box-report box6-report">
-              <i class="uil uil-share"></i>
-              <span class="text">Chart</span>
-              <span class="number">0</span>
-            </div>
-          </div>
-        </div>
+        <!-- reprot analytics -->
 
         <!--=====Send SMS====-->
         <div class="form-popup-sms" id="myForm-sms">
@@ -141,8 +162,9 @@
               </div>
 
               <div class="inputfield-sms">
-                <input type="button" value="Send Message" class="btn-send" onclick="submitData('sendSMS')">
+                <input type="button" value="Send Message" class="btn-send" onclick="submitData('sendSMS'); closeFormsms();">
               </div>
+              <?php require 'script files\schedule.data.js.php'; ?>
               <div class="inputfield-sms">
                 <input type="button" value="Close" class="btn-send" onclick="closeFormsms()">
               </div>
@@ -248,8 +270,6 @@
 This is to confirm your appointment today at Doc Lenon Veterinary Clinic:
 
 Date: ${date}
-Pet's Name: ${petname}
-Reason for Visit: ${service}
 
 For questions or changes, contact us at 09124567890.
 

@@ -14,6 +14,12 @@
 
   <!----===== Icons ===== -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+  <?php require 'alert-notif-function.php'; ?>
+
+  <!-- AJAX -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
   <!--=====Change name mo na lang====-->
   <title>Admin Dashboard Panel</title>
 </head>
@@ -27,6 +33,7 @@
       <i class="sidebar-toggle"><span class="material-symbols-outlined"> menu </span></i>
       <div class="title">
         <span class="text">Client Records</span>
+        <?php require 'alert-notif.php'; ?>
       </div>
     </div>
 
@@ -188,14 +195,15 @@
             <thead>
               <tr>
                 <th width="10%"></th>
-                <th width="45%">Name</th>
+                <th width=""></th>
+                <th width="20%">Name</th>
                 <th>Species</th>
                 <th width="10%"></th>
               </tr>
             </thead>
             <tbody id="refresh">
 
-              <?php require 'script files\get-cust-id.jd.php'; ?>
+              <?php require 'script files\get-cust-id.js.php'; ?>
 
             </tbody>
           </table>
@@ -259,248 +267,675 @@
         </div>
       </div>
 
-      <!--Pet Record Table-->
+      <!--Visit Date Table-->
       <div class="pet-records">
-        <div class="customer-pet-table" id="petRecordTable" style="display: none;">
+        <div class="customer-pet-table" id="petRecordTable" style="display: block;">
+          <input type="text" id="getPetID" value="" style="display: none;">
+          <input type="text" id="getOwnerName" name="getOwnerName" value="" style="display: none;">
+          <input type="text" id="getOwnerID" name="getOwnerID" value="" style="display: none;">
           <table width="100%">
             <thead>
               <tr>
                 <th width="35%">Visit Date</th>
-                <th width="35%">Next Visit</th>
                 <th>Service</th>
               </tr>
             </thead>
             <tbody id="pRcrd">
+              <!--  -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Next Visit -->
+        <div class="customer-pet-table" id="petRecordTable" style="display: block;">
+          <input type="text" id="getPetID" value="" style="display: none;">
+          <input type="text" id="getOwnerName" name="getOwnerName" value="" style="display: none;">
+          <input type="text" id="getOwnerID" name="getOwnerID" value="" style="display: none;">
+          <table width="100%">
+            <thead>
               <tr>
-                <td style="color: crimson">mm-dd-yyyy</td>
-                <td>n/a</td>
-                <td>Vaccine</td>
+                <th width="35%">Next Visit</th>
               </tr>
-              <tr>
-                <td>mm-dd-yyyy</td>
-                <td>n/a</td>
-                <td>Vaccine</td>
-              </tr>
-              <tr>
-                <td>mm-dd-yyyy</td>
-                <td>n/a</td>
-                <td>Vaccine</td>
-              </tr>
-              <tr>
-                <td>mm-dd-yyyy</td>
-                <td>n/a</td>
-                <td>Vaccine</td>
-              </tr>
-              <tr>
-                <td>mm-dd-yyyy</td>
-                <td>n/a</td>
-                <td>Vaccine</td>
-              </tr>
-              <tr>
-                <td>mm-dd-yyyy</td>
-                <td>n/a</td>
-                <td>Vaccine</td>
-              </tr>
-              <tr>
-                <td>mm-dd-yyyy</td>
-                <td>n/a</td>
-                <td>Vaccine</td>
-              </tr>
-              <tr>
-                <td>mm-dd-yyyy</td>
-                <td>n/a</td>
-                <td>Vaccine</td>
-              </tr>
+            </thead>
+            <tbody id="nVisit">
+              <!--  -->
             </tbody>
           </table>
         </div>
       </div>
-    </div>
 
-    <div class="pets-records">
-      <div class="filter-box">
-        <label class="title-petrec">Pet Records</label>
-        <div class="inputfield">
-          <form>
-            <label>View Only:</label>
-            <input type="radio" name="radio" />
-            <label>All </label>
+      <!-- Pet record table filters-->
+      <div class="pets-records" id="petTableRecord" style="display: none;">
+        <div class="filter-box">
+          <label class="title-petrec">Pet Records</label>
+          <div class="inputfield">
+            <form>
+              <input type="text" style="display: none;" value="" id="searchInput" name="searchInput">
+              <label>View Only:</label>
+              <input type="radio" name="radio" id="all" />
+              <label for="all">All</label>
 
-            <input type="radio" name="radio" />
-            <label>Consultation </label>
+              <input type="radio" name="radio" id="grooming" />
+              <label for="grooming">Grooming</label>
 
-            <input type="radio" name="radio" />
-            <label>Surgeries </label>
+              <input type="radio" name="radio" id="consultation" />
+              <label for="consultation">Consultation</label>
 
-            <input type="radio" name="radio" />
-            <label>Vaccine </label>
-          </form>
-        </div>
-      </div>
+              <input type="radio" name="radio" id="surgery" />
+              <label for="Surgery">Surgery</label>
 
-      <div class="inputfield">
-        <label>Filter Date</label>
-        <div class="date-seperator">
-          <div>
-            <label class="label-date">Start At</label>
-            <input type="date" class="input" />
-          </div>
-          <div>
-            <label class="label-date">End At</label>
-            <input type="date" class="input" />
+              <input type="radio" name="radio" id="vaccine" />
+              <label for="vaccine">Vaccine</label>
+
+              <input type="radio" name="radio" id="Lab Test" />
+              <label for="Lab Test">Lab Test</label>
+            </form>
           </div>
         </div>
-      </div>
-      <div class="pet-visit-all">
-        <table>
-          <tr>
-            <th scope="col" style="width: 20%">Date</th>
-            <th scope="col" style="width: 20%">Service</th>
-            <th scope="col" style="width: 50">About</th>
-            <th style="width: 10%"></th>
-          </tr>
-          <tr>
-            <td data-label="Name">mm-dd-yyyy</td>
-            <td data-label="Contact">Vaccine</td>
-            <td data-label="Recent Visit">dhudjhfjdhfkf</td>
-            <td class="pet-rec" onclick="openViewRecords()"><u>View</u></td>
-          </tr>
-          <tr>
-            <td data-label="Name">mm-dd-yyyy</td>
-            <td data-label="Contact">Vaccine</td>
-            <td data-label="Recent Visit">dhudjhfjdhfkf</td>
-            <td class="pet-rec"><u>View</u></td>
-          </tr>
-        </table>
-      </div>
-    </div>
 
-    <!--Pop up-->
-    <!--Add Pets-->
-    <form class="form-popup-pets" id="myform-pets">
-      <div class="form-pet">
-        <div class="title">
-          <a>Add Pets</a>
-        </div>
+        <!-- pet record table -->
         <div class="inputfield">
-          <label>ID</label>
-          <input type="text" class="input" id="petId" / disabled>
+          <label>Filter by month</label>
+          <div class="date-seperator">
+            <div>
+              <input type="month" class="input" id="startDate" />
+            </div>
+          </div>
         </div>
-        <div class="inputfield">
-          <label>Pet Name</label>
-          <input type="text" class="input" id="petName" />
-        </div>
-        <div class="inputfield">
-          <label>Gender </label>
-          <select name="gender" id="gender" style="width: 100%;" id="gender">
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
-        </div>
-        <div class="inputfield">
-          <label>Birth Date</label>
-          <input type="date" class="input" id="birthDate" />
-        </div>
-        <div class="inputfield">
-          <label>Type</label>
-          <input type="text" class="input" id="type" />
-        </div>
-        <div class="inputfield">
-          <label>Breed</label>
-          <input type="text" class="input" id="breed" value="" />
-        </div>
-        <div class="inputfield">
-          <label>Species</label>
-          <input type="text" class="input" id="species" value="" />
-        </div>
-        <div class="inputfield">
-          <input type="button" value="Cancel" class="btn-cancel" onclick="closeAddPets()" />
-          <input type="button" value="Add Pet" class="btn-add" onclick="submitData('addPet')" />
-          <?php require 'script files\customer-pet-record-data.js.php'; ?>
+        <div class="pet-visit-all" style="
+            height: 390px;
+            overflow-x: hidden;
+            overflow-y: auto;
+          ">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col" style="width: 20%">Date</th>
+                <th scope="col" style="width: 20%">Service</th>
+                <th scope="col" style="width: 50">About</th>
+                <th style="width: 10%"></th>
+              </tr>
+            </thead>
+            <tbody id="pRecordt">
+              <!--  -->
+              <?php require 'script files\pet-record-refresh-table.js.php'; ?>
+            </tbody>
+          </table>
         </div>
       </div>
-    </form>
 
-    <!--add record-->
-    <form class="form-popup-record" id="myform-records">
-      <div class="form-record">
-        <div class="title">
-          <a>Add Pets</a>
-        </div>
-        <div class="inputfield">
-          <label>Date</label>
-          <input type="date" class="input" />
-        </div>
-        <div class="inputfield">
-          <label>Service</label>
-          <div class="custom_select">
-            <select>
-              <option value="">Select</option>
-              <option value="male">1</option>
-              <option value="female">2</option>
-              <option value="male">1</option>
-              <option value="female">2</option>
-              <option value="male">1</option>
-              <option value="female">2</option>
+      <!--Pop up-->
+      <!--Add Pets-->
+      <form class="form-popup-pets" id="myform-pets">
+        <div class="form-pet">
+          <div class="title">
+            <a>Add Pets</a>
+          </div>
+          <div class="inputfield">
+            <label>ID</label>
+            <input type="text" class="input" id="petId" / disabled>
+          </div>
+          <div class="inputfield">
+            <label>Pet Name</label>
+            <input type="text" class="input" id="petName" />
+          </div>
+          <div class="inputfield">
+            <label>Gender </label>
+            <select name="gender" id="gender" style="width: 100%;">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
             </select>
           </div>
+          <div class="inputfield">
+            <label>Birth Date</label>
+            <input type="date" class="input" id="birthDate" />
+          </div>
+          <div class="inputfield">
+            <label>Type</label>
+            <input type="text" class="input" id="type" />
+          </div>
+          <div class="inputfield">
+            <label>Breed</label>
+            <input type="text" class="input" id="breed" value="" />
+          </div>
+          <div class="inputfield">
+            <label>Species</label>
+            <input type="text" class="input" id="species" value="" />
+          </div>
+          <div class="inputfield">
+            <input type="button" value="Cancel" class="btn-cancel" onclick="closeAddPets()" />
+            <input type="button" value="Add Pet" class="btn-add" onclick="submitData('addPet'); closeAddPets();" />
+            <?php require 'script files\customer-pet-record-data.js.php'; ?>
+          </div>
         </div>
-        <div class="inputfield">
-          <label>Weight</label>
-          <input type="number" class="input" />
-        </div>
-        <div class="inputfield">
-          <label>About</label>
-          <textarea class="input"></textarea>
-        </div>
-        <div class="inputfield">
-          <label>Next Schedule</label>
-          <input type="date" class="input" />
-        </div>
-        <div class="inputfield">
-          <label>Notes</label>
-          <textarea class="input"></textarea>
-        </div>
-        <div class="inputfield">
-          <input type="button" value="Cancel" class="btn-cancel" />
-          <input type="submit" value="Add Customer" class="btn-add" />
-        </div>
-        <button type="button" class="btn-close" onclick="closeAddRecords()">
-          Close
-        </button>
-      </div>
-    </form>
+      </form>
 
-    <!--view record-->
-    <form class="form-popup-viewrecord" id="myform-viewrecords">
-      <div class="form-record">
-        <div class="title">
-          <a>Add Pets</a>
+      <!--add record-->
+      <form class="form-popup-record" id="myform-records">
+        <div class="form-record" style="
+            height: 390px;
+            overflow-x: hidden;
+            overflow-y: auto;
+        ">
+          <div class="title">
+            <a>Add Pet Record</a>
+          </div>
+          <div class="inputfield">
+            <label>Date</label>
+            <input type="date" class="input" id="rDate" />
+          </div>
+
+          <div class="inputfield">
+            <label>Number of Services</label>
+            <div class="custom_select">
+              <select id="numServices" onchange="services()">
+                <option value="">SELECT</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+          </div>
+          <div class="inputfield" id="s1" style="display: none;">
+            <label>Service 1</label>
+            <div class="custom_select">
+              <select id="service1">
+                <option value="">SELECT</option>
+                <option value="Vaccine">Vaccine</option>
+                <option value="Grooming">Grooming</option>
+                <option value="Consultation and Treatment">Consultation and Treatment</option>
+                <option value="Lab Test">Lab Test</option>
+                <option value="Surgery">Surgery</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- For vaccine -->
+          <div class="inputfield" id="v1" style="display: none;">
+            <label>Vaccine Type</label>
+            <div class="custom_select">
+              <select id="vaccine1">
+                <option value="">SELECT</option>
+                <option value="5in1">5in1</option>
+                <option value="6in1">6in1</option>
+                <option value="Rabies Vax">Rabies Vax</option>
+                <option value="Kennel Cough">Kennel Cough</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="inputfield" id="s2" style="display: none;">
+            <label>Service 2</label>
+            <div class="custom_select">
+              <select id="service2">
+                <option value="">SELECT</option>
+                <option value="Vaccine">Vaccine</option>
+                <option value="Grooming">Grooming</option>
+                <option value="Consultation">Consultation and Treatment</option>
+                <option value="Lab Test">Lab Test</option>
+                <option value="Surgery">Surgery</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- For vaccine -->
+          <div class="inputfield" id="v2" style="display: none;">
+            <label>Vaccine Type</label>
+            <div class="custom_select">
+              <select id="vaccine2">
+                <option value="">SELECT</option>
+                <option value="5in1">5in1</option>
+                <option value="6in1">6in1</option>
+                <option value="Rabies Vax">Rabies Vax</option>
+                <option value="Kennel Cough">Kennel Cough</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="inputfield" id="s3" style="display: none;">
+            <label>Service 3</label>
+            <div class="custom_select">
+              <select id="service3">
+                <option value="">SELECT</option>
+                <option value="Vaccine">Vaccine</option>
+                <option value="Grooming">Grooming</option>
+                <option value="Consultation and Treatment">Consultation and Treatment</option>
+                <option value="Lab Test">Lab Test</option>
+                <option value="Surgery">Surgery</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- For vaccine -->
+          <div class="inputfield" id="v3" style="display: none;">
+            <label>Vaccine Type</label>
+            <div class="custom_select">
+              <select id="vaccine3">
+                <option value="">SELECT</option>
+                <option value="5in1">5in1</option>
+                <option value="6in1">6in1</option>
+                <option value="Rabies Vax">Rabies Vax</option>
+                <option value="Kennel Cough">Kennel Cough</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="inputfield">
+            <label>Weight in Kg</label>
+            <input type="number" class="input" id="rWeight" />
+          </div>
+          <div class="inputfield">
+            <label>About</label>
+            <textarea class="input" id="rAbout"></textarea>
+          </div>
+          <div class="inputfield">
+            <label>Next Schedule</label>
+            <input type="date" class="input" id="nDate" />
+          </div>
+          <div class="inputfield">
+            <label>Notes</label>
+            <textarea class="input" id="rNote"></textarea>
+          </div>
+          <div class="inputfield">
+            <input type="button" value="Cancel" class="btn-cancel" />
+            <input type="button" value="Add Record" class="btn-add" onclick="submitData('addPetRecord'); closeAddRecords();" />
+          </div>
+          <?php require "script files\customer-pet-record-data.js.php"; ?>
+          <button type="button" class="btn-close" onclick="closeAddRecords()">
+            Close
+          </button>
         </div>
-        <div class="inputfield">
-          <label>Date</label>
-          <input type="date" class="input" />
+      </form>
+
+      <!--pet record details-->
+      <form class="form-popup-viewrecord" id="myform-viewrecords">
+        <div class="form-record">
+          <div class="title">
+            <a>Pet Record Details</a>
+          </div>
+          <div class="inputfield">
+            <label>Date</label>
+            <input type="date" class="input" readonly id="vDate" />
+          </div>
+          <div class="inputfield">
+            <label>Services</label>
+            <table>
+              <tr>
+                <td>
+                  <input type="text" class="input" placeholder="s1" readonly id="vS1" style="display: none;" />
+                </td>
+                <td>
+                  <input type="text" class="input" placeholder="if may vaccine" readonly id="vV1" style="display: none;" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="text" class="input" placeholder="s2" readonly id="vS2" style="display: none;" />
+                </td>
+                <td>
+                  <input type="text" class="input" placeholder="if may vaccine" readonly id="vV2" style="display: none;" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="text" class="input" placeholder="s3" readonly id="vS3" style="display: none;" />
+                </td>
+                <td>
+                  <input type="text" class="input" placeholder="if may vaccine" readonly id="vV3" style="display: none;" />
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="inputfield">
+            <label>Weight</label>
+            <input type="text" class="input" readonly id="vWeight" />
+          </div>
+          <div class="inputfield">
+            <label>About</label>
+            <textarea class="input" readonly id="vAbout"></textarea>
+          </div>
+          <div class="inputfield">
+            <label>Notes</label>
+            <textarea class="input" readonly id="vNote"></textarea>
+          </div>
+          <div class="inputfield">
+            <input type="button" value="Close" class="btn-close" onclick="closeViewRecords()" />
+          </div>
         </div>
-        <div class="inputfield">
-          <label>Weight</label>
-          <input type="number" class="input" />
+      </form>
+
+      <!-- Edit pet record -->
+      <form class="form-popup-record" id="edit-records">
+        <div class="form-record" style="
+            height: 390px;
+            overflow-x: hidden;
+            overflow-y: auto;
+        ">
+          <div class="title">
+            <a>Update Pet Record</a>
+          </div>
+          <div class="inputfield">
+            <input type="text" id="testDisplay" value="" style="display: none;">
+            <label>Date</label>
+            <input type="date" class="input" id="eDate" />
+          </div>
+
+          <div class="inputfield">
+            <label>Services</label>
+            <div class="custom_select">
+              <input type="button" value="View" onclick="eservices();" style="display: none;" id="eBtn1">
+              <input type="button" value="Hide" onclick="eHservices();" style="display: block;" id="eBtn2">
+            </div>
+          </div>
+          <div class="inputfield" id="es1" style="display: none;">
+            <label>Service 1</label>
+            <div class="custom_select">
+              <select id="eservice1">
+                <option value="">SELECT</option>
+                <option value="Vaccine">Vaccine</option>
+                <option value="Grooming">Grooming</option>
+                <option value="Consultation and Treatment">Consultation and Treatment</option>
+                <option value="Lab Test">Lab Test</option>
+                <option value="Surgery">Surgery</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- For vaccine -->
+          <div class="inputfield" id="ev1" style="display: none;">
+            <label>Vaccine Type</label>
+            <div class="custom_select">
+              <select id="evaccine1">
+                <option value="">SELECT</option>
+                <option value="5in1">5in1</option>
+                <option value="6in1">6in1</option>
+                <option value="Rabies Vax">Rabies Vax</option>
+                <option value="Kennel Cough">Kennel Cough</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="inputfield" id="es2" style="display: none;">
+            <label>Service 2</label>
+            <div class="custom_select">
+              <select id="eservice2">
+                <option value="">SELECT</option>
+                <option value="Vaccine">Vaccine</option>
+                <option value="Grooming">Grooming</option>
+                <option value="Consultation">Consultation and Treatment</option>
+                <option value="Lab Test">Lab Test</option>
+                <option value="Surgery">Surgery</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- For vaccine -->
+          <div class="inputfield" id="ev2" style="display: none;">
+            <label>Vaccine Type</label>
+            <div class="custom_select">
+              <select id="evaccine2">
+                <option value="">SELECT</option>
+                <option value="5in1">5in1</option>
+                <option value="6in1">6in1</option>
+                <option value="Rabies Vax">Rabies Vax</option>
+                <option value="Kennel Cough">Kennel Cough</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="inputfield" id="es3" style="display: none;">
+            <label>Service 3</label>
+            <div class="custom_select">
+              <select id="eservice3">
+                <option value="">SELECT</option>
+                <option value="Vaccine">Vaccine</option>
+                <option value="Grooming">Grooming</option>
+                <option value="Consultation and Treatment">Consultation and Treatment</option>
+                <option value="Lab Test">Lab Test</option>
+                <option value="Surgery">Surgery</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- For vaccine -->
+          <div class="inputfield" id="ev3" style="display: none;">
+            <label>Vaccine Type</label>
+            <div class="custom_select">
+              <select id="evaccine3">
+                <option value="">SELECT</option>
+                <option value="5in1">5in1</option>
+                <option value="6in1">6in1</option>
+                <option value="Rabies Vax">Rabies Vax</option>
+                <option value="Kennel Cough">Kennel Cough</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="inputfield">
+            <label>Weight</label>
+            <input type="number" class="input" id="eWeight" />
+          </div>
+          <div class="inputfield">
+            <label>About</label>
+            <textarea class="input" id="eAbout"></textarea>
+          </div>
+          <div class="inputfield">
+            <label>Next Schedule</label>
+            <input type="date" class="input" id="enxDate" />
+          </div>
+          <div class="inputfield">
+            <label>Notes</label>
+            <textarea class="input" id="eNote"></textarea>
+          </div>
+          <div class="inputfield">
+            <input type="button" value="Cancel" class="btn-cancel" />
+            <input type="button" value="Update Record" class="btn-add" onclick="submitData('editPetRecord');" />
+          </div>
+          <?php require "script files\customer-pet-record-data.js.php"; ?>
+          <button type="button" class="btn-close" onclick="closeEditRecord()">
+            Close
+          </button>
         </div>
-        <div class="inputfield">
-          <label>About</label>
-          <textarea class="input"></textarea>
-        </div>
-        <div class="inputfield">
-          <label>Notes</label>
-          <textarea class="input"></textarea>
-        </div>
-        <div class="inputfield">
-          <input type="submit" value="Add Customer" class="btn-add" />
-          <input type="button" value="Close" class="btn-close" onclick="closeViewRecords()" />
-        </div>
-      </div>
-    </form>
+      </form>
+
   </section>
+  <script>
+    function openEditRecord(id, date, s01, s02, s03, v01, v02, v03, weight, about, note, nextDate) {
+      document.getElementById("edit-records").style.display = "block";
+      document.getElementById("testDisplay").value = id;
 
+      var d = date;
+      var s1 = s01;
+      var s2 = s02;
+      var s3 = s03;
+      var v1 = v01;
+      var v2 = v02;
+      var v3 = v03;
+      var w = weight;
+      var a = about;
+      var n = note;
+
+      document.getElementById("eDate").value = d;
+      document.getElementById("eWeight").value = w;
+      document.getElementById("eAbout").value = a;
+      document.getElementById("enxDate").value = nextDate;
+      document.getElementById("eNote").value = n;
+
+      if (s1 != "") {
+        document.getElementById("es1").style.display = "block";
+        document.getElementById("eservice1").value = s1;
+        if (s1 == "Vaccine") {
+          document.getElementById("ev1").style.display = "block";
+          document.getElementById("evaccine1").value = v1;
+        }
+      }
+
+      if (s2 != "") {
+        document.getElementById("es2").style.display = "block";
+        document.getElementById("eservice2").value = s1;
+        if (s1 == "Vaccine") {
+          document.getElementById("ev2").style.display = "block";
+          document.getElementById("evaccine2").value = v1;
+        }
+      }
+
+      if (s3 != "") {
+        document.getElementById("es3").style.display = "block";
+        document.getElementById("eservice3").value = s1;
+        if (s1 == "Vaccine") {
+          document.getElementById("ev3").style.display = "block";
+          document.getElementById("evaccine3").value = v1;
+        }
+      }
+    }
+
+    function closeEditRecord() {
+      document.getElementById("edit-records").style.display = "none";
+    }
+  </script>
+  <script>
+    // Get the current date
+    var today = new Date();
+
+    // Set the value to the current month (format: "YYYY-MM")
+    var currentMonth = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2);
+    document.getElementById('startDate').value = currentMonth;
+  </script>
+  <script>
+    // Add event listeners to the date input elements
+    var startDateInput = document.getElementById('startDate');
+
+    startDateInput.addEventListener('change', function() {
+      document.getElementById("searchInput").value = this.value;
+    });
+  </script>
+  <script>
+    // Add event listener to the radio buttons
+    var radioButtons = document.querySelectorAll('input[name="radio"]');
+
+    radioButtons.forEach(function(radio) {
+      radio.addEventListener('change', function() {
+        // Check if the radio button is checked
+        if (this.checked) {
+          document.getElementById("searchInput").value = this.id;
+        }
+      });
+    });
+  </script>
+  <script>
+    // Add event listener to the dropdown
+    document.getElementById('service1').addEventListener('change', function() {
+      // Get the selected value
+      var selectedValue = this.value;
+
+      if (selectedValue == 'Vaccine') {
+        document.getElementById("v1").style.display = "block";
+      } else {
+        document.getElementById("v1").style.display = "none";
+      }
+    });
+    // Add event listener to the dropdown
+    document.getElementById('service2').addEventListener('change', function() {
+      // Get the selected value
+      var selectedValue = this.value;
+
+      if (selectedValue == 'Vaccine') {
+        document.getElementById("v2").style.display = "block";
+      } else {
+        document.getElementById("v2").style.display = "none";
+      }
+    });
+    // Add event listener to the dropdown
+    document.getElementById('service3').addEventListener('change', function() {
+      // Get the selected value
+      var selectedValue = this.value;
+
+      if (selectedValue == 'Vaccine') {
+        document.getElementById("v3").style.display = "block";
+      } else {
+        document.getElementById("v3").style.display = "none";
+      }
+
+    });
+
+    // edit pet record
+    // Add event listener to the dropdown
+    document.getElementById('eservice1').addEventListener('change', function() {
+      // Get the selected value
+      var selectedValue = this.value;
+
+      if (selectedValue == 'Vaccine') {
+        document.getElementById("ev1").style.display = "block";
+      } else {
+        document.getElementById("ev1").style.display = "none";
+      }
+    });
+    // Add event listener to the dropdown
+    document.getElementById('eservice2').addEventListener('change', function() {
+      // Get the selected value
+      var selectedValue = this.value;
+
+      if (selectedValue == 'Vaccine') {
+        document.getElementById("ev2").style.display = "block";
+      } else {
+        document.getElementById("ev2").style.display = "none";
+      }
+    });
+    // Add event listener to the dropdown
+    document.getElementById('eservice3').addEventListener('change', function() {
+      // Get the selected value
+      var selectedValue = this.value;
+
+      if (selectedValue == 'Vaccine') {
+        document.getElementById("ev3").style.display = "block";
+      } else {
+        document.getElementById("ev3").style.display = "none";
+      }
+
+    });
+
+    function services() {
+      var services = document.getElementById("numServices");
+      var selectedValue = services.value;
+      document.getElementById("s1").style.display = "none";
+      document.getElementById("s2").style.display = "none";
+      document.getElementById("s3").style.display = "none";
+      if (selectedValue == 1) {
+        document.getElementById("s1").style.display = "block";
+      }
+      if (selectedValue == 2) {
+        document.getElementById("s1").style.display = "block";
+        document.getElementById("s2").style.display = "block";
+      }
+      if (selectedValue == 3) {
+        document.getElementById("s1").style.display = "block";
+        document.getElementById("s2").style.display = "block";
+        document.getElementById("s3").style.display = "block";
+      }
+    }
+
+    function eservices() {
+      document.getElementById("eBtn1").style.display = "none";
+      document.getElementById("eBtn2").style.display = "block";
+      document.getElementById("es1").style.display = "block";
+      document.getElementById("es2").style.display = "block";
+      document.getElementById("es3").style.display = "block";
+      document.getElementById("ev1").style.display = "block";
+      document.getElementById("ev2").style.display = "block";
+      document.getElementById("ev3").style.display = "block";
+    }
+
+    function eHservices() {
+      document.getElementById("eBtn1").style.display = "block";
+      document.getElementById("eBtn2").style.display = "none";
+      document.getElementById("es1").style.display = "none";
+      document.getElementById("es2").style.display = "none";
+      document.getElementById("es3").style.display = "none";
+      document.getElementById("ev1").style.display = "none";
+      document.getElementById("ev2").style.display = "none";
+      document.getElementById("ev3").style.display = "none";
+    }
+  </script>
   <script>
     const body = document.querySelector("body"),
       modeToggle = body.querySelector(".mode-toggle");
@@ -539,20 +974,66 @@
       document.getElementById("myform-records").style.display = "none";
     }
 
-    function openViewRecords() {
+    function openViewRecords(date, s01, s02, s03, v01, v02, v03, weight, about, note) {
       document.getElementById("myform-viewrecords").style.display = "block";
+      var d = date;
+      var s1 = s01;
+      var s2 = s02;
+      var s3 = s03;
+      var v1 = v01;
+      var v2 = v02;
+      var v3 = v03;
+      var w = weight;
+      var a = about;
+      var n = note;
+
+      document.getElementById("vDate").value = d;
+      document.getElementById("vWeight").value = w + " kg";
+      document.getElementById("vAbout").value = a;
+      document.getElementById("vNote").value = n;
+
+      if (s1 != "") {
+        document.getElementById("vS1").style.display = "block";
+        document.getElementById("vS1").value = s1;
+        if (s1 == "Vaccine") {
+          document.getElementById("vV1").style.display = "block";
+          document.getElementById("vV1").value = v1;
+        }
+      }
+
+      if (s2 != "") {
+        document.getElementById("vS2").style.display = "block";
+        document.getElementById("vS2").value = s2;
+        if (s2 == "Vaccine") {
+          document.getElementById("vV2").style.display = "block";
+          document.getElementById("vV2").value = v2;
+        }
+      }
+
+      if (s3 != "") {
+        document.getElementById("vS3").style.display = "block";
+        document.getElementById("vS3").value = s3;
+        if (s3 == "Vaccine") {
+          document.getElementById("vV3").style.display = "block";
+          document.getElementById("vV3").value = v3;
+        }
+      }
     }
 
     function closeViewRecords() {
       document.getElementById("myform-viewrecords").style.display = "none";
     }
 
-    function viewPetInfo(id, name, breeds, speciess, birthdate) {
+    function viewPetInfo(id, name, breeds, speciess, birthdate, visitID, ownername, ownerid) {
       document.getElementById("Petid").value = id;
       document.getElementById("Petname").value = name;
       document.getElementById("Breed").value = breeds;
       document.getElementById("Species").value = speciess;
       document.getElementById("Birthdate").value = birthdate;
+      document.getElementById("getPetID").value = visitID;
+      document.getElementById("getOwnerName").value = ownername;
+      document.getElementById("getOwnerID").value = ownerid;
+      recordBtnTable();
     }
 
     function edit() {
@@ -577,6 +1058,14 @@
       document.getElementById("custAddress").disabled = true;
     }
 
+    function openFormDelete() {
+      document.getElementById("myForm-delete").style.display = "block";
+    }
+
+    function closeFormDelete() {
+      document.getElementById("myForm-delete").style.display = "none";
+    }
+
     function cancel() {
       document.getElementById("edit").style.display = "block";
       document.getElementById("ok").style.display = "none";
@@ -588,9 +1077,9 @@
       document.getElementById("custAddress").disabled = true;
     }
 
-    function addRecord(){
+    function recordBtnTable() {
       document.getElementById("addRecord").style.display = "block";
-      document.getElementById("petRecordTable").style.display = "block";
+      document.getElementById("petTableRecord").style.display = "block";
     }
 
     function editPet() {
@@ -635,6 +1124,11 @@
 
     function deletePet(id) {
       document.getElementById("Petid").value = id;
+      //document.getElementById("Petid").value = name;
+    }
+    
+    function deletePet2(id) {
+      document.getElementById("searchInput").value = id;
     }
   </script>
 </body>

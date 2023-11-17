@@ -10,6 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" />
+
+  <?php require 'alert-notif-function.php'; ?>
   <title>Doc Lenon Veterinary Clinic | Login</title>
 </head>
 
@@ -35,8 +37,9 @@
           <input type="password" placeholder="Password" id="password" />
           <i><span class="material-symbols-outlined">lock</span></i>
         </div>
+
+        <?php require 'alert-notif.php'; ?>
         <div class="form-password">
-          <p>Forgot Password?</p>
         </div>
         <button type="button" class="submit" onclick="login('checker');">Login</button>
       </form>

@@ -33,10 +33,56 @@ function load()
                     '<?php echo $name; ?>', 
                     '<?php echo $rowPet['breed']; ?>', 
                     '<?php echo $species; ?>', 
-                    '<?php echo $rowPet['birthdate']; ?>');
-                    addRecord();">
-
+                    '<?php echo $rowPet['birthdate']; ?>',
+                    '<?php echo $petId; ?>',
+                    '<?php echo $rowPet['ownerfirstname']; ?>',
+                    '<?php echo $rowPet['ownerid']; ?>');
+                    submitData('getPetID');
+                    ">
                     <span class="material-symbols-outlined"> toc </span>
+                </td>
+                <?php require 'script files\customer-pet-record-data.js.php'; ?>
+                <td>
+                    <!-- mark pet -->
+                    <?php
+                    $query3 = "SELECT * FROM schedule WHERE status = ? AND ownerid = ?";
+                    $stmt2 = mysqli_prepare($conn, $query3);
+
+                    $status = 'Past';
+                    mysqli_stmt_bind_param($stmt2, "ss", $status, $custId);
+                    mysqli_stmt_execute($stmt2);
+                    $resultPets2 = mysqli_stmt_get_result($stmt2);
+
+                    $petArray = array();
+
+                    if (mysqli_num_rows($resultPets2) > 0) {
+                        while ($rowPet = mysqli_fetch_assoc($resultPets2)) {
+                            $petArray[] = $rowPet["petname"];
+                            $petArray[] = $rowPet["petname2"];
+                            $petArray[] = $rowPet["petname3"];
+                            $petArray[] = $rowPet["petname4"];
+                            $petArray[] = $rowPet["petname5"];
+                        }
+
+                        if (in_array($name, $petArray)) {
+                    ?>
+                            <button type="button" class="done-button" style=" background-color: #00000000;
+                    border-style: none;
+                    color: #fa5d5a;
+                    cursor: pointer;">
+                                <span class="material-symbols-outlined">
+                                    check_small
+                                </span>
+                            </button>
+                    <?php
+                        } else {
+                            //
+                        }
+                    } else {
+                        // Handle the case when there are no pets to display
+                        //echo 'No Pet';
+                    }
+                    ?>
                 </td>
                 <td><?php echo $name; ?></td>
                 <td><?php echo $species; ?></td>
