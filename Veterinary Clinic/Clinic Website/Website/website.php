@@ -19,7 +19,7 @@
   <nav class="nav">
     <div class="container">
       <div class="logo">
-        <a href="#">Doc Lenon Veterinary Clinic</a>
+      <?php require 'title.php'; ?>
       </div>
       <div id="mainListDiv" class="main_list">
         <ul class="navlinks">
@@ -38,7 +38,8 @@
   <!--top-->
   <section class="home">
     <div class="clinic-name">
-      <a>Doc Lenon <br />Veterinary Clinic</a>
+      <!--  -->
+      <?php require 'title.php'; ?>
       <p>Paws-itively passionate about pets!</p>
     </div>
 

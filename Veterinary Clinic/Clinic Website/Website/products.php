@@ -19,7 +19,7 @@
   <nav class="nav">
     <div class="container">
       <div class="logo">
-        <a href="#">Doc Lenon Veterinary Clinic</a>
+      <?php require 'title.php'; ?>
       </div>
       <div id="mainListDiv" class="main_list">
         <ul class="navlinks">
