@@ -111,6 +111,10 @@
                             successAlert("Customer record updated successfully");
                         }
 
+                        if (response == 'Contact must be 11 digit') {
+                            successAlert("Contact must be 11 digit");
+                        }
+
                         if (response == 'petAdded') {
                             //
                             $("#petName").val("");

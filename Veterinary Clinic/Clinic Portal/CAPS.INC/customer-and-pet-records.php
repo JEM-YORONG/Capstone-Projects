@@ -160,7 +160,7 @@
               <input type="number" class="input" id="custContact" value="<?php echo $contact; ?>" disabled />
             </div>
             <div class="inputfield">
-              <label>Email</label>
+              <label>Email (Optional)</label>
               <input type="text" class="input" id="custEmail" value="<?php echo $email; ?>" disabled />
             </div>
           </div>
@@ -182,7 +182,7 @@
       <!--Customer Pet Table-->
       <div class="customer-records">
         <div class="pet-table-top">
-          <label>Fur-babies</label>
+          <label>Pets</label>
           <div style="padding-left: 50%;">
             <button class="add-pet-button" onclick="openAddPets(); generateAndDisplayId();">
               Add Pet
@@ -214,7 +214,27 @@
     <!--Pet Information-->
     <hr class="seperator" />
     <br />
-    <button class="add-button" id="addRecord" onclick="openAddRecords()" style="display: none;">+ Add Record</button>
+    <!-- add record button -->
+    <?php
+    require 'database-conn.php';
+
+    $query = "SELECT * FROM login WHERE id = '1'";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_array($result);
+
+    foreach ($row as $user) {
+      $user = $row['user'];
+    }
+
+    if ($user == 'admin') {
+      echo '<button class="add-button" id="addRecord" onclick="openAddRecords()" style="display: none;">+ Add Record</button>';
+    } else if ($user == 'veterinarian') {
+      echo '<button class="add-button" id="addRecord" onclick="openAddRecords()" style="display: none;">+ Add Record</button>';
+    } else {
+      echo '<button id="addRecord" style="display: none;" disabled></button>';
+    }
+    mysqli_close($conn);
+    ?>
     <br />
     <div class="pet-content">
       <div class="pet-records">
@@ -1126,7 +1146,7 @@
       document.getElementById("Petid").value = id;
       //document.getElementById("Petid").value = name;
     }
-    
+
     function deletePet2(id) {
       document.getElementById("searchInput").value = id;
     }

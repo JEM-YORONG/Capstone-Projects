@@ -1,10 +1,12 @@
 <nav>
-    <div class="logo-name">
+    <!-- logo and name -->
+    <div class="logo-name" id="toRefresh">
         <div class="logo-image">
-            <img src=".vscode\Images\Doc Lenon Logo.png" alt="" />
+            <img src=".vscode\Doc Lenon Logo.png" alt="" />
         </div>
-        <span class="logo_name">Doc Lenon Veterinary Clinic | <br />
+        <span class="logo_name"><label>Doc Lenon Veterinary Clinic</label> | <br />
             Vet Portal</span>
+        <?php require 'script files\reload-logo-name.js.php'; ?>
     </div>
     <!--=====Nav Menus====-->
     <div class="menu-items">
@@ -84,14 +86,14 @@
                         <i><span class="material-symbols-outlined">analytics</span></i>
                         <span class="link-name">Report Analytics</span>
                     </a>
-                </li>       
+                </li>
                 <li>
-                <a href="zHTML_login.php" style="position: absolute;
+                    <a href="zHTML_login.php" style="position: absolute;
                  bottom: 10px;">
-                    <i><span class="material-symbols-outlined"> logout </span></i>
-                    <span class="link-name">Logout</span>
-                </a>
-            </li>
+                        <i><span class="material-symbols-outlined"> logout </span></i>
+                        <span class="link-name">Logout</span>
+                    </a>
+                </li>
                 <!-- <li>
                     <a href="Capstone_Bin.html">
                         <i><span class="material-symbols-outlined">delete</span></i>

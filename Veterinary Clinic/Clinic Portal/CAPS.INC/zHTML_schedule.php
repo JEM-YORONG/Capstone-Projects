@@ -424,6 +424,7 @@
                                                 $query = "SELECT * FROM customer";
                                                 $result = mysqli_query($conn, $query);
 
+
                                                 // Check if the query was successful
                                                 if ($result) {
                                                     while ($row = mysqli_fetch_assoc($result)) {
@@ -572,9 +573,10 @@
                                     </select>
                                 </div>
                             </div>
+
                             <div class="inputfield">
                                 <label>Phone Number</label>
-                                <input type="number" class="input" placeholder="+63**********" id="number" autocomplete="off">
+                                <input type="" class="input" placeholder="09*********" id="number" maxlength="11" onkeydown="return /[0-9\s/b]/i.test(event.key)" />
                             </div>
                             <div class="inputfield">
                                 <input type="button" value="Add Appointment" class="btn-add" onclick="submitData('addAppointment'); closeForm();">
@@ -656,6 +658,7 @@
 
                                                 $query = "SELECT * FROM customer";
                                                 $result = mysqli_query($conn, $query);
+                                                $number = "";
 
                                                 // Check if the query was successful
                                                 if ($result) {
@@ -671,6 +674,7 @@
                                                         if ($result2) {
                                                             $row2 = mysqli_fetch_assoc($result2);
                                                             $customerId = $row2["id"];
+                                                            $number = $row2["number"];
                                                         } else {
                                                             // Handle the case where the query failed
                                                             echo "Error in query2: " . mysqli_error($conn);
@@ -941,7 +945,7 @@
                             </div>
                             <div class="inputfield">
                                 <label>Phone Number</label>
-                                <input type="number" class="input" placeholder="+63**********" id="numberUpdate" autocomplete="off">
+                                <input type="" class="input" placeholder="09*********" id="numberUpdate" maxlength="11" onkeydown="return /[0-9\s/b]/i.test(event.key)" />
                             </div>
                             <div class="inputfield">
                                 <input type="button" value="Update Appointment" class="btn-add" onclick="submitData('updateAppointment'); viewPetsDome();">
@@ -1068,7 +1072,28 @@
             });
         }
 
-        // Function to add click event handlers to the <li> elements
+        // Function to handle number retrieval
+        function getNumber(element) {
+            
+            const selectedValue = element.textContent;
+
+            document.getElementById("name").value = selectedValue;
+
+            var data = {
+                nameOwner: selectedValue
+            }
+
+            $.ajax({
+                url: 'get-number.php',
+                type: 'post',
+                data: data,
+                success: function(response) {
+                    $("#number").val(response);
+                }
+            });
+        }
+
+        // Function to add click event handlers to the <li> elements for handleItemSelection
         function addClickHandlers() {
             const liElements = document.querySelectorAll("#customerNames li");
 
@@ -1079,8 +1104,93 @@
             });
         }
 
+        // Function to add click event handlers to the <li> elements for getNumber
+        function addClickHandlers2() {
+            const liElements = document.querySelectorAll("#customerNames li");
+
+            liElements.forEach(function(li) {
+                li.addEventListener("click", function() {
+                    getNumber(li);
+                });
+            });
+        }
+
         // Call the function to add click event handlers after the page loads
-        window.addEventListener("load", addClickHandlers);
+        window.addEventListener("load", function() {
+            addClickHandlers();
+            addClickHandlers2();
+        });
+
+
+
+        // // Function to handle item selection and display the value in the input field
+        // function handleItemSelection(element) {
+        //     // Get the text content of the clicked <li> element
+        //     const selectedValue = element.textContent;
+
+        //     document.getElementById("name").value = selectedValue;
+
+        //     var data = {
+        //         nameOwner: selectedValue
+        //     }
+
+        //     $.ajax({
+        //         url: 'get_pet_names.php',
+        //         type: 'post',
+        //         data: data,
+        //         success: function(response) {
+        //             $("#petname1").html(response);
+        //             $("#petname2").html(response);
+        //             $("#petname3").html(response);
+        //             $("#petname4").html(response);
+        //             $("#petname5").html(response);
+        //         }
+        //     });
+        // }
+
+        // function getNumber() {
+        //     // Get the text content of the clicked <li> element
+        //     const selectedValue = element.textContent;
+
+        //     document.getElementById("name").value = selectedValue;
+
+        //     var data = {
+        //         nameOwner: selectedValue
+        //     }
+
+        //     $.ajax({
+        //         url: 'get-number.php',
+        //         type: 'post',
+        //         data: data,
+        //         success: function(response) {
+        //             $("#number").val(response);
+        //         }
+        //     });
+        // }
+
+        // // Function to add click event handlers to the <li> elements
+        // function addClickHandlers() {
+        //     const liElements = document.querySelectorAll("#customerNames li");
+
+        //     liElements.forEach(function(li) {
+        //         li.addEventListener("click", function() {
+        //             handleItemSelection(li);
+        //         });
+        //     });
+        // }
+
+        // function addClickHandlers2() {
+        //     const liElements = document.querySelectorAll("#customerNames li");
+
+        //     liElements.forEach(function(li) {
+        //         li.addEventListener("click", function() {
+        //             handleItemSelection(li);
+        //         });
+        //     });
+        // }
+
+        // // Call the function to add click event handlers after the page loads
+        // window.addEventListener("load", addClickHandlers);
     </script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

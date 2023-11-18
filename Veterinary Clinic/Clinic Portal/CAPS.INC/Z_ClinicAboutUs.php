@@ -77,7 +77,7 @@
     <div class="about-clinic">
       <div class="myDiv">
         <br>
-        <h1 id="title" style="padding: 5px;"><?php echo $title; ?></h1>
+        <h1 id="title" style="padding: 5px; text-transform: none;"><?php echo $title; ?></h1>
       </div>
       <div style="text-align: center;">
         <br />

@@ -18,12 +18,12 @@ while ($row = mysqli_fetch_assoc($result)) :
     $servicesArray = array($row['service1'], $row['service2'], $row['service3']);
     $serviceStringDone = implode(', ', array_filter($servicesArray));
 ?>
+
     <tr>
         <td data-label=""><?php echo $row["date"]; ?></td>
         <td data-label=""><?php echo $serviceStringDone; ?></td>
         <td data-label=""><?php echo $row["about"]; ?></td>
-        <td class="pet-rec" onclick="
-        openViewRecords(
+        <td class="pet-rec" onclick="openViewRecords(
             '<?php echo $row['date']; ?>',
             '<?php echo $row['service1']; ?>',
             '<?php echo $row['service2']; ?>',
@@ -37,12 +37,21 @@ while ($row = mysqli_fetch_assoc($result)) :
         )">
             <span class="material-symbols-outlined"> toc </span>
         </td>
-        <td>
-            <button type="button" class="done-button" style=" background-color: #00000000;
+
+        <?php
+        $query = "SELECT * FROM login WHERE id = '1'";
+        $resultLogin = mysqli_query($conn, $query);
+        $rowLogin = mysqli_fetch_array($resultLogin);
+
+        $user = $rowLogin['user'];
+
+        if ($user == 'admin' || $user == 'veterinarian') :
+        ?>
+            <td>
+                <button type="button" class="done-button" style="background-color: #00000000;
                     border-style: none;
                     color: #5a81fa;
-                    cursor: pointer;" onclick="
-                    openEditRecord(
+                    cursor: pointer;" onclick="openEditRecord(
                         '<?php echo $row['nid']; ?>',
                         '<?php echo $row['date']; ?>',
                         '<?php echo $row['service1']; ?>',
@@ -56,40 +65,27 @@ while ($row = mysqli_fetch_assoc($result)) :
                         '<?php echo $row['note']; ?>',
                         '<?php
                             $nid = $row['nid'];
-
                             $query2 = 'SELECT * FROM schedule WHERE nid = ' . $nid;
                             $result2 = mysqli_query($conn, $query2);
-                            if ($result2) {
-                                // Check if a row is returned
-                                if (mysqli_num_rows($result) > 0) {
-                                    $row2 = mysqli_fetch_assoc($result2);
-
-                                    $date2 = $row2['date'];
-                                    echo $date2;
-                                } else {
-                                    //
-                                }
-                            } else {
-                                //
-                            } ?>'
-                        );">
-                <span class="material-symbols-outlined">
-                    edit
-                </span>
-            </button>
-        </td>
-        <td>
-            <button type="button" class="done-button" style=" background-color: #00000000;
+                            if ($result2 && mysqli_num_rows($result2) > 0) {
+                                $row2 = mysqli_fetch_assoc($result2);
+                                echo $row2['date'];
+                            }
+                            ?>'
+                    );">
+                    <span class="material-symbols-outlined"> edit </span>
+                </button>
+            </td>
+            <td>
+                <button type="button" class="done-button" style="background-color: #00000000;
                     border-style: none;
                     color: #f50d05;
-                    cursor: pointer;" onclick="
-                    submitData('delete2'); 
-                    deletePet2('<?php echo $nid; ?>');">
-                <span class="material-symbols-outlined">
-                    delete
-                </span>
-            </button>
-            <?php require 'script files\customer-pet-record-data.js.php'; ?>
-        </td>
+                    cursor: pointer;" onclick="submitData('delete2'); deletePet2('<?php echo $row['nid']; ?>');">
+                    <span class="material-symbols-outlined"> delete </span>
+                </button>
+                <?php require 'script files/customer-pet-record-data.js.php'; ?>
+            </td>
+        <?php endif; ?>
     </tr>
+
 <?php endwhile; ?>

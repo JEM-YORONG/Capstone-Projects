@@ -65,7 +65,7 @@
                 data: data,
 
                 success: function(response) {
-                    // Update petname elements with the response
+
                     $("#petname1Update2, #petname2Update2, #petname3Update2, #petname4Update2, #petname5Update2").html(response);
 
                     // Check if the response is not empty before proceeding
@@ -92,6 +92,9 @@
                         }
                         if (response == "Please fill in all the fields") {
                             errorAlert("Please fill in all the fields");
+                        }
+                        if (response == "Contact must be 11 digit") {
+                            errorAlert("Contact must be 11 digit");
                         }
                         if (response == "CustomerDidntExist") {
                             errorAlert("Customer did not exist");

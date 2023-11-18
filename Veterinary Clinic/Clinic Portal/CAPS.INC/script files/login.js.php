@@ -23,7 +23,7 @@
                     if (response == "admin") {
                         successAlert("Welcome Admin");
                         location.replace("zHTML_dashboard.php");
-                    } else if(response == "staff") {
+                    } else if(response == "secretary" || response == "veterinarian") {
                         successAlert("Welcome Staff");
                         location.replace("zStaff_dashboard.php");
                     }

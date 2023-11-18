@@ -44,10 +44,12 @@ function update()
 
     // Validate input - customer and pet
     if (
-        empty($custId) || empty($custLastName) || empty($custFirstName) || empty($custContact) || empty($custEmail) || empty($custAddress)
+        empty($custId) || empty($custLastName) || empty($custFirstName) || empty($custContact) || empty($custAddress)
     ) {
         echo "emptyFields";
         return;
+    } else if (strlen($custContact) !== 11 || !ctype_alnum($custContact)) {
+        echo "Contact must be 11 digit";
     } else {
         // Prepare the SQL statement for customer name
         $query = "SELECT * FROM customer WHERE id = ?";
@@ -107,7 +109,7 @@ function addPet()
     $ownerAddress = $_POST["ownerAddress"];
 
     if (
-        empty($petId) || empty($petName) || empty($gender) || empty($birthDate) || empty($type) || empty($breed) || empty($species) ||
+        empty($petName) || empty($gender) || empty($birthDate) || empty($type) || empty($breed) || empty($species) ||
         empty($ownerId) || empty($ownerLastname) || empty($ownerFirstname) || empty($ownerContact) || empty($ownerEmail) || empty($ownerAddress)
     ) {
         // At least one field is empty
@@ -151,7 +153,7 @@ function updatePet()
 
     // Validate input - customer and pet
     if (
-        empty($id) || empty($name) || empty($breed) || empty($species) || empty($birthdate)
+        empty($name) || empty($breed) || empty($species) || empty($birthdate)
     ) {
         echo "emptyFields";
     } else {
@@ -320,8 +322,7 @@ function addPetRecord()
 
     // Check for empty fields
     if (
-        empty($rDate) || empty($rId) || empty($rPet) || empty($rService1) || empty($rService2) || empty($rService3) ||
-        empty($rV1) || empty($rV2) || empty($rV3) || empty($rWeight) || empty($rAbout) || empty($rNote)
+        empty($rDate) || empty($rWeight) || empty($rAbout) || empty($rNote)
     ) {
         // At least one field is empty
         echo "emptyFields";

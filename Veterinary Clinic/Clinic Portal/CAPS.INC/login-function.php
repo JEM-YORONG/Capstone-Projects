@@ -42,11 +42,20 @@ function checker()
             $query = "UPDATE login SET user = '$user' WHERE id = '1'";
             mysqli_query($conn, $query);
             mysqli_close($conn);
-        } elseif ($row['role'] == 'Staff') {
-            $user = "staff";
+        } elseif ($row['role'] == 'Secretary') {
+            $user = "secretary";
             $query = "UPDATE login SET user = '$user' WHERE id = '1'";
             mysqli_query($conn, $query);
             mysqli_close($conn);
+        } elseif ($row['role'] == 'Veterinarian') {
+            $user = "veterinarian";
+            $query = "UPDATE login SET user = '$user' WHERE id = '1'";
+            mysqli_query($conn, $query);
+            mysqli_close($conn);
+        } else {
+            // Login failed
+            echo "Invalid username or password!";
+            $user = "";
         }
 
         // Login successful

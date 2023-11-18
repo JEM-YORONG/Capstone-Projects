@@ -40,10 +40,14 @@ function addAppointment()
     $customerName = "";
     $status = "";
 
-    
+
     if (empty(trim($date)) || empty(trim($name)) || empty(trim($number))) {
         // At least one of the values is empty or only contains whitespace
         echo "Please fill in all the fields";
+        return;
+    }
+    if (strlen($number) !== 11 || !ctype_alnum($number)) {
+        echo "Contact must be 11 digit";
         return;
     }
 
@@ -78,7 +82,7 @@ function addAppointment()
             echo "Error inserting schedule: " . mysqli_error($conn);
         }
     } else {
-        echo "CustomerDidntExist"; 
+        echo "CustomerDidntExist";
     }
 }
 
@@ -89,6 +93,17 @@ function updateAppointment()
     $id = $_POST["updateId"];
     $date = $_POST["updatedate"];
     $name = $_POST["updatename"];
+    $number = $_POST["updatenumber"];
+
+    if (empty(trim($date))) {
+        // At least one of the values is empty or only contains whitespace
+        echo "Please fill in all the fields";
+        return;
+    }
+    if (strlen($number) !== 11 || !ctype_alnum($number)) {
+        echo "Contact must be 11 digit";
+        return;
+    }
 
     //default
     $petname = $_POST["updatepetname1"];
@@ -144,7 +159,6 @@ function updateAppointment()
     $service1 = $_POST["updateservice1"];
     $service2 = $_POST["updateservice2"];
     $service3 = $_POST["updateservice3"];
-    $number = $_POST["updatenumber"];
 
     $query = "UPDATE schedule SET ownername = '$name', petname = '$p1', petname2 = '$p2', petname3 = '$p3', petname4 = '$p4', petname5 = '$p5', service = '$service1', service2 = '$service2', service3 = '$service3', date = '$date', number = '$number' WHERE id = '$id'";
 

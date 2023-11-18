@@ -148,7 +148,7 @@ function editStaff()
         $query = "UPDATE staffs SET name = '$nameClean', role = '$roleClean', contact = '$contactClean', email = '$emailClean', password = '$passwordClean' WHERE cliniId = '$id'";
             mysqli_query($conn, $query);
             mysqli_close($conn);
-            echo "Staff updated Successfully.";
+            echo "Staff updated successfully";
     }
 }
 

@@ -32,9 +32,11 @@ function addCustomer()
 
     //validate input - customer and pet
     if (
-        empty($custIdS) || empty($custLastNameS) || empty($custFirstNameS) || empty($custContactS) || empty($custEmailS) || empty($custAddressS)
+        empty($custIdS) || empty($custLastNameS) || empty($custFirstNameS) || empty($custContactS) || empty($custAddressS)
     ) {
         echo "Empty Fields Detected.";
+    } else if (strlen($custContactS) !== 11 || !ctype_alnum($custContactS)) {
+        echo "Contact must be 11 digit";
     } else {
         // Prepare the SQL statement for customer name
         $query = "SELECT * FROM customer WHERE lastname = ? AND firstname = ?";

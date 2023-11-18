@@ -78,14 +78,17 @@ require 'script files\staff-data.js.php';
             </div>
             <div class="inputfield">
               <label>Name</label>
-              <input type="text" class="input" placeholder="Juan Delacruz" id="name" maxlength="225" onkeydown="return /[a-zA-Z\s]/i.test(event.key)" />
+              <input type="text" class="input" id="name" maxlength="225" onkeydown="return /[a-zA-Z\s]/i.test(event.key)" />
             </div>
             <div class="inputfield">
               <label>Role</label>
               <!--<input type="text" class="input" id="role" onkeydown="return /[a-zA-Z.\s]/i.test(event.key)" /> -->
               <select class="input" id="role" aria-placeholder="Admin">
                 <option value="Admin">Admin</option>
-                <option value="Staff">Staff</option>
+                <option value="Secretary">Secretary</option>
+                <option value="Veterinarian">Veterinarian</option>
+                <option value="Assistant">Assistant</option>
+                <option value="Groomer">Groomer</option>
               </select>
             </div>
             <div class="inputfield">
@@ -131,7 +134,10 @@ require 'script files\staff-data.js.php';
               <!--<input type="text" class="input" id="editRole" onkeydown="return /[a-zA-Z.\s]/i.test(event.key)" /> -->
               <select class="input" id="editRole" aria-placeholder="Admin">
                 <option value="Admin">Admin</option>
-                <option value="Staff">Staff</option>
+                <option value="Secretary">Secretary</option>
+                <option value="Veterinarian">Veterinarian</option>
+                <option value="Assistant">Assistant</option>
+                <option value="Groomer">Groomer</option>
               </select>
             </div>
             <div class="inputfield">

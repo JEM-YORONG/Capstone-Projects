@@ -75,7 +75,7 @@ require 'script files\disable-paste.js.php'; ?>
         <form action="" class="form-container" method="post">
           <div class="title">Customer</div>
           <div class="form">
-            <div class="inputfield">
+            <div class="inputfield" style="display: block;">
               <label>ID</label>
               <input type="text" class="input" disabled id="addId" />
             </div>
@@ -89,10 +89,10 @@ require 'script files\disable-paste.js.php'; ?>
             </div>
             <div class="inputfield">
               <label>Contact</label>
-              <input type="" class="input" id="addContact" maxlength="11" onkeydown="return /[0-9\s/b]/i.test(event.key)" />
+              <input type="tel" class="input" id="addContact" maxlength="11" onkeydown="return /[0-9\s/b]/i.test(event.key)" />
             </div>
             <div class="inputfield">
-              <label>Email</label>
+              <label>Email (Optional)</label>
               <input type="email" class="input" id="addEmail" maxlength="225" onkeydown="return /[0-9a-zA-Z@.]/i.test(event.key)" />
             </div>
             <div class="inputfield">
