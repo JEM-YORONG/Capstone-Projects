@@ -1,5 +1,4 @@
 <?php
-session_start();
 require "database-conn.php";
 
 if (isset($_POST["action"])) {

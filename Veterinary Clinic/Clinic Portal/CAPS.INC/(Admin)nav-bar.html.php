@@ -88,7 +88,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="zHTML_login.php" style="position: absolute;
+                    <a href="index.php" style="position: absolute;
                  bottom: 10px;">
                         <i><span class="material-symbols-outlined"> logout </span></i>
                         <span class="link-name">Logout</span>

@@ -1,0 +1,869 @@
+/* ===== Google Font Import - Poppins ===== */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+:root {
+  /* ====== Transition ====== */
+  --tran-05: all 0.5s ease;
+  --tran-03: all 0.3s ease;
+  --tran-03: all 0.2s ease;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #5782fa;
+}
+
+/* === Custom Scroll Bar CSS === */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #5782fa;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d5dffb;
+}
+
+nav::-webkit-scrollbar {
+  display: none;
+}
+
+/* === Navigation === */
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 250px;
+  padding: 10px 14px;
+  background-color: #f2f5ff;
+  border-right: 1px solid #e5e5e6;
+  transition: var(--tran-05);
+  overflow-y: scroll;
+}
+
+nav.close {
+  width: 73px;
+}
+
+nav .logo-name {
+  display: flex;
+  align-items: center;
+}
+
+nav .system_title {
+  font-size: 18px;
+  color: var(--text-color);
+  margin-left: 30px;
+  transition: var(--tran-05);
+}
+
+nav .logo-image {
+  display: flex;
+  justify-content: center;
+  min-width: 45px;
+}
+
+nav .logo-image img {
+  width: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+nav .logo-name .logo_name {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-left: 14px;
+  transition: var(--tran-05);
+}
+
+nav.close .logo_name {
+  opacity: 0;
+  pointer-events: none;
+}
+
+nav .menu-items {
+  margin-top: 20px;
+  height: calc(100% - 90px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding-top: 5px;
+  border-top: 1px solid #e5e5e6;
+}
+
+/* === Navigation menu=== */
+.menu-items li {
+  list-style: none;
+}
+
+.menu-items li a {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  text-decoration: none;
+  position: relative;
+}
+
+.nav-links li a:hover:before {
+  content: "";
+  position: absolute;
+  left: -7px;
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+  background-color: #5782fa;
+}
+
+.menu-items li a i {
+  font-size: 24px;
+  min-width: 45px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #707070;
+}
+
+.menu-items li a .link-name {
+  font-size: 15px;
+  font-weight: 400;
+  color: #707070;
+  transition: var(--tran-05);
+}
+
+nav.close li a .link-name {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.menu-items .clinic-management-link {
+  padding-top: 5px;
+  border-top: 1px solid #e5e5e6;
+}
+
+.menu-items .record-management-link {
+  padding-top: 5px;
+  border-top: 1px solid #e5e5e6;
+}
+
+.nav-links li a:hover i,
+.nav-links li a:hover .link-name {
+  color: #5782fa;
+}
+
+.menu-items .logout-mode {
+  padding-top: 5px;
+  border-top: 1px solid #e5e5e6;
+}
+
+.menu-items .mode {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.menu-items .mode-toggle {
+  position: absolute;
+  right: 14px;
+  height: 50px;
+  min-width: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* === Clinic Information pinaka taas === */
+.dashboard {
+  position: relative;
+  left: 250px;
+  background-color: #f2f5ff;
+  min-height: 100vh;
+  width: calc(100% - 250px);
+  padding: 10px 14px;
+  transition: var(--tran-05);
+}
+
+nav.close~.dashboard {
+  left: 73px;
+  width: calc(100% - 73px);
+}
+
+.dashboard .top {
+  position: fixed;
+  top: 0;
+  left: 250px;
+  display: flex;
+  width: calc(100% - 250px);
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background-color: #f2f5ff;
+  transition: var(--tran-05);
+  z-index: 10;
+}
+
+nav.close~.dashboard .top {
+  left: 73px;
+  width: calc(100% - 73px);
+}
+
+.dashboard .top .sidebar-toggle {
+  font-size: 26px;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.dashboard .title {
+  position: relative;
+  height: 45px;
+  max-width: 95%;
+  width: 100%;
+  margin: 0 30px;
+}
+
+.dashboard .title .text {
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.dashboard .web-content {
+  padding-top: 50px;
+}
+
+/**/
+.web-content .boxes-overview {
+  margin-top: 60px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: left;
+  flex-wrap: wrap;
+}
+
+.web-content .boxes-overview .box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  width: calc(100% / 4 - 15px);
+  height: auto;
+  padding: 15px 20px;
+  margin: 5px;
+  border: 1px solid #fefefe;
+  border-radius: 5px;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+}
+
+.web-content .boxes-overview .box.box1 {
+  justify-content: center;
+  height: 300px;
+}
+
+.web-content .boxes-overview .box.box1 img {
+  /*sizes ng image*/
+  width: 100%;
+  border-radius: 5px;
+  height: 100px;
+  /*  height: auto;*/
+  max-height: 150px;
+  object-fit: cover;
+  /* Add this line to ensure the image fits within the container */
+  object-position: center;
+  /* Add this line to center the image within the container */
+}
+
+.web-content .boxes-overview .box.box2 img {
+  /*sizes ng image*/
+  width: 100%;
+  border-radius: 5px;
+  height: 133px;
+  /*  height: auto;*/
+  max-height: 150px;
+  object-fit: cover;
+  /* Add this line to ensure the image fits within the container */
+  object-position: center;
+  /* Add this line to center the image within the container */
+}
+
+.web-content .boxes-overview .box.box1:hover {
+  transform: scale(1.1);
+  text-shadow: 0 0 0 var(--main-color);
+}
+
+.web-content .boxes-overview .box.box1 span {
+  font-size: 100px;
+  color: #5782fa;
+}
+
+.web-content .boxes-overview .title {
+  padding: 2px;
+  text-align: center;
+  font-size: 20px;
+
+  cursor: pointer;
+}
+
+.web-content .boxes-overview .title:hover {
+  transform: scale(1.1);
+  text-shadow: 0 0 0 var(--main-color);
+  text-decoration: underline;
+}
+
+.web-content .boxes-overview .desc {
+  padding: 0px;
+  text-align: left;
+  font-size: 12px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.web-content .boxes-overview .date {
+  padding: 0px;
+  font-weight: 200;
+  font-size: 11px;
+  margin-right: 10px;
+  cursor: default;
+}
+
+.web-content .boxes-overview .action {
+  display: flex;
+  flex-direction: row;
+  text-align: right;
+}
+
+.boxes-overview .action .edit-bttn {
+  color: #5a81fa;
+  cursor: pointer;
+}
+
+.boxes-overview .action .edit-bttn:hover {
+  color: #053feb;
+}
+
+.boxes-overview .action .delete-bttn {
+  color: #fa5d5a;
+  cursor: pointer;
+}
+
+.boxes-overview .action .delete-bttn:hover {
+  color: #f50d05;
+}
+
+/**/
+.menu {
+  margin-top: 15px;
+}
+
+.web-content .menu {
+  margin-left: 3%;
+}
+
+.menu .filter {
+  background-color: #c5cefb;
+  border: 1px solid #c0ccf0;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  padding-top: 3px;
+  width: 40px;
+  float: left;
+  margin-left: 6%;
+}
+
+.web-content .menu .viewAll-button,
+.web-content .menu .services-button,
+.web-content .menu .product-button {
+  background-color: #f9faff;
+  border: 1px solid #c0ccf0;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #062b98;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 29px;
+  padding: 2px 20px 2px 15px;
+  width: 200px;
+  float: left;
+  margin-right: 3%;
+}
+
+.web-content .menu .viewAll-button:hover,
+.web-content .menu .services-button:hover,
+.web-content .menu .product-button:hover {
+  background-color: #5a81fa;
+}
+
+/**/
+.form-popup-servprod {
+  display: none;
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.form-container-servprod img {
+  width: 50%;
+  padding: 5%;
+  border-radius: 5px;
+  height: 250px;
+  align-items: center;
+}
+
+.form-container-servprod {
+  max-width: 500px;
+  width: 100%;
+  background: #f5f2ff;
+  margin: 20px auto;
+  box-shadow: 3px 3px 6px #abbef7;
+  padding: 12px;
+  border-style: 2px solid;
+}
+
+.form-container-servprod .title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #2c3d8f;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.form-container-servprod .form .inputfield {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.form-container-servprod .form .inputfield-image label {
+  width: 200px;
+  color: #757575;
+  margin-right: 10px;
+  font-size: 12px;
+  align-items: flex-start;
+}
+
+.form-container-servprod .form .inputfield label {
+  width: 200px;
+  color: #757575;
+  margin-right: 10px;
+  font-size: 12px;
+}
+
+.form-container-servprod .form .inputfield .input {
+  width: 100%;
+  outline: none;
+  border: 1px solid #d5dbd9;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.form-container-servprod .form .inputfield .textarea {
+  width: 100%;
+  height: 50px;
+  resize: none;
+}
+
+.form-container-servprod .form .inputfield .input:focus,
+.form-container-servprod .form .inputfield .textarea:focus {
+  border: 1px solid #2c3d8f;
+}
+
+.form-container-servprod .form .inputfield p {
+  font-size: 14px;
+  color: #757575;
+}
+
+.form-container-servprod .form .inputfield .custom_select {
+  position: relative;
+  width: 100%;
+  height: 30px;
+}
+
+.form-container-servprod .form .inputfield .custom_select:before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  border: 8px solid;
+  border-color: #d5dbd9 transparent transparent transparent;
+  pointer-events: none;
+}
+
+.form-container-servprod .form .inputfield .custom_select select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  border: 0px;
+  padding: 2px 8px;
+  font-size: 12px;
+  border: 1px solid #d5dbd9;
+  border-radius: 3px;
+}
+
+.form-container-servprod .form .inputfield .btn-send {
+  width: 100%;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: bolder;
+  border: 1px solid #5a81fa;
+  background: #5a81fa;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 3px;
+  outline: none;
+  margin-bottom: 2px;
+}
+
+.form-container-servprod .form .inputfield .custom_select select:focus,
+.form-container-servprod .form .inputfield .input:focus {
+  border: 1px solid #2c3d8f;
+}
+
+.form-container-servprod .form .inputfield .btn-send:hover {
+  background: #5e58ff;
+}
+
+.form-container-servprod .btn-cancel {
+  width: 100%;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: bolder;
+  border: 1px solid #fcaa93;
+  background: #fcaa93;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 3px;
+  outline: none;
+  margin-bottom: 2px;
+}
+
+.form-container-servprod .btn-cancel:hover {
+  background: #c92f04;
+}
+
+.form-container-servprod .bttn-close {
+  background-color: #00000000;
+  border-style: none;
+  color: #fa5a5a;
+  cursor: pointer;
+  float: right;
+}
+
+.form-container-servprod .bttn-close:hover {
+  color: #351414;
+}
+
+.form-container-servprod .form .inputfield:last-child {
+  margin-bottom: 0;
+}
+
+.form-popup-filter {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 30%;
+  bottom: 30%;
+  z-index: 9;
+}
+
+.form-container-filter {
+  max-width: 500px;
+  width: 100%;
+  background: #f0f0f6;
+  margin: 20px auto;
+  box-shadow: 3px 3px 6px #abbef7;
+  padding: 12px;
+  border-style: 2px solid;
+}
+
+.form-container-filter .title-filter {
+  font-size: 13px;
+  font-weight: 700;
+  color: #2c3d8f;
+  text-transform: uppercase;
+  text-align: center;
+  border-bottom: 1px solid #abbef7;
+}
+
+.form-container-filter .form-filter .inputfield {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.form-container-filter .form-filter .inputfield label {
+  width: 200px;
+  color: #757575;
+  margin-right: 10px;
+  font-size: 12px;
+}
+
+.form-container-filter .form-filter .inputfield .input,
+.form-container-filter .form-filter .inputfield .textarea {
+  width: 100%;
+  outline: none;
+  border: 1px solid #d5dbd9;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.form-container-filter .form-filter .inputfield .textarea {
+  width: 100%;
+  height: 50px;
+  resize: none;
+}
+
+.form-container-filter .form-filter .inputfield .input:focus,
+.form-container-filter .form-filter .inputfield .textarea:focus {
+  border: 1px solid #2c3d8f;
+}
+
+.form-container-filter .form-filter .inputfield p {
+  font-size: 14px;
+  color: #757575;
+}
+
+.form-container-filter .form-filter .inputfield .btn-send {
+  width: 100%;
+  padding: 2px 8px;
+  font-size: 12px;
+  border: 1px solid #5a81fa;
+  background: #5a81fa;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 3px;
+  outline: none;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+.form-container-filter .btn-close {
+  width: 100%;
+  padding: 2px 8px;
+  font-size: 12px;
+  border: 0px;
+  background: #fcaa93;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 3px;
+  outline: none;
+}
+
+.form-container-filter .form-filter .inputfield .btn-send:hover {
+  background: #5e58ff;
+}
+
+.form-container-filter .btn-close:hover {
+  background: #fa5d5a;
+}
+
+.form-container-filter .form .inputfield:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 1000px) {
+  nav {
+    width: 73px;
+  }
+
+  nav.close {
+    width: 250px;
+  }
+
+  nav .logo_name {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  nav.close .logo_name {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  nav .logo-image img {
+    width: 60px;
+  }
+
+  nav li a .link-name {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  nav.close li a .link-name {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  nav~.dashboard {
+    left: 73px;
+    width: calc(100% - 73px);
+  }
+
+  nav.close~.dashboard {
+    left: 250px;
+    width: calc(100% - 250px);
+  }
+
+  nav~.dashboard .top {
+    left: 73px;
+    width: calc(100% - 73px);
+  }
+
+  nav.close~.dashboard .top {
+    left: 250px;
+    width: calc(100% - 250px);
+  }
+}
+
+@media (max-width: 780px) {
+  .web-content .boxes-overview .box {
+    width: calc(100% / 3 - 15px);
+    margin-top: 15px;
+    height: 350px;
+    max-height: 350px;
+  }
+
+  .boxes-overview .box .action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-container-servprod .form .inputfield {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .form-container-servprod .form .inputfield label {
+    margin-bottom: 5px;
+  }
+
+  .form-container-servprod .form .inputfield.terms {
+    flex-direction: row;
+  }
+
+  .form-container-servprod img {
+    width: 50%;
+    border-radius: 5px;
+    height: 100px;
+    margin-left: 50px;
+  }
+
+  .menu {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  .web-content .boxes-overview .box {
+    width: calc(100% / 2 - 15px);
+    height: 350px;
+  }
+
+  .form-container-servprod .form .inputfield {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .form-container-servprod .form .inputfield label {
+    margin-bottom: 5px;
+  }
+
+  .form-container-servprod .form .inputfield.terms {
+    flex-direction: row;
+  }
+
+  .form-container-servprod img {
+    width: 50%;
+    border-radius: 5px;
+    height: 100px;
+    margin-left: 50px;
+  }
+}
+
+@media (max-width: 400px) {
+  nav {
+    width: 0px;
+  }
+
+  nav.close {
+    width: 73px;
+  }
+
+  nav .logo_name {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  nav.close .logo_name {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  nav li a .link-name {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  nav.close li a .link-name {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  nav~.dashboard {
+    left: 0;
+    width: 100%;
+  }
+
+  nav.close~.dashboard {
+    left: 73px;
+    width: calc(100% - 73px);
+  }
+
+  nav~.dashboard .top {
+    left: 0;
+    width: 100%;
+  }
+
+  nav.close~.dashboard .top {
+    left: 0;
+    width: 100%;
+  }
+}
