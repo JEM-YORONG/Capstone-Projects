@@ -8,9 +8,6 @@ if (isset($_POST["action"])) {
     if ($_POST["action"] === "deleteSchedule") {
         deleteSchedule();
     }
-    if ($_POST["action"] === "sendSMS") {
-        sendSMS();
-    }
     if ($_POST["action"] === "updateAppointment") {
         updateAppointment();
     }
@@ -191,22 +188,6 @@ function deleteSchedule()
     $query = "DELETE FROM schedule WHERE id = '$id'";
     mysqli_query($conn, $query);
     echo "ScheduleDeletedSuccessfully";
-}
-
-function sendSMS()
-{
-    //info
-    $smsDate = $_POST["smsDate"];
-    $smsNumber = "+639217214912"; //$_POST["smsNumber"]; //default muna
-    $smsName = $_POST["smsName"];
-    $smsPetname = $_POST["smsPetname"];
-    $smsMessage = $_POST["smsMessage"];
-
-    //$smsbody = "Hello " . $smsName . ", " . $smsMessage . " ";
-
-    require 'sms\index.php';
-
-    echo send($smsNumber, $smsMessage);
 }
 
 function display()
