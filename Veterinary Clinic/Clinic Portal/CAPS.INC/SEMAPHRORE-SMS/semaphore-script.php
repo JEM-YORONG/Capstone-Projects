@@ -7,7 +7,7 @@
         const apikey = document.getQuerySelector("#apiKey").value;
         const number = document.getQuerySelector("#number").value;
         const message = document.getQuerySelector("#message").value;
-        const sendername = document.getQuerySelector("#apiKey").value;
+        const sendername = "DocLenonVetClinic";
 
         const parameters = {
             apikey: apikey,

@@ -56,10 +56,19 @@ if ($result) {
                         </button>
                     </td> -->
                     <?php require 'script files\schedule.data.js.php'; ?>
-                    <td data-label="Notify" onclick="setMessageToday('<?php echo $row['ownername']; ?>',
-                    '<?php echo $row['date']; ?>',
-                    '<?php echo $row['petname']; ?>',
-                    '<?php echo $row['service']; ?>');"><button type="button" class="notify-button-1" style="background-color: #00000000; border-style: none; color: #5a81fa; cursor: pointer;" onclick="opensms(); infoSMS('<?php echo $row['date']; ?>', '<?php echo $row['number']; ?>', '<?php echo $row['ownername']; ?>', '<?php echo $row['petname']; ?>');">
+                    <td data-label="Notify" onclick="
+                    setMessageToday(
+                        '<?php echo $row['ownername']; ?>',
+                        '<?php echo $row['date']; ?>',
+                        '<?php echo $row['petname']; ?>',
+                        '<?php echo $row['petname2']; ?>',
+                        '<?php echo $row['petname3']; ?>',
+                        '<?php echo $row['petname4']; ?>',
+                        '<?php echo $row['petname5']; ?>',
+                        '<?php echo $row['service']; ?>',
+                        '<?php echo $row['service2']; ?>',
+                        '<?php echo $row['service3']; ?>'
+                        );"><button type="button" class="notify-button-1" style="background-color: #00000000; border-style: none; color: #5a81fa; cursor: pointer;" onclick="opensms(); infoSMS('<?php echo $row['date']; ?>', '<?php echo $row['number']; ?>', '<?php echo $row['ownername']; ?>', '<?php echo $row['petname']; ?>');">
                             <span class="material-symbols-outlined">
                                 sms
                             </span>
