@@ -35,14 +35,19 @@
     <!--=====Customer/Pet/ Pet Grooming====-->
     <div class="dash-content">
       <div class="overview">
-        <!-- Daily -->
         <?php
         require 'database-conn.php';
 
+        // Set the timezone to Asia/Manila
+        date_default_timezone_set('Asia/Manila');
+
         $currentDate = new DateTime();
         $currentDateFormatted = $currentDate->format('Y-m-d');
+
+        // Display the current date in the Philippine timezone
+        $philippineDate = $currentDate->format('Y-m-d H:i:s T');
+
         // customer
-        // get the count of scheduled items where date is the current date
         $query = "SELECT COUNT(*) as count FROM schedule WHERE date = '$currentDateFormatted'";
         $result = mysqli_query($conn, $query);
 
@@ -50,11 +55,12 @@
           $row = mysqli_fetch_assoc($result);
           $dailyCustomers = $row['count'];
         } else {
-          //echo "Error in query: " . mysqli_error($conn);
+          // Uncomment the following line for debugging
+          // echo "Error in customer query: " . mysqli_error($conn);
+          $dailyCustomers = 0; // Set to 0 or handle the error accordingly
         }
 
         // pet
-        // get the count of scheduled items where date is the current date
         $query2 = "SELECT petname, petname2, petname3, petname4, petname5 FROM schedule WHERE date = '$currentDateFormatted'";
         $result2 = mysqli_query($conn, $query2);
 
@@ -70,11 +76,12 @@
             }
           }
         } else {
-          // echo "Error in query: " . mysqli_error($conn);
+          // Uncomment the following line for debugging
+          // echo "Error in pet query: " . mysqli_error($conn);
+          $dailyPets = 0; // Set to 0 or handle the error accordingly
         }
 
         // grooming
-        // get the count of scheduled items where date is the current date
         $query3 = "SELECT service, service2, service3 FROM schedule WHERE date = '$currentDateFormatted'";
         $result3 = mysqli_query($conn, $query3);
 
@@ -90,9 +97,12 @@
             }
           }
         } else {
-          // echo "Error in query: " . mysqli_error($conn);
+          // Uncomment the following line for debugging
+          // echo "Error in grooming query: " . mysqli_error($conn);
+          $dailyGrooming = 0; // Set to 0 or handle the error accordingly
         }
         ?>
+
         <div class="boxes-overview">
           <div class="box box1">
             <span class="text">Customer</span>
@@ -162,9 +172,9 @@
               </div>
 
               <div class="inputfield-sms">
-                <input type="button" value="Send Message" class="btn-send" onclick="submitData('sendSMS'); closeFormsms();">
+                <input type="button" value="Send Message" class="btn-send" onclick="smsSend(); closeFormsms();">
               </div>
-              <?php require 'schedule.data.js.php'; ?>
+              <?php require 'smsFunction.php'; ?>
               <div class="inputfield-sms">
                 <input type="button" value="Close" class="btn-send" onclick="closeFormsms()">
               </div>

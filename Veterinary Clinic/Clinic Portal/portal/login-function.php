@@ -16,7 +16,7 @@ function checker()
 
     // Validate the username and password
     if (empty($username)) {
-        echo "Invalid username!";
+        echo "Invalid email!";
         exit;
     }
     if (empty($password)) {
@@ -53,7 +53,7 @@ function checker()
             mysqli_close($conn);
         } else {
             // Login failed
-            echo "Invalid username or password!";
+            echo "Invalid email or password!";
             $user = "";
         }
 
@@ -61,7 +61,7 @@ function checker()
         echo $user;
     } else {
         // Login failed
-        echo "Invalid username or password!";
+        echo "Invalid email or password!";
     }
 
     // Close the prepared statement

@@ -70,6 +70,10 @@
 
                     // Check if the response is not empty before proceeding
                     if (response != "") {
+                                                if (response == "CustomerDidntExist") {
+                            errorAlert("Customer did not exist");
+  
+                        }
                         if (response == "ScheduleAddedSuccessfully") {
                             // Reset input values
                             $("#date, #name, #numPet, #numServices, #number").val("");
@@ -90,15 +94,14 @@
                         if (response == "ScheduleDeletedSuccessfully") {
                             errorAlert("Schedule deleted successfully");
                         }
+                        
                         if (response == "Please fill in all the fields") {
                             errorAlert("Please fill in all the fields");
                         }
                         if (response == "Contact must be 11 digit") {
                             errorAlert("Contact must be 11 digit");
                         }
-                        if (response == "CustomerDidntExist") {
-                            errorAlert("Customer did not exist");
-                        }
+
                     } else {
                         // Handle the case when the response is empty
                         console.error("Empty response received");

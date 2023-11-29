@@ -991,7 +991,7 @@
                             <div class="inputfield-sms">
                                 <input type="button" value="Send Message" class="btn-send" onclick="smsSend(); closeFormsms();">
                             </div>
-                            <?php require 'schedule.data.js.php'; ?>
+                            <?php require 'smsFunction.php'; ?>
                             <div class="inputfield-sms">
                                 <input type="button" value="Close" class="btn-send" onclick="closeFormsms()">
                             </div>
@@ -1037,34 +1037,34 @@
         </div>
     </section>
     <script>
-        // today and upcoming SMS
-        function smsSend() {
-            const accountSid = 'AC6cdfafd3b72a8bfe4c051160b456b6ac';
-            const authToken = 'b19636a4ae0af13c36c827276c045114';
+        // // today and upcoming SMS
+        // function smsSend() {
+        //     const accountSid = 'AC6cdfafd3b72a8bfe4c051160b456b6ac';
+        //     const authToken = 'b19636a4ae0af13c36c827276c045114';
 
-            const url = 'https://api.twilio.com/2010-04-01/Accounts/' + accountSid + '/Messages.json';
+        //     const url = 'https://api.twilio.com/2010-04-01/Accounts/' + accountSid + '/Messages.json';
 
-            const message = document.getElementById("smsMessage").value;
+        //     const message = document.getElementById("smsMessage").value;
 
-            const filtered = "-------------------------------------------------------------------------------------------------------------------" + message;
+        //     const filtered = "-------------------------------------------------------------------------------------------------------------------" + message;
 
-            const body = new URLSearchParams();
-            body.append('To', '+639217214912');
-            body.append('From', '+12672961685');
-            body.append('Body', filtered);
+        //     const body = new URLSearchParams();
+        //     body.append('To', '+639217214912');
+        //     body.append('From', '+12672961685');
+        //     body.append('Body', filtered);
 
-            fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Authorization': 'Basic ' + btoa(accountSid + ':' + authToken)
-                    },
-                    body: body
-                })
-                .then(response => response.json())
-                .then(data => console.log(data))
-                .catch(error => console.error('Error:', error));
-        }
+        //     fetch(url, {
+        //             method: 'POST',
+        //             headers: {
+        //                 'Content-Type': 'application/x-www-form-urlencoded',
+        //                 'Authorization': 'Basic ' + btoa(accountSid + ':' + authToken)
+        //             },
+        //             body: body
+        //         })
+        //         .then(response => response.json())
+        //         .then(data => console.log(data))
+        //         .catch(error => console.error('Error:', error));
+        // }
 
 
         function setMessageToday(ownername, date, petname1, petname2, petname3, petname4, petname5, service, service2, service3) {

@@ -23,11 +23,13 @@
                     if (response == "admin") {
                         successAlert("Welcome Admin");
                         location.replace("zHTML_dashboard.php");
-                    } else if(response == "secretary" || response == "veterinarian") {
-                        successAlert("Welcome Staff");
+                    } else if (response == "secretary") {
+                        successAlert("Welcome Secretary");
                         location.replace("zStaff_dashboard.php");
-                    }
-                    else{
+                    } else if (response == "veterinarian") {
+                        successAlert("Welcome Veterinarian");
+                        location.replace("zStaff_dashboard.php");
+                    } else {
                         successAlert(response);
                     }
                 }

@@ -11,7 +11,9 @@ foreach ($row as $user) {
 
 if ($user == 'admin') {
     require '(Admin)nav-bar.html.php';
-} else {
+} else if ($user == 'secretary') {
     require '(Staff)nav-bar.html.php';
+} else if ($user == 'veterinarian') {
+    require '(Vet)nav-bar.html.php';
 }
 mysqli_close($conn);

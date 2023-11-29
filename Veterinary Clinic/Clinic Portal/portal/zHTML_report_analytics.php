@@ -36,64 +36,74 @@
                     <span class="text">Report Analytics</span>
                 </div>
 
-                <!-- Daily -->
                 <?php
-                require 'database-conn.php';
+require 'database-conn.php';
 
-                $currentDate = new DateTime();
-                $currentDateFormatted = $currentDate->format('Y-m-d');
-                // customer
-                // get the count of scheduled items where date is the current date
-                $query = "SELECT COUNT(*) as count FROM schedule WHERE date = '$currentDateFormatted'";
-                $result = mysqli_query($conn, $query);
+// Set the timezone to Asia/Manila
+date_default_timezone_set('Asia/Manila');
 
-                if ($result) {
-                    $row = mysqli_fetch_assoc($result);
-                    $dailyCustomers = $row['count'];
-                } else {
-                    //echo "Error in query: " . mysqli_error($conn);
-                }
+$currentDate = new DateTime();
+$currentDateFormatted = $currentDate->format('Y-m-d');
 
-                // pet
-                // get the count of scheduled items where date is the current date
-                $query2 = "SELECT petname, petname2, petname3, petname4, petname5 FROM schedule WHERE date = '$currentDateFormatted'";
-                $result2 = mysqli_query($conn, $query2);
+// Display the current date in the Philippine timezone
+$philippineDate = $currentDate->format('Y-m-d H:i:s T');
 
-                if ($result2) {
-                    $dailyPets = 0;
+// customer
+$query = "SELECT COUNT(*) as count FROM schedule WHERE date = '$currentDateFormatted'";
+$result = mysqli_query($conn, $query);
 
-                    while ($row2 = mysqli_fetch_assoc($result2)) {
-                        // Loop through each column and count the pets
-                        foreach ($row2 as $pet) {
-                            if (!empty($pet)) {
-                                $dailyPets++;
-                            }
-                        }
-                    }
-                } else {
-                    // echo "Error in query: " . mysqli_error($conn);
-                }
+if ($result) {
+    $row = mysqli_fetch_assoc($result);
+    $dailyCustomers = $row['count'];
+} else {
+    // Uncomment the following line for debugging
+    // echo "Error in customer query: " . mysqli_error($conn);
+    $dailyCustomers = 0; // Set to 0 or handle the error accordingly
+}
 
-                // grooming
-                // get the count of scheduled items where date is the current date
-                $query3 = "SELECT service, service2, service3 FROM schedule WHERE date = '$currentDateFormatted'";
-                $result3 = mysqli_query($conn, $query3);
+// pet
+$query2 = "SELECT petname, petname2, petname3, petname4, petname5 FROM schedule WHERE date = '$currentDateFormatted'";
+$result2 = mysqli_query($conn, $query2);
 
-                if ($result3) {
-                    $dailyGrooming = 0;
+if ($result2) {
+    $dailyPets = 0;
 
-                    while ($row3 = mysqli_fetch_assoc($result3)) {
-                        // Loop through each column and count the grooming services
-                        foreach ($row3 as $service) {
-                            if (!empty($service) && $service == "Grooming") {
-                                $dailyGrooming++;
-                            }
-                        }
-                    }
-                } else {
-                    // echo "Error in query: " . mysqli_error($conn);
-                }
-                ?>
+    while ($row2 = mysqli_fetch_assoc($result2)) {
+        // Loop through each column and count the pets
+        foreach ($row2 as $pet) {
+            if (!empty($pet)) {
+                $dailyPets++;
+            }
+        }
+    }
+} else {
+    // Uncomment the following line for debugging
+    // echo "Error in pet query: " . mysqli_error($conn);
+    $dailyPets = 0; // Set to 0 or handle the error accordingly
+}
+
+// grooming
+$query3 = "SELECT service, service2, service3 FROM schedule WHERE date = '$currentDateFormatted'";
+$result3 = mysqli_query($conn, $query3);
+
+if ($result3) {
+    $dailyGrooming = 0;
+
+    while ($row3 = mysqli_fetch_assoc($result3)) {
+        // Loop through each column and count the grooming services
+        foreach ($row3 as $service) {
+            if (!empty($service) && $service == "Grooming") {
+                $dailyGrooming++;
+            }
+        }
+    }
+} else {
+    // Uncomment the following line for debugging
+    // echo "Error in grooming query: " . mysqli_error($conn);
+    $dailyGrooming = 0; // Set to 0 or handle the error accordingly
+}
+?>
+
 
                 <br>
                 <h2>Daily</h2>
@@ -124,6 +134,9 @@
                 <!-- Weekly -->
                 <?php
                 require 'database-conn.php';
+                
+                // Set the timezone to Asia/Manila
+date_default_timezone_set('Asia/Manila');
 
                 $currentDate = new DateTime();
                 $currentWeek = $currentDate->format('W'); // Get the current week number
@@ -334,6 +347,9 @@
                 <!-- Monthly -->
                 <?php
                 require 'database-conn.php';
+                
+                // Set the timezone to Asia/Manila
+date_default_timezone_set('Asia/Manila');
 
                 $filterMonth = isset($_GET['filter_month']) ? $_GET['filter_month'] : date('Y-m');
 

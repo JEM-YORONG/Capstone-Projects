@@ -109,7 +109,7 @@ function addPet()
     $ownerAddress = $_POST["ownerAddress"];
 
     if (
-        empty($petName) || empty($gender) || empty($birthDate) || empty($type) || empty($breed) || empty($species) ||
+        empty($petName) || empty($gender) || empty($birthDate) || empty($breed) || empty($species) ||
         empty($ownerId) || empty($ownerLastname) || empty($ownerFirstname) || empty($ownerContact) || empty($ownerEmail) || empty($ownerAddress)
     ) {
         // At least one field is empty

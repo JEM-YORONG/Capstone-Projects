@@ -64,6 +64,12 @@
             <!--=====Record Menus====-->
             <ul class="record-management-link">
                 <li>
+                    <a href="zHTML_schedule.php">
+                        <i><span class="material-symbols-outlined">event</span></i>
+                        <span class="link-name">Appointment Schedule</span>
+                    </a>
+                </li>
+                <li>
                     <a href="zHTML_customer.php">
                         <i class="uil uil-share"><span class="material-symbols-outlined">groups</span></i>
                         <span class="link-name">Customer</span>

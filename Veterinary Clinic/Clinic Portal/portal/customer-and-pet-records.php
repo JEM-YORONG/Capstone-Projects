@@ -410,10 +410,7 @@
             <label>Birth Date</label>
             <input type="date" class="input" id="birthDate" />
           </div>
-          <div class="inputfield">
-            <label>Type</label>
-            <input type="text" class="input" id="type" />
-          </div>
+         
           <div class="inputfield">
             <label>Breed</label>
             <input type="text" class="input" id="breed" value="" />
