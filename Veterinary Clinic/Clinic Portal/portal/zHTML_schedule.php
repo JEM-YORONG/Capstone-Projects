@@ -579,7 +579,7 @@
                                 <input type="" class="input" placeholder="09*********" id="number" maxlength="11" onkeydown="return /[0-9\s/b]/i.test(event.key)" />
                             </div>
                             <div class="inputfield">
-                                <input type="button" value="Add Appointment" class="btn-add" onclick="submitData('addAppointment'); closeForm();">
+                                <input type="button" value="Add Appointment" class="btn-add" onclick="submitData('addAppointment');">
                                 <button class="btn-create">
                                     <a href="zHTML_customer.php" style="text-decoration: none;">Add Customer</a>
                                 </button>
@@ -948,7 +948,7 @@
                                 <input type="" class="input" placeholder="09*********" id="numberUpdate" maxlength="11" onkeydown="return /[0-9\s/b]/i.test(event.key)" />
                             </div>
                             <div class="inputfield">
-                                <input type="button" value="Update Appointment" class="btn-add" onclick="submitData('updateAppointment'); viewPetsDome();">
+                                <input type="button" value="Update Appointment" class="btn-add" onclick="submitData('updateAppointment');">
                                 <button class="btn-create">
                                     <a href="CAPS.INC/zHTML_customer.php" style="text-decoration: none;">Add Customer</a>
                                 </button>
@@ -989,7 +989,7 @@
                             </div>
 
                             <div class="inputfield-sms">
-                                <input type="button" value="Send Message" class="btn-send" onclick="smsSend(); closeFormsms();">
+                                <input type="button" value="Send Message" class="btn-send" onclick="smsSend(); sent();">
                             </div>
                             <?php require 'smsFunction.php'; ?>
                             <div class="inputfield-sms">
@@ -998,6 +998,17 @@
                         </div>
                     </form>
                 </div>
+
+                <script>
+                    function sent(){
+                        successAlert("Message sent successfully.");
+                        closeFormsms();
+                    }
+                    function statusDone(){
+                        successAlert("Appointments marked as completed.");
+                        closeConfirmForm();
+                    }
+                </script>
 
                 <!--=====Delete====-->
                 <div class="form-popup-delete" id="myForm-delete">
@@ -1009,7 +1020,7 @@
                             <label>This will be permanently deleted</label>
                             <div class="inputfield">
                                 <input type="button" value="Cancel" class="btn-cancel" onclick="closeFormDelete()">
-                                <input type="button" value="Delete" class="btn-delete" onclick="submitData('deleteSchedule'); closeFormDelete();">
+                                <input type="button" value="Delete" class="btn-delete" onclick="submitData('deleteSchedule');">
                                 <?php require 'schedule.data.js.php'; ?>
                             </div>
                         </div>
@@ -1026,7 +1037,7 @@
                             <label>This will remove todays appointment</label>
                             <div class="inputfield">
                                 <input type="button" value="No" class="btn-cancel" onclick="closeConfirmForm()">
-                                <input type="button" value="Yes" class="btn-delete" onclick="submitData('statusDone'); closeConfirmForm();">
+                                <input type="button" value="Yes" class="btn-delete" onclick="submitData('statusDone'); statusDone();">
                                 <?php require 'schedule.data.js.php'; ?>
                             </div>
                         </div>

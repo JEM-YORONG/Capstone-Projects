@@ -63,8 +63,8 @@
           <label>Contact Number</label>
           <br />
           <div class="cnumber-div">
-            <input type="number" placeholder="+63 000 000 0000" style="margin-bottom: 10px;" id="contact1" disabled autocomplete="off" value="<?php echo $c1; ?>" />
-            <input type="number" placeholder="+63 000 000 0000" style="margin-bottom: 10px;" id="contact2" disabled autocomplete="off" value="<?php echo $c2; ?>" />
+            <input type="" class="input" placeholder="09*********" id="contact1" maxlength="11" onkeydown="return /[0-9\s/b]/i.test(event.key)" value="<?php echo $c1; ?>"/>
+            <input type="" class="input" placeholder="09*********" id="contact2" maxlength="11" onkeydown="return /[0-9\s/b]/i.test(event.key)" value="<?php echo $c2; ?>"/>
           </div>
           <label>Email</label>
           <br />
@@ -95,7 +95,7 @@
       </div>
       <div style="display: none;" id="divConfirm">
         <div class="button-wrap" style="padding: 10px;">
-          <label class="button" onclick="hideC(); submitData('addContact');" style="width: 500px; text-align: center;">Ok</label>
+          <label class="button" onclick="submitData('addContact');" style="width: 500px; text-align: center;">Ok</label>
           <?php require 'clinic-contact.js.php'; ?>
         </div>
         <div class="button-wrap" style="padding: 10px;">

@@ -30,7 +30,6 @@ while ($row) :
         <td><?php echo $row["ownerfirstname"]. " ". $row["ownerlastname"]; ?></td>
         <td><?php echo $row["ownercontact"]; ?></td>
         <td><?php echo $row["birthdate"]; ?></td>
-        <td><?php echo $row["type"]; ?></td>
         <td><?php echo $row["breed"]; ?></td>
         <td><?php echo $row["species"]; ?></td>
         <td><?php echo $row["gender"]; ?></td>

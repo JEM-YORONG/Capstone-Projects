@@ -113,7 +113,7 @@
       </div>
       <div style="display: none;" id="divConfirm">
         <div class="button-wrap" style="padding: 10px;">
-          <label class="button" onclick="hideC(); submitData('addInfo');" style="width: 500px; text-align: center;">Ok</label>
+          <label class="button" onclick="submitData('addInfo');" style="width: 500px; text-align: center;">Ok</label>
           <?php require 'about-us.data.php'; ?>
         </div>
         <div class="button-wrap" style="padding: 10px;">

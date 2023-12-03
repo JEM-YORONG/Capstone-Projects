@@ -70,9 +70,9 @@
 
                     // Check if the response is not empty before proceeding
                     if (response != "") {
-                                                if (response == "CustomerDidntExist") {
+                        if (response == "CustomerDidntExist") {
                             errorAlert("Customer did not exist");
-  
+
                         }
                         if (response == "ScheduleAddedSuccessfully") {
                             // Reset input values
@@ -82,19 +82,30 @@
                             $("#petname1, #petname2, #petname3, #petname4, #petname5, #service1, #service2, #service3").prop("selectedIndex", 0);
 
                             // Hide pet and service sections
-                            $("#pet1, #pet2, #pet3, #pet4, #pet5, #s1, #s2, #s3").hide();
+                            $("#pet1, #pet2, #pet3, #pet4, #pet5, #s1, #s2, #s3, #myForm").hide();
 
                             successAlert("Schedule added successfully");
                         }
 
                         if (response == "ScheduleUpdatedSuccessfully") {
                             successAlert("Schedule updated successfully");
+
+                            count = 0;
+                            document.getElementById("viewBtn").value = "View Petnames";
+                            document.getElementById("pet1U").style.display = "none";
+                            document.getElementById("pet2U").style.display = "none";
+                            document.getElementById("pet3U").style.display = "none";
+                            document.getElementById("pet4U").style.display = "none";
+                            document.getElementById("pet5U").style.display = "none";
+
+                            document.getElementById("updateForm").style.display = "none";
                         }
 
                         if (response == "ScheduleDeletedSuccessfully") {
                             errorAlert("Schedule deleted successfully");
+                            document.getElementById("myForm-delete").style.display = "none";
                         }
-                        
+
                         if (response == "Please fill in all the fields") {
                             errorAlert("Please fill in all the fields");
                         }

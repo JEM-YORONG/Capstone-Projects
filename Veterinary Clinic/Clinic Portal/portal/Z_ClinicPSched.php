@@ -182,7 +182,7 @@
       </div>
       <div style="display: none;" id="divConfirm">
         <div class="button-wrap" style="padding: 10px;">
-          <label class="button" onclick="hideC(); submitData('addSched');" style="width: 500px; text-align: center;">Ok</label>
+          <label class="button" onclick="submitData('addSched');" style="width: 500px; text-align: center;">Ok</label>
           <?php require 'clinic-schedule.data.js.php'; ?>
         </div>
         <div class="button-wrap" style="padding: 10px;">

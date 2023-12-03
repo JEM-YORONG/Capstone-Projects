@@ -91,21 +91,48 @@ require 'staff-data.js.php';
                 <option value="Groomer">Groomer</option>
               </select>
             </div>
+
+            <script>
+              // Get the select element by its ID
+              const roleSelect = document.getElementById('role');
+
+              // Attach an event listener to the select element
+              roleSelect.addEventListener('change', function() {
+                // Get the selected value
+                const selectedValue = roleSelect.value;
+
+                if (selectedValue == "Assistant" || selectedValue == "Groomer") {
+                  document.getElementById('emailTxt').style.display = "none";
+                  document.getElementById('passTxt').style.display = "none";
+                  document.getElementById('email').style.display = "none";
+                  document.getElementById('password').style.display = "none";
+                  document.getElementById('email').value = "-@gmail.com";
+                  document.getElementById('password').value = "nonenone";
+                } else {
+                  document.getElementById('emailTxt').style.display = "block";
+                  document.getElementById('passTxt').style.display = "block";
+                  document.getElementById('email').style.display = "block";
+                  document.getElementById('password').style.display = "block";
+                }
+              });
+            </script>
+
+
             <div class="inputfield">
               <label>Contact</label>
               <input type="" class="input" placeholder="09*********" id="contact" maxlength="11" onkeydown="return /[0-9\s/b]/i.test(event.key)" />
             </div>
             <div class="inputfield">
-              <label>Email</label>
+              <label id="emailTxt">Email</label>
               <input type="email" class="input" placeholder="Example@gmail.com" id="email" maxlength="225" onkeydown="return /[0-9a-zA-Z@.]/i.test(event.key)" />
             </div>
             <div class="inputfield">
-              <label>Password</label>
+              <label id="passTxt">Password</label>
               <input type="password" class="input" id="password" placeholder="••••••••" maxlength="8" onkeydown="return /[0-9a-zA-Z]/i.test(event.key)" />
             </div>
             <div class="inputfield">
               <input type="button" value="Cancel" class="btn-create" onclick="closeForm(); clearForm();" />
-              <input type="button" value="Add Staff" class="btn-add" onclick="submitData('addStaff'); closeForm();" />
+              <input type="button" value="Add Staff" class="btn-add" onclick="submitData('addStaff');" />
               <?php
               require 'staff-data.js.php';
               ?>
@@ -153,7 +180,7 @@ require 'staff-data.js.php';
               <input type="password" class="input" placeholder="••••••••" id="editPassword" maxlength="8" onkeydown="return /[0-9a-zA-Z]/i.test(event.key)" />
             </div>
             <div class="inputfield">
-              <input type="button" value="Update" class="btn-update" onclick="submitData('editStaff'); closeFormEdit();" />
+              <input type="button" value="Update" class="btn-update" onclick="submitData('editStaff');" />
               <?php
               require 'staff-data.js.php';
               ?>

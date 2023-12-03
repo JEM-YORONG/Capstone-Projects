@@ -1,7 +1,7 @@
 <?php
 require 'database-conn.php';
 $filter = $_GET["id"];
-$query = "SELECT * FROM announcement";
+$query = "SELECT * FROM announcement ORDER BY id DESC";
 
 $result = mysqli_query($conn, $query);
 function loop($result)
@@ -18,9 +18,9 @@ function loop($result)
             ?>
             <img class="gumanaKa" src="<?php echo $imageScr; ?>" alt="" id="imagename<?php echo $index; ?>" />
             <h3 class="title" id="title"><?php echo $row["title"]; ?></h3>
-            <p class="desc">
-                <?php echo $row["description"]; ?>
-            </p>
+            <!-- <p class="desc">
+                <?php //echo $row["description"]; ?>
+            </p> -->
             <br />
             <div class="action">
                 <p class="date" id="date"><?php echo $row["date"]; ?></p>
@@ -31,7 +31,7 @@ function loop($result)
                     </span>
                 </p>
                 &nbsp; &nbsp;
-                <p class="delete-bttn" onclick="getRow('<?php echo $row['id']; ?>'); submitData('Delete');">
+                <p class="delete-bttn" onclick="getRow('<?php echo $row['id']; ?>'); openFormDelete();">
                     <span class="material-symbols-outlined"> delete </span>
                 </p>
             </div>

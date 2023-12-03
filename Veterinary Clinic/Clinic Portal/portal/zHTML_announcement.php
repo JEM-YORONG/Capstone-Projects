@@ -10,8 +10,9 @@
   <link rel="stylesheet" href="Capstone_ClinicAnnouncement.css" />
   <link rel="stylesheet" href="Capstone_ClinicServNProd.css">
   <link rel="stylesheet" href="Capstone_ClinicAboutUs copy.css">
-    <!----======== CSS ======== -->
-    <link rel="stylesheet" href="Capstone_CustNPetRecords.css" />
+  <link rel="stylesheet" href="Capstone_Staff.css">
+  <!----======== CSS ======== -->
+  <link rel="stylesheet" href="Capstone_CustNPetRecords.css" />
 
   <!----===== Icons ===== -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
@@ -38,7 +39,7 @@
       <div style="padding-left: 80%;">
         <input type="text" id="id" style="display: none;">
         <div style="padding-top: 10px;">
-        <button class="add-button" onclick="openAnnouncement()">Add New</button>
+          <button class="add-button" onclick="openAnnouncement()">Add New</button>
         </div>
       </div>
 
@@ -70,9 +71,23 @@
 
             <div class="inputfield">
               <?php require 'announcement-data.js.php'; ?>
-              <input type="button" value="Upload" class="btn-send" onclick="submitData('Add'); closeFormAnnouncement();" />
+              <input type="button" value="Upload" class="btn-send" onclick="submitData('Add');" />
             </div>
             <input type="button" value="Close" class="btn-cancel" onclick="closeFormAnnouncement()" />
+          </div>
+        </form>
+      </div>
+
+      <!--Delete-->
+      <div class="form-popup-delete" id="myForm-delete" style="display: none;">
+        <form action="/action_page.php" class="form-container-delete">
+          <div class="title">Are you sure?</div>
+          <div class="form-delete">
+            <label>This will be permanently deleted</label>
+            <div class="inputfield">
+              <input type="button" value="Cancel" class="btn-cancel" onclick="closeFormDelete()" />
+              <input type="button" value="Delete" class="btn-delete" onclick="submitData('Delete');" />
+            </div>
           </div>
         </form>
       </div>
@@ -150,12 +165,20 @@
       });
     }
 
+    function openFormDelete() {
+      document.getElementById("myForm-delete").style.display = "block";
+    }
+
+    function closeFormDelete() {
+      document.getElementById("myForm-delete").style.display = "none";
+    }
+
     function getRow(rowId) {
       document.getElementById("editTitle").value = rowId;
     }
 
 
-    function clearId(){
+    function clearId() {
       document.getElementById("id").value = "";
     }
 

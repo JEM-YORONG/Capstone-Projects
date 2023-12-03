@@ -28,8 +28,11 @@
                             $("#addAddress").val("");
 
                             successAlert("Customer added successfully");
+
+                            document.getElementById("myForm").style.display = "none";
                         } else if (response == "CustomerDeletedSuccessfully") {
                             successAlert("Customer deleted successfully");
+                            document.getElementById("myForm-delete").style.display = "none";
                         } else {
                             errorAlert(response);
                         }

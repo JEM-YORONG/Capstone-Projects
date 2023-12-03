@@ -22,6 +22,16 @@
 
                         successAlert("Information updated successfully");
 
+                        document.getElementById("divConfirm").style.display = "none";
+                        document.getElementById("divUpdate").style.display = "block";
+
+                        document.getElementById('upload').style.display = "none";
+
+                        document.getElementById("title").contentEditable = false;
+                        document.getElementById("address").contentEditable = false;
+                        document.getElementById("intro").contentEditable = false;
+                        document.getElementById("about").contentEditable = false;
+
                     } else {
 
                         errorAlert(response);

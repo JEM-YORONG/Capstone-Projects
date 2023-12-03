@@ -160,7 +160,18 @@ function updateAppointment()
     $service2 = $_POST["updateservice2"];
     $service3 = $_POST["updateservice3"];
 
-    $query = "UPDATE schedule SET ownername = '$name', petname = '$p1', petname2 = '$p2', petname3 = '$p3', petname4 = '$p4', petname5 = '$p5', service = '$service1', service2 = '$service2', service3 = '$service3', date = '$date', number = '$number' WHERE id = '$id'";
+    $currentDate = date('Y-m-d');
+    $statusUpdate ="";
+    
+    if ($date > $currentDate) {
+        $statusUpdate = 'Upcoming';
+    } elseif ($date == $currentDate) {
+        $statusUpdate = 'Today';
+    } else {
+        $statusUpdate = 'Past';
+    }
+
+    $query = "UPDATE schedule SET ownername = '$name', petname = '$p1', petname2 = '$p2', petname3 = '$p3', petname4 = '$p4', petname5 = '$p5', service = '$service1', service2 = '$service2', service3 = '$service3', date = '$date', number = '$number', status = '$statusUpdate' WHERE id = '$id'";
 
     mysqli_query($conn, $query);
     mysqli_close($conn);

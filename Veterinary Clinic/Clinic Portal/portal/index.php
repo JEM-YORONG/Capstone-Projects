@@ -16,21 +16,40 @@
 </head>
 
 <body>
+  <?php
+  require 'database-conn.php';
+
+  $query = "SELECT * FROM aboutus WHERE id = '1'";
+  $result = mysqli_query($conn, $query);
+
+  while ($row = mysqli_fetch_assoc($result)) {
+    $imageName = $row['imagename'];
+    $imageType = $row['imagetype'];
+    $imageData = $row['imagedata'];
+
+    $title = $row['title'];
+    $address = $row['address'];
+    $intro = $row['intro'];
+    $about = $row['about'];
+  }
+
+  $imageScr = "data:" . $imageType . ";base64," . base64_encode($imageData);
+  ?>
   <section class="side">
-    <img src=".vscode\Images\Doc Lenon Logo.png" alt="" />
+    <img src="<?php echo $imageScr; ?>" alt="" />
     <div class="separator-vertical"></div>
   </section>
 
   <section class="main">
     <div class="login-container">
-      <p class="title">Doc Lenon Veterinary Clinic</p>
+      <p class="title"><?php echo $title; ?></p>
       <p class="system-title">Vet Portal</p>
 
       <p class="welcome-message">LOGIN</p>
 
       <form class="login-form" method="post">
         <div class="form-control">
-          <input type="text" placeholder="Email" id="username" autocomplete="off"/>
+          <input type="text" placeholder="Email" id="username" autocomplete="off" />
           <i><span class="material-symbols-outlined">person</span></i>
         </div>
         <div class="form-control">
@@ -68,8 +87,11 @@
                 if (response == "admin") {
                   successAlert("Welcome Admin");
                   location.replace("zHTML_dashboard.php");
-                } else if (response == "secretary" || response == "veterinarian") {
-                  successAlert("Welcome Staff");
+                } else if (response == "secretary") {
+                  successAlert("Welcome Secretary");
+                  location.replace("zStaff_dashboard.php");
+                } else if (response == "veterinarian") {
+                  successAlert("Welcome Veterinarian");
                   location.replace("zStaff_dashboard.php");
                 } else {
                   successAlert(response);

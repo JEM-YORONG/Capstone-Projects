@@ -24,6 +24,16 @@
 
                         successAlert("Contact updated successfully");
 
+                        document.getElementById("divConfirm").style.display = "none";
+                        document.getElementById("divUpdate").style.display = "block";
+
+                        document.getElementById("contact1").disabled = true;
+                        document.getElementById("contact2").disabled = true;
+                        document.getElementById("email").disabled = true;
+                        document.getElementById("social1").disabled = true;
+                        document.getElementById("social2").disabled = true;
+                        document.getElementById("social3").disabled = true;
+
                     } else {
 
                         errorAlert(response);

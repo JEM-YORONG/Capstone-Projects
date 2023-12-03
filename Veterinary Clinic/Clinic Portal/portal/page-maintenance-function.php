@@ -104,7 +104,7 @@ function addContact()
     $s2 = $_POST['s2'];
     $s3 = $_POST['s3'];
 
-    if (empty(trim($c1)) || empty(trim($c2)) || empty(trim($e)) || empty(trim($s1)) || empty(trim($s2)) || empty(trim($s3))) {
+    if (empty(trim($c1)) || empty(trim($e)) || empty(trim($s1)) || empty(trim($s2)) || empty(trim($s3))) {
         // At least one of the values is empty or only contains whitespace
         echo "Please fill in all the fields.";
         return;

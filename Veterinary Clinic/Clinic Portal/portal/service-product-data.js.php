@@ -33,12 +33,16 @@
                                 var newFileInput = $("<input type='file' id='addImage' accept='image/*' value='Upload Image'>");
                                 $('#addImage').replaceWith(newFileInput);
                                 successAlert("Added successfully");
+
+                                document.getElementById("myForm-servprod").style.display = "none";
                                 break;
                             case "UpdatedSuccessfully":
                                 successAlert("Updated successfully");
+                                document.getElementById("myForm-Editservprod").style.display = "none";
                                 break;
                             case "DeletedSuccessfully":
                                 successAlert("Deleted successfully");
+                                document.getElementById("myForm-delete").style.display = "none";
                                 break;
                             default:
                                 errorAlert(response);

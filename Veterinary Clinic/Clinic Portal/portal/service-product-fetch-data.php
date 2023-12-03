@@ -2,28 +2,38 @@
 require 'database-conn.php';
 $filter = $_GET["filterValue"];
 $query = "SELECT * FROM serviceandproduct";
-$query2 = "SELECT * FROM serviceandproduct";
-$result;
 
+// Check if $filter is not empty
 if (!empty($filter)) {
+    // Add WHERE clause with LIKE condition
     $query .= " WHERE categories LIKE '%$filter%'";
+
+    // If the filter is "Product," further filter by specific categories
+    if ($filter == "Product") {
+        $categories = ["Pet Foods", "Bath Products", "Accessories", "Others"];
+        $categoriesStr = implode("', '", $categories);
+        $query .= " AND categories IN ('$categoriesStr')";
+    }
 }
 
-if (!empty($filter) && $filter == "Product") {
-    $categories = ["Pet Foods", "Bath Products", "Accessories", "Others"];
-    $categoriesStr = implode("', '", $categories);
-    $query2 .= " WHERE categories IN ('$categoriesStr')";
-    $result = mysqli_query($conn, $query2);
-} else {
-    $result = mysqli_query($conn, $query);
+// Add ORDER BY clause to sort in descending order by id
+$query .= " ORDER BY id DESC";
+
+// Execute the final query
+$result = mysqli_query($conn, $query);
+
+// Check for errors in the query execution
+if (!$result) {
+    die("Error in query: " . mysqli_error($conn));
 }
+
 
 function loop($result)
 {
     $index = 0;
     while ($row = mysqli_fetch_assoc($result)) {
         $imageName = $row['imagename'];
-        $imageType = $row['imagetype']; 
+        $imageType = $row['imagetype'];
         $imageData = $row['imagedata'];
 ?>
         <div class="box box2" id="div-container">
@@ -33,9 +43,9 @@ function loop($result)
             <img class="gumanaKa" src="<?php echo $imageScr; ?>" alt="" id="imagename<?php echo $index; ?>" />
             <h3 class="title" id="title"><?php echo $row["title"]; ?></h3>
             <h6><?php echo $row["categories"]; ?></h6>
-            <p class="desc">
-                <?php echo $row["description"]; ?>
-            </p>
+            <!-- <p class="desc">
+                <?php //echo $row["description"]; ?>
+            </p> -->
             <br />
             <div class="action">
                 <p class="date" id="date"><?php echo $row["date"]; ?></p>
@@ -46,7 +56,7 @@ function loop($result)
                     </span>
                 </p>
                 &nbsp; &nbsp;
-                <p class="delete-bttn" onclick="getRow('<?php echo $row['id']; ?>'); submitData('Delete');">
+                <p class="delete-bttn" onclick="getRow('<?php echo $row['id']; ?>'); openFormDelete();">
                     <span class="material-symbols-outlined"> delete </span>
                 </p>
             </div>

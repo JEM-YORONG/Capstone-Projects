@@ -1,7 +1,4 @@
 <?php
-
-use Twilio\Rest\Serverless\V1\Service\TwilioFunction\FunctionVersionList;
-
 require 'database-conn.php';
 
 if (isset($_POST["action"])) {
@@ -44,7 +41,7 @@ function update()
 
     // Validate input - customer and pet
     if (
-        empty($custId) || empty($custLastName) || empty($custFirstName) || empty($custContact) || empty($custAddress)
+        empty($custLastName) || empty($custFirstName) || empty($custContact) || empty($custAddress)
     ) {
         echo "emptyFields";
         return;
@@ -322,7 +319,7 @@ function addPetRecord()
 
     // Check for empty fields
     if (
-        empty($rDate) || empty($rWeight) || empty($rAbout) || empty($rNote)
+        empty($rDate) || empty($rService1)
     ) {
         // At least one field is empty
         echo "emptyFields";
@@ -395,6 +392,15 @@ function editPetRecord()
     $rWeight = $_POST["eWeight"];
     $rAbout = $_POST["eAbout"];
     $rNote = $_POST["eNote"];
+
+        // Check for empty fields
+        if (
+            empty($rDate) || empty($rService1)
+        ) {
+            // At least one field is empty
+            echo "emptyFields";
+            return;
+        }
 
     $rID = $_POST["eRid"];
 

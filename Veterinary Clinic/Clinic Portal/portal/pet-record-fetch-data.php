@@ -83,7 +83,7 @@ while ($row = mysqli_fetch_assoc($result)) :
                     cursor: pointer;" onclick="submitData('delete2'); deletePet2('<?php echo $row['nid']; ?>');">
                     <span class="material-symbols-outlined"> delete </span>
                 </button>
-                <?php require 'script files/customer-pet-record-data.js.php'; ?>
+                <?php require 'customer-pet-record-data.js.php'; ?>
             </td>
         <?php endif; ?>
     </tr>

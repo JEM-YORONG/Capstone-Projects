@@ -9,11 +9,11 @@ date_default_timezone_set('Asia/Manila');
 // Get the current date in the same format as your database date
 $currentDate = date('Y-m-d');
 
-$query = "SELECT * FROM schedule WHERE date > '$currentDate'";
+$query = "SELECT * FROM schedule WHERE status = 'Upcoming'";
 
 // If search input is not empty
 if (!empty($search)) {
-    $query .= " AND (ownername LIKE '%$search%' OR petname LIKE '%$search%' OR type LIKE '%$search%' OR service LIKE '%$search%' OR date LIKE '%$search%' OR number LIKE '%$search%')";
+    $query .= " AND (ownername LIKE '%$search%' OR date LIKE '%$search%' OR number LIKE '%$search%')";
 }
 
 $result = mysqli_query($conn, $query);

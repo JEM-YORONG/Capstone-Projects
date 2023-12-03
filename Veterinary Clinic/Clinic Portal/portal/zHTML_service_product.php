@@ -12,6 +12,7 @@
   <!----======== CSS ======== -->
   <link rel="stylesheet" href="Capstone_CustNPetRecords.css" />
   <link rel="stylesheet" href="Capstone_ClinicAboutUs copy.css">
+  <link rel="stylesheet" href="Capstone_Staff.css">
 
   <!----===== Icons ===== -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
@@ -43,8 +44,8 @@
         <div class="bttn">
           <button class="viewAll-button" onclick="clearRadio()">View All</button>
           <button class="services-button" onclick="serviceOnly()">Services Only</button>
-          <button class="product-button">Products Only</button>
-          <button class="filter" id="filterbttn" onclick="openFormFilter()" disabled>
+          <button class="product-button" onclick="displayFilter()">Products Only</button>
+          <button class="filter" id="filterbttn" onclick="openFormFilter()" style="display: none; color: #ffffff; background-color: #5a81fa;">
             <span class="material-symbols-outlined">filter_list</span>
           </button>
           <button class="add-button" onclick="openAddServProd()">Add New</button>
@@ -93,7 +94,7 @@
             </div>
 
             <div class="inputfield">
-              <input type="button" value="Upload" class="btn-send" onclick="submitData('Add'); closeAddServProd();" />
+              <input type="button" value="Upload" class="btn-send" onclick="submitData('Add');" />
               <?php require 'service-product-data.js.php'; ?>
             </div>
             <input type="button" value="Close" class="btn-cancel" onclick="closeAddServProd()" />
@@ -137,10 +138,24 @@
             </div>
 
             <div class="inputfield">
-              <input type="button" value="Upload" class="btn-send" onclick="submitData('Edit'); closeEditServProd();" />
+              <input type="button" value="Upload" class="btn-send" onclick="submitData('Edit');" />
               <?php require 'service-product-data.js.php'; ?>
             </div>
             <input type="button" value="Close" class="btn-cancel" onclick="closeEditServProd()" />
+          </div>
+        </form>
+      </div>
+
+      <!--Delete-->
+      <div class="form-popup-delete" id="myForm-delete" style="display: none;">
+        <form action="/action_page.php" class="form-container-delete">
+          <div class="title">Are you sure?</div>
+          <div class="form-delete">
+            <label>This will be permanently deleted</label>
+            <div class="inputfield">
+              <input type="button" value="Cancel" class="btn-cancel" onclick="closeFormDelete()" />
+              <input type="button" value="Delete" class="btn-delete" onclick="submitData('Delete');" />
+            </div>
           </div>
         </form>
       </div>
@@ -167,7 +182,7 @@
               <label for="Vitamins">Others</label>
             </div>
           </div>
-          <button type="button" class="btn-close" onclick="closeFormFilter(); clearRadio();">
+          <button type="button" class="btn-close" onclick="closeFormFilter();">
             Close
           </button>
         </form>
@@ -232,17 +247,31 @@
       }
     }
 
+    function openFormDelete() {
+      document.getElementById("myForm-delete").style.display = "block";
+    }
+
+    function closeFormDelete() {
+      document.getElementById("myForm-delete").style.display = "none";
+    }
+
     function serviceOnly() {
       document.getElementById("filterValue").value = "Services";
+      document.getElementById("filterbttn").style.display = "none";
     }
 
     function productOnly() {
       document.getElementById("filterValue").value = "Product";
     }
 
+    function displayFilter() {
+      document.getElementById("filterValue").value = "Product";
+      document.getElementById("filterbttn").style.display = "block";
+    }
 
     function clearRadio() {
       document.getElementById("filterValue").value = "";
+      document.getElementById("filterbttn").style.display = "none";
     }
 
     function getInfo(imageName, imageSrc, title, categories, description, id) {
@@ -306,14 +335,6 @@
       document.getElementById("myForm-filter").style.display = "none";
     }
 
-    var button = document.querySelector(".product-button");
-    var filterButton = document.querySelector(".filter");
-    button.onclick = function() {
-      document.getElementById("filterbttn").disabled = false;
-      filterButton.style.backgroundColor = "#5a81fa";
-      productOnly();
-    };
-    //kapag clinick ang View all and All Services disabled ulit ung filter button na pang products
   </script>
 </body>
 

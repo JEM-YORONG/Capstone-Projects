@@ -30,12 +30,15 @@
                                 $('#addDescription').val("");
                                 var newFileInput = $("<input type='file' id='addImage' accept='image/*' value='Upload Image'>");
                                 $('#addImage').replaceWith(newFileInput);
+
+                                document.getElementById("myForm-announcement").style.display = "none";
                                 break;
                             case "UpdatedSuccessfully":
                                 successAlert("Announcement updated successfully");
                                 break;
                             case "DeletedSuccessfully":
                                 successAlert("Announcement deleted successfully");
+                                document.getElementById("myForm-delete").style.display = "none";
                                 break;
                             default:
                                 errorAlert(response);

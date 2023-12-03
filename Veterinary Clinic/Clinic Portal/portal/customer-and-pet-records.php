@@ -169,7 +169,7 @@
             <textarea type="text" class="input" rows="3" cols="5" id="custAddress" disabled><?php echo $address; ?></textarea>
             <!---->
             <div class="savecancel">
-              <button class="add-button" id="ok" onclick="ok(); submitData('update');" style="display: none;">Update</button>
+              <button class="add-button" id="ok" onclick="submitData('update');" style="display: none;">Update</button>
               <button class="add-button" id="cancel" onclick="cancel()" style="display: none;">Cancel</button>
               <?php require 'customer-pet-record-data.js.php'; ?>
             </div>
@@ -277,7 +277,7 @@
               <br>
               <!--gawing responsive OK and Cancel-->
               <div class="savecancel">
-                <button class="add-button" id="okPet" onclick="okPet(); submitData('updatePet');" style="display: none;">Update</button>
+                <button class="add-button" id="okPet" onclick="submitData('updatePet');" style="display: none;">Update</button>
                 <button class="add-button" id="cancelPet" onclick="cancelPet();" style="display: none;">Cancel</button>
                 <?php require 'customer-pet-record-data.js.php'; ?>
               </div>
@@ -393,7 +393,7 @@
           </div>
           <div class="inputfield">
             <label>ID</label>
-            <input type="text" class="input" id="petId" / disabled>
+            <input type="text" class="input" id="petId" disabled>
           </div>
           <div class="inputfield">
             <label>Pet Name</label>
@@ -410,7 +410,7 @@
             <label>Birth Date</label>
             <input type="date" class="input" id="birthDate" />
           </div>
-         
+
           <div class="inputfield">
             <label>Breed</label>
             <input type="text" class="input" id="breed" value="" />
@@ -422,13 +422,13 @@
           <div class="inputfield">
             <input type="button" value="Cancel" class="btn-cancel" onclick="closeAddPets()" />
             <input type="button" value="Add Pet" class="btn-add" onclick="submitData('addPet'); closeAddPets();" />
-            <?php require 'customer-pet-record-data.js.php'; ?>
           </div>
+          <?php require 'customer-pet-record-data.js.php'; ?>
         </div>
       </form>
 
       <!--add record-->
-      <form class="form-popup-record" id="myform-records">
+      <form class="form-popup-record" id="myform-records" style="display: none;">
         <div class="form-record" style="
             height: 390px;
             overflow-x: hidden;
@@ -746,7 +746,7 @@
           </div>
           <div class="inputfield">
             <input type="button" value="Cancel" class="btn-cancel" />
-            <input type="button" value="Update Record" class="btn-add" onclick="submitData('editPetRecord');" />
+            <input type="button" value="Update Record" class="btn-add" onclick="submitData('editPetRecord'); closeEditRecord();" />
           </div>
           <?php require "customer-pet-record-data.js.php"; ?>
           <button type="button" class="btn-close" onclick="closeEditRecord()">

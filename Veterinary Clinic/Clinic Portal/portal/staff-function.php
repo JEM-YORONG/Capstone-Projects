@@ -1,6 +1,4 @@
-
 <?php
-
 require 'database-conn.php';
 
 if (isset($_POST["action"])) {
@@ -62,10 +60,18 @@ function addStaff()
 
         // Check if the query returned any rows for email
         if (mysqli_num_rows($result) == 1) {
-            echo "Email is already used.";
+            $row = mysqli_fetch_assoc($result);
+            $role = $row['role'];
+            if ($role == 'Groomer' || $role == 'Assistant') {
+
+                $query = "INSERT INTO staffs VALUES ('', '$idClean', '$nameClean', '$roleClean', '$contactClean', '$emailClean', '$passwordClean')";
+                mysqli_query($conn, $query);
+                mysqli_close($conn);
+                echo "Staff added successfully";
+            } else {
+                echo "Email is already used.";
+            }
         } else {
-            // Hash the password
-            //$hashedPassword = password_hash($passwordClean, PASSWORD_DEFAULT);
 
             $query = "INSERT INTO staffs VALUES ('', '$idClean', '$nameClean', '$roleClean', '$contactClean', '$emailClean', '$passwordClean')";
             mysqli_query($conn, $query);
@@ -123,7 +129,7 @@ function editStaff()
             echo $passwordClean;
             */
 
-            /*
+        /*
         // Prepare the SQL statement for checking email
         $query = "SELECT * FROM staffs WHERE email = ?";
         $stmt = mysqli_prepare($conn, $query);
@@ -146,9 +152,9 @@ function editStaff()
         */
 
         $query = "UPDATE staffs SET name = '$nameClean', role = '$roleClean', contact = '$contactClean', email = '$emailClean', password = '$passwordClean' WHERE cliniId = '$id'";
-            mysqli_query($conn, $query);
-            mysqli_close($conn);
-            echo "Staff updated successfully";
+        mysqli_query($conn, $query);
+        mysqli_close($conn);
+        echo "Staff updated successfully";
     }
 }
 

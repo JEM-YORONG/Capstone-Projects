@@ -44,7 +44,6 @@
                 <th scope="col">Owner Name</th>
                 <th scope="col">Owner Contact</th>
                 <th scope="col">Birth Date</th>
-                <th scope="col">Type</th>
                 <th scope="col">Breed</th>
                 <th scope="col">Species</th>
                 <th scope="col">Gender</th>

@@ -99,7 +99,7 @@
 
                 success: function(response) {
                     if (response == '') {
-                        //
+                        successAlert(response);
                     } else {
                         if (response == 'emptyFields') {
                             //
@@ -109,6 +109,15 @@
                         if (response == 'customerUpdated') {
                             //
                             successAlert("Customer record updated successfully");
+
+                            document.getElementById("edit").style.display = "block";
+                            document.getElementById("ok").style.display = "none";
+                            document.getElementById("cancel").style.display = "none";
+                            document.getElementById("custLastName").disabled = true;
+                            document.getElementById("custFirstName").disabled = true;
+                            document.getElementById("custContact").disabled = true;
+                            document.getElementById("custEmail").disabled = true;
+                            document.getElementById("custAddress").disabled = true;
                         }
 
                         if (response == 'Contact must be 11 digit') {
@@ -124,11 +133,22 @@
                             $("#breed").val("");
                             $("#species").val("");
 
+                            $("#myform-pets").hide();
+
                             successAlert("Pet added successfully");
                         }
 
                         if (response == 'pedUpdated') {
                             //
+
+                            document.getElementById("editPet").style.display = "block";
+                            document.getElementById("okPet").style.display = "none";
+                            document.getElementById("cancelPet").style.display = "none";
+                            document.getElementById("Petname").disabled = true;
+                            document.getElementById("Breed").disabled = true;
+                            document.getElementById("Species").disabled = true;
+                            document.getElementById("Birthdate").disabled = true;
+
                             successAlert("Pet updated successfully");
                         }
 
@@ -140,6 +160,7 @@
                         if (response == 'petRDeleted') {
                             //alert("pet record deleted");
                             $("#searchInput").val("");
+
                             successAlert("Pet record deleted successfully");
                         }
 

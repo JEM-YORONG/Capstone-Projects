@@ -101,7 +101,7 @@ require 'disable-paste.js.php'; ?>
             </div>
             <div class="inputfield">
               <input type="button" value="Cancel" class="btn-create" onclick="closeForm(); clearForm();" />
-              <input type="button" value="Add Customer" class="btn-add" onclick="submitData('addCustomer'); closeForm();" />
+              <input type="button" value="Add Customer" class="btn-add" onclick="submitData('addCustomer');" />
               <?php
               require 'customer-data.js.php';
               ?>
@@ -120,7 +120,7 @@ require 'disable-paste.js.php'; ?>
             <label>This will be permanently deleted</label>
             <div class="inputfield">
               <input type="button" value="Cancel" class="btn-cancel" onclick="closeFormDelete()" />
-              <input type="button" value="Delete" class="btn-delete" onclick="submitData('deleteCustomer'); closeFormDelete();" />
+              <input type="button" value="Delete" class="btn-delete" onclick="submitData('deleteCustomer');" />
             </div>
           </div>
         </form>
