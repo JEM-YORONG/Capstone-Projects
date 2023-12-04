@@ -348,6 +348,24 @@ nav.close~.Contents .top {
     font-weight: 500;
     color: var(--text-color);
 }
+.midbox{
+    width: 100%;
+    padding-left: 545px;
+}
+.filter-bttn{
+    background-color: #5a81fa;
+    border: 1px solid #21305d00;
+    border-radius: 8px;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 29px;
+    padding: 0 10px 0 11px;
+    width: 150px;
+    margin-right: 3%;
+}
+
 
 @media (max-width: 1000px) {
     nav {
@@ -401,6 +419,9 @@ nav.close~.Contents .top {
         left: 250px;
         width: calc(100% - 250px);
     }
+    .midbox{
+        padding-left: 250px;
+    }
 }
 
 @media (max-width: 780px) {
@@ -427,6 +448,10 @@ nav.close~.Contents .top {
         display: grid;
         grid-template-columns: 80% 25%;
     }
+    .midbox{
+        width: 100%;
+        padding-left: 250px;
+    }
 }
 
 @media (max-width: 560px) {
@@ -436,6 +461,10 @@ nav.close~.Contents .top {
 
     .dash-content .boxes-report .box-report {
         width: 100%;
+    }
+    .midbox{
+        width: 100%;
+        padding-left: 0;
     }
 }
 

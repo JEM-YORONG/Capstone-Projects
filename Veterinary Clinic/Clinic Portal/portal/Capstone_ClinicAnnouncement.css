@@ -299,8 +299,11 @@ nav.close~.dashboard .top {
   padding: 2px;
   text-align: center;
   font-size: 20px;
-
   cursor: pointer;
+  white-space: nowrap; 
+  width: 70%; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
 }
 
 .web-content .boxes-overview .title:hover {
@@ -313,9 +316,10 @@ nav.close~.dashboard .top {
   padding: 0px;
   text-align: left;
   font-size: 12px;
-
+  white-space: nowrap; 
+  width: 50%; 
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis; 
 }
 
 .web-content .boxes-overview .date {

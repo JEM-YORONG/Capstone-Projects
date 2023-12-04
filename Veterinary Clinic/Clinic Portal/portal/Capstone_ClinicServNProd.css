@@ -253,7 +253,7 @@ nav.close~.dashboard .top {
 
 /**/
 .web-content .boxes-overview {
-  margin-top: 60px;
+  
   display: flex;
   align-items: flex-start;
   justify-content: left;
@@ -320,8 +320,13 @@ nav.close~.dashboard .top {
   padding: 2px;
   text-align: center;
   font-size: 20px;
-
+  max-width: 400px;
+  white-space: nowrap; 
+  width: 70%; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
   cursor: pointer;
+
 }
 
 .web-content .boxes-overview .title:hover {
@@ -334,9 +339,12 @@ nav.close~.dashboard .top {
   padding: 0px;
   text-align: left;
   font-size: 12px;
-
+  max-width: 300px;
+  max-height: 50px;
+  white-space: nowrap; 
+  width: 50%; 
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis; 
 }
 
 .web-content .boxes-overview .date {
@@ -372,15 +380,19 @@ nav.close~.dashboard .top {
 }
 
 /**/
-.menu {
+.ss-menu {
   margin-top: 15px;
+ 
 }
-
-.web-content .menu {
+.ss-menu .bttn{
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+}
+.web-content .ss-menu {
   margin-left: 3%;
 }
 
-.menu .filter {
+.ss-menu .filter {
   background-color: #c5cefb;
   border: 1px solid #c0ccf0;
   border-radius: 8px;
@@ -393,10 +405,25 @@ nav.close~.dashboard .top {
   float: left;
   margin-left: 6%;
 }
+.web-content .ss-menu .add-button1{
+  background-color: #5a81fa;
+  border: 1px solid #c0ccf0;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #062b98;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 29px;
+  padding: 2px 20px 2px 15px;
+  width: 200px;
+  float: inline-start;
+  margin-right: 3%;
+  margin-bottom: 10px;
 
-.web-content .menu .viewAll-button,
-.web-content .menu .services-button,
-.web-content .menu .product-button {
+}
+.web-content .ss-menu .viewAll-button,
+.web-content .ss-menu .services-button,
+.web-content .ss-menu .product-button {
   background-color: #f9faff;
   border: 1px solid #c0ccf0;
   border-radius: 8px;
@@ -407,13 +434,14 @@ nav.close~.dashboard .top {
   line-height: 29px;
   padding: 2px 20px 2px 15px;
   width: 200px;
-  float: left;
+  float: inline-start;
   margin-right: 3%;
+  margin-bottom: 10px;
 }
 
-.web-content .menu .viewAll-button:hover,
-.web-content .menu .services-button:hover,
-.web-content .menu .product-button:hover {
+.web-content .ss-menu .viewAll-button:hover,
+.web-content .ss-menu .services-button:hover,
+.web-content .ss-menu .product-button:hover {
   background-color: #5a81fa;
 }
 
@@ -746,14 +774,12 @@ nav.close~.dashboard .top {
     left: 250px;
     width: calc(100% - 250px);
   }
+
 }
 
 @media (max-width: 780px) {
-  .web-content .boxes-overview .box {
-    width: calc(100% / 3 - 15px);
-    margin-top: 15px;
-    height: 350px;
-    max-height: 350px;
+  .web-content .boxes-overview {
+    display: block;
   }
 
   .boxes-overview .box .action {
@@ -782,16 +808,14 @@ nav.close~.dashboard .top {
     margin-left: 50px;
   }
 
-  .menu {
-    margin-top: 40px;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    align-items: flex-start;
+  .ss-menu .bttn{
+    display: block;
   }
+
 }
 
 @media (max-width: 560px) {
+
   .web-content .boxes-overview .box {
     width: calc(100% / 2 - 15px);
     height: 350px;
@@ -815,6 +839,9 @@ nav.close~.dashboard .top {
     border-radius: 5px;
     height: 100px;
     margin-left: 50px;
+  }
+  .ss-menu .bttn{
+    display: block;
   }
 }
 
@@ -866,4 +893,5 @@ nav.close~.dashboard .top {
     left: 0;
     width: 100%;
   }
+
 }

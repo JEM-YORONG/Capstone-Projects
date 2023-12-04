@@ -306,11 +306,6 @@ nav.close~.Contents .top {
     outline: none;
 }
 
-.menu .search-box input[type=text] {
-    width: 130px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
-}
 
 .menu .search-box input[type=text]:focus {
     width: 100%;
@@ -417,9 +412,9 @@ nav.close~.Contents .top {
 .form-popup-edit {
     display: none;
     position: fixed;
-    bottom: 0;
-    right: 25%;
-    bottom: 25%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 9;
 }
 
@@ -611,8 +606,9 @@ nav.close~.Contents .top {
 .form-popup-delete {
     display: none;
     position: fixed;
-    right: 35%;
-    bottom: 35%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 9;
 }
 
@@ -624,9 +620,10 @@ nav.close~.Contents .top {
     box-shadow: 3px 3px 6px #f7abab;
     padding: 12px;
     border-style: 2px solid;
+    width: 350px;
 }
 
-.form-container-delete .title {
+.form-container-delete .delete-title {
     font-size: 15px;
     font-weight: 700;
     color: #f71111;
@@ -659,6 +656,7 @@ nav.close~.Contents .top {
     outline: none;
     margin-bottom: 2px;
     margin-left: 5px;
+    margin-top: 5px;
 }
 
 .form-container-delete .form-delete .inputfield .btn-cancel {
@@ -673,7 +671,7 @@ nav.close~.Contents .top {
     border-radius: 3px;
     outline: none;
     margin-bottom: 2px;
-
+    margin-top: 5px;
 }
 
 .form-container-delete .form-delete .inputfield .btn-delete:hover {
@@ -740,15 +738,6 @@ nav.close~.Contents .top {
 
 @media (max-width: 780px) {
 
-
-    .form-popup {
-        bottom: 10px;
-    }
-
-    .form-popup-edit {
-        bottom: 10px;
-        left: 100px;
-    }
 
     .form-container .form .inputfield,
     .form-container-edit .form-edit .inputfield {

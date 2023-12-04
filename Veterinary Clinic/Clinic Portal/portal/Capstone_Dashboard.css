@@ -427,15 +427,14 @@ td {
 .form-popup-sms {
   display: none;
   position: fixed;
-  bottom: 0;
-  right: 25%;
-  bottom: 25%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 9;
 }
 
 .form-container-sms {
-  max-width: 500px;
-  width: 100%;
+
   background: #f5f2ff;
   margin: 20px auto;
   box-shadow: 3px 3px 6px #abbef7;
@@ -857,15 +856,6 @@ td {
     margin-top: 15px;
   }
 
-  .form-popup {
-    bottom: 10px;
-  }
-
-  .form-popup-sms,
-  .form-popup-edit {
-    bottom: 10px;
-    left: 100px;
-  }
 
   .form-container .form .inputfield,
   .form-container-edit .form-edit .inputfield {
@@ -906,15 +896,7 @@ td {
     width: 100%;
   }
 
-  .form-popup {
-    bottom: 10px;
-  }
 
-  .form-popup-sms,
-  .form-popup-edit {
-    bottom: 10px;
-    left: 100px;
-  }
 
   .form-container .form .inputfield,
   .form-container-edit .form-edit .inputfield {
