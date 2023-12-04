@@ -1,0 +1,9 @@
+.page-maintenance-content {
+  display: none;
+  margin-left: 30px;
+}
+
+.page-maintenance:hover .page-maintenance-content {
+  display: block;
+  margin-left: 30px;
+}
