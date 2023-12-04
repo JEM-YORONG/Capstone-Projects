@@ -421,7 +421,7 @@
           </div>
           <div class="inputfield">
             <input type="button" value="Cancel" class="btn-cancel" onclick="closeAddPets()" />
-            <input type="button" value="Add Pet" class="btn-add" onclick="submitData('addPet'); closeAddPets();" />
+            <input type="button" value="Add Pet" class="btn-add" onclick="submitData('addPet'); closeAddPets2();" />
           </div>
           <?php require 'customer-pet-record-data.js.php'; ?>
         </div>
@@ -555,7 +555,7 @@
           </div>
           <div class="inputfield">
             <input type="button" value="Cancel" class="btn-cancel" />
-            <input type="button" value="Add Record" class="btn-add" onclick="submitData('addPetRecord'); closeAddRecords();" />
+            <input type="button" value="Add Record" class="btn-add" onclick="submitData('addPetRecord');" />
           </div>
           <?php require "customer-pet-record-data.js.php"; ?>
           <button type="button" class="btn-close" onclick="closeAddRecords()">
@@ -977,6 +977,22 @@
 
     function openAddPets() {
       document.getElementById("myform-pets").style.display = "block";
+    }
+
+    function closeAddPets2() {
+      //
+      var petname = document.getElementById("petName").value;
+      var petgnder = document.getElementById("gender").value;
+      var petbday = document.getElementById("birthDate").value;
+      var petbreed = document.getElementById("breed").value;
+      var petspecies = document.getElementById("species").value;
+
+      if (petname == "" || petgnder == "" || petbreed == "" || petspecies == "" || petbday == "") {
+        successAlert("Empty fields detected");
+      } else {
+        document.getElementById("myform-pets").style.display = "none";
+        successAlert("Pet added successfully");
+      }
     }
 
     function closeAddPets() {

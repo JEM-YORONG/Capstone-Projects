@@ -17,6 +17,9 @@
   <!----===== Icons ===== -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
   <?php require 'alert-notif-function.php'; ?>
+
+
+  
   <!--=====Change name mo na lang====-->
   <title>Admin Clinic Information Panel</title>
 </head>

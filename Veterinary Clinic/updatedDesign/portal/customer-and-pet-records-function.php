@@ -106,10 +106,8 @@ function addPet()
     $ownerAddress = $_POST["ownerAddress"];
 
     if (
-        empty($petName) || empty($gender) || empty($birthDate) || empty($breed) || empty($species) ||
-        empty($ownerId) || empty($ownerLastname) || empty($ownerFirstname) || empty($ownerContact) || empty($ownerEmail) || empty($ownerAddress)
+        empty($petName) || empty($gender) || empty($birthDate) || empty($breed) || empty($species)
     ) {
-        // At least one field is empty
         echo "emptyFields";
         return;
     }
@@ -133,8 +131,6 @@ function addPet()
     mysqli_query($conn, $query);
     mysqli_close($conn);
     echo "petAdded";
-    // echo $_POST["breed"];
-    // echo $_POST["species"];
 }
 
 function updatePet()

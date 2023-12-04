@@ -17,6 +17,12 @@
   <link rel="stylesheet" href="Capstone_Pets.css">
   <!----===== Icons ===== -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+  <?php require 'alert-notif-function.php'; ?>
+
+  <!-- pagenation css -->
+  <link rel="stylesheet" href="pagenation.css">
+
   <!--=====Change name mo na lang====-->
   <title>Admin Dashboard Panel</title>
 </head>
@@ -30,6 +36,7 @@
       <i class="sidebar-toggle"><span class="material-symbols-outlined"> menu </span></i>
       <div class="title">
         <span class="text">Dashboard</span>
+        <?php require 'alert-notif.php'; ?>
       </div>
     </div>
     <!--=====Customer/Pet/ Pet Grooming====-->
@@ -137,8 +144,10 @@
               </tr>
             </thead>
             <tbody id="table-body1"></tbody>
-            <?php require 'dashboard-schedule-refresh.js.php'; ?>
+            <?php require 'dashboard-schedule.php'; ?>
           </table>
+          <!-- pagenation buttons -->
+          <?php require 'pagenation-btn.php'; ?>
         </div>
 
         <!-- reprot analytics -->
@@ -172,7 +181,7 @@
               </div>
 
               <div class="inputfield-sms">
-                <input type="button" value="Send Message" class="btn-send" onclick="smsSend(); closeFormsms();">
+                <input type="button" value="Send Message" class="btn-send" onclick="smsSend(); closeFormsms2();">
               </div>
               <?php require 'smsFunction.php'; ?>
               <div class="inputfield-sms">
@@ -349,6 +358,11 @@ Doc Lenon Veterinary Clinic`;
 
     function opensms() {
       document.getElementById("myForm-sms").style.display = "block";
+    }
+
+    function closeFormsms2() {
+      document.getElementById("myForm-sms").style.display = "none";
+      successAlert("Message sent successfully.");
     }
 
     function closeFormsms() {

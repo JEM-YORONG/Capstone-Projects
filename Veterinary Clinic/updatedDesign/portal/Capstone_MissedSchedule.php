@@ -86,7 +86,7 @@
               </div>
 
               <div class="inputfield">
-                <input type="button" value="Add Appointment" class="btn-add" onclick="submitData('addAppointment'); closeForm();">
+                <input type="button" value="Add Appointment" class="btn-add" onclick="submitData('addAppointment'); closeForm2();">
                 <?php require 'missed-schedule-data.js.php'; ?>
               </div>
             </div>
@@ -139,6 +139,15 @@
 
     function deleteRow(rowId) {
       document.getElementById("rowId").value = rowId;
+    }
+
+    function closeForm2() {
+      var date = document.getElementById("date").value;
+      if (date == "") {
+        //successAlert("Empty fields detected");
+      } else {
+        document.getElementById("myForm").style.display = "none";
+      }
     }
 
     function closeForm() {

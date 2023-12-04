@@ -43,9 +43,9 @@ function loop($result)
             <img class="gumanaKa" src="<?php echo $imageScr; ?>" alt="" id="imagename<?php echo $index; ?>" />
             <h3 class="title" id="title"><?php echo $row["title"]; ?></h3>
             <h6><?php echo $row["categories"]; ?></h6>
-            <p class="desc">
-                <?php echo $row["description"]; ?>
-            </p>
+            <!-- <p class="desc">
+                <?php //echo $row["description"]; ?>
+            </p> -->
             <br />
             <div class="action">
                 <p class="date" id="date"><?php echo $row["date"]; ?></p>

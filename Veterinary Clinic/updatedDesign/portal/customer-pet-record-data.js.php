@@ -2,6 +2,9 @@
 <script>
     function submitData(action) {
         $(document).ready(function() {
+            var tableData = "";
+            var tableData2 = "";
+
             var data = {
                 action: action,
                 //customer data
@@ -199,6 +202,9 @@
                             $("#v3").css("display", "none");
 
                             successAlert("Pet record added successfully");
+
+                            //close form
+                            document.getElementById("myform-records").style.display = "none";
                         } else if (response == 'ePetRecord') {
                             alert("Error adding pet record");
                         } else {

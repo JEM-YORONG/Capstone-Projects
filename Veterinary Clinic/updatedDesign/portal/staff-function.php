@@ -51,32 +51,64 @@ function addStaff()
         echo $passwordClean;
         */
 
-        // Prepare the SQL statement for checking email
-        $query = "SELECT * FROM staffs WHERE email = ?";
-        $stmt = mysqli_prepare($conn, $query);
-        mysqli_stmt_bind_param($stmt, "s", $emailClean);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
 
-        // Check if the query returned any rows for email
-        if (mysqli_num_rows($result) == 1) {
-            $row = mysqli_fetch_assoc($result);
-            $role = $row['role'];
-            if ($role == 'Groomer' || $role == 'Assistant') {
+        $query = "SELECT email, contact FROM staffs";
+        $result = mysqli_query($conn, $query);
 
-                $query = "INSERT INTO staffs VALUES ('', '$idClean', '$nameClean', '$roleClean', '$contactClean', '$emailClean', '$passwordClean')";
-                mysqli_query($conn, $query);
-                mysqli_close($conn);
-                echo "Staff added successfully";
+        $emailArray = array();
+        $contactArray = array();
+
+        while ($row = mysqli_fetch_assoc($result)) {
+            $emailArray[] = $row['email'];
+            $contactArray[] = $row['contact'];
+        }
+
+        if ($role == "Groomer" || $role == "Assistant") {
+
+            if (in_array($contactClean, $contactArray)) {
+                echo "Contact is already used.";
             } else {
-                echo "Email is already used.";
+                $query = "INSERT INTO staffs (cliniId, name, role, contact, email, password) VALUES (?, ?, ?, ?, ?, ?)";
+                $stmt = mysqli_prepare($conn, $query);
+
+                $e = '--------';
+                $p = '--------';
+
+                mysqli_stmt_bind_param($stmt, "ssssss", $idClean, $nameClean, $roleClean, $contactClean, $e, $p);
+
+                if (mysqli_stmt_execute($stmt)) {
+                    echo "Staff added successfully";
+                } else {
+                    //echo "Error adding staff: " . mysqli_error($conn);
+                }
+                // Close the statement
+                mysqli_stmt_close($stmt);
             }
         } else {
+            // Check if contact or email already exists
+            if (in_array($contactClean, $contactArray)) {
+                echo "Contact is already used.";
+                return;
+            }
+            if (in_array($emailClean, $emailArray)) {
+                echo "Email is already used.";
+                return;
+            }
 
-            $query = "INSERT INTO staffs VALUES ('', '$idClean', '$nameClean', '$roleClean', '$contactClean', '$emailClean', '$passwordClean')";
-            mysqli_query($conn, $query);
+            $query = "INSERT INTO staffs (cliniId, name, role, contact, email, password) VALUES (?, ?, ?, ?, ?, ?)";
+            $stmt = mysqli_prepare($conn, $query);
+
+            mysqli_stmt_bind_param($stmt, "ssssss", $idClean, $nameClean, $roleClean, $contactClean, $emailClean, $passwordClean);
+
+            if (mysqli_stmt_execute($stmt)) {
+                echo "Staff added successfully";
+            } else {
+                //echo "Error adding staff: " . mysqli_error($conn);
+            }
+            // Close the statement
+            mysqli_stmt_close($stmt);
+
             mysqli_close($conn);
-            echo "Staff added successfully";
         }
     }
 }
@@ -129,28 +161,22 @@ function editStaff()
             echo $passwordClean;
             */
 
-        /*
-        // Prepare the SQL statement for checking email
-        $query = "SELECT * FROM staffs WHERE email = ?";
-        $stmt = mysqli_prepare($conn, $query);
-        mysqli_stmt_bind_param($stmt, "s", $emailClean);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
+        // $query = "SELECT email, contact FROM staffs";
+        // $result = mysqli_query($conn, $query);
 
-        // Check if the query returned any rows for email
-        if (mysqli_num_rows($result) == 1) {
-            echo "Email is already used.";
-        } else {
-            // Hash the password
-            //$hashedPassword = password_hash($passwordClean, PASSWORD_DEFAULT);
+        // $idArray = array();
+        // $contactArray = array();
 
-            $query = "UPDATE staffs SET name = '$nameClean', role = '$roleClean', contact = '$contactClean', email = '$emailClean', password = '$passwordClean' WHERE cliniId = '$id'";
-            mysqli_query($conn, $query);
-            mysqli_close($conn);
-            echo "Staff Updated Successfully.";
-        }
-        */
+        // while ($row = mysqli_fetch_assoc($result)) {
+        //     $idArray[] = $row['cliniId'];
+        //     $contactArray[] = $row['contact'];
+        // }
 
+        // if (in_array($id, $idArray)) {
+        //     echo "Contact is already used.";
+        //     return;
+        // }
+        
         $query = "UPDATE staffs SET name = '$nameClean', role = '$roleClean', contact = '$contactClean', email = '$emailClean', password = '$passwordClean' WHERE cliniId = '$id'";
         mysqli_query($conn, $query);
         mysqli_close($conn);

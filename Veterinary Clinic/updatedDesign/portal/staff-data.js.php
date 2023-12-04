@@ -63,7 +63,11 @@
                         if (response === "Email is already used.") {
                             successAlert("Email is already used.");
                         }
+                        if(response === "Contact is already used."){
+                            successAlert("Contact is already used.");
+                        }
                     }
+                    //alert(response);
                 }
             });
         });
