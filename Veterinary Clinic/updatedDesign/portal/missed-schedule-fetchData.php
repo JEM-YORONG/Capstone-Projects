@@ -1,14 +1,7 @@
 <?php
 require 'database-conn.php';
 
-$search = $_GET['search'];
-
 $query = "SELECT * FROM schedule WHERE status NOT IN ('Done', 'Upcoming', 'Past')";
-
-// If search input is not empty, add a WHERE clause to filter the data
-if (!empty($search)) {
-    $query .= " AND (ownername LIKE '%$search%' OR date LIKE '%$search%')";
-}
 
 $result = mysqli_query($conn, $query);
 

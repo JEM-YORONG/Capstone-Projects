@@ -289,7 +289,7 @@
 
       <!--Visit Date Table-->
       <div class="pet-records">
-        <div class="customer-pet-table" id="petRecordTable" style="display: block;">
+        <div class="customer-pet-table" id="visitTable" style="display: block;">
           <input type="text" id="getPetID" value="" style="display: none;">
           <input type="text" id="getOwnerName" name="getOwnerName" value="" style="display: none;">
           <input type="text" id="getOwnerID" name="getOwnerID" value="" style="display: none;">
@@ -307,7 +307,7 @@
         </div>
 
         <!-- Next Visit -->
-        <div class="customer-pet-table" id="petRecordTable" style="display: block;">
+        <div class="customer-pet-table" id="nextVisitTable" style="display: block;">
           <input type="text" id="getPetID" value="" style="display: none;">
           <input type="text" id="getOwnerName" name="getOwnerName" value="" style="display: none;">
           <input type="text" id="getOwnerID" name="getOwnerID" value="" style="display: none;">

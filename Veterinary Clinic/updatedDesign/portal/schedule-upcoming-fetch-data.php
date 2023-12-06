@@ -1,7 +1,6 @@
 <?php
 require 'database-conn.php';
 
-$search = $_GET['search2'];
 
 // Set the timezone to 'Asia/Manila'
 date_default_timezone_set('Asia/Manila');
@@ -9,12 +8,7 @@ date_default_timezone_set('Asia/Manila');
 // Get the current date in the same format as your database date
 $currentDate = date('Y-m-d');
 
-$query = "SELECT * FROM schedule WHERE status = 'Upcoming'";
-
-// If search input is not empty
-if (!empty($search)) {
-    $query .= " AND (ownername LIKE '%$search%' OR date LIKE '%$search%' OR number LIKE '%$search%')";
-}
+$query = "SELECT * FROM schedule WHERE date <> CURDATE() AND status NOT IN ('Past', 'Today', 'Missed')";
 
 $result = mysqli_query($conn, $query);
 

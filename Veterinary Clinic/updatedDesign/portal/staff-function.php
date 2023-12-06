@@ -142,45 +142,58 @@ function editStaff()
     $emailClean = mysqli_real_escape_string($conn, $email);
     $passwordClean = mysqli_real_escape_string($conn, $password);
 
-    // Validate input
-    if (empty($idClean) || empty($nameClean) || empty($roleClean) || empty($contactClean) || empty($emailClean) || empty($passwordClean)) {
-        echo "Empty Fields Detected";
-    } else if (strlen($contactClean) !== 11 || !ctype_alnum($contactClean)) {
-        echo "Contact must be 11 digit";
-    } else if (strlen($passwordClean) !== 8 || !ctype_alnum($passwordClean)) {
-        echo "Password must be at least 8 characters";
-    } else if (substr($email, -10) !== "@gmail.com") {
-        echo "Invalid Email";
+    if ($roleClean == "Groomer" || $roleClean == "Assistant") {
+        // Validate input
+        if (empty($idClean) || empty($nameClean) || empty($roleClean) || empty($contactClean) || empty($emailClean) || empty($passwordClean)) {
+            echo "Empty Fields Detected";
+        } else if (strlen($contactClean) !== 11 || !ctype_alnum($contactClean)) {
+            echo "Contact must be 11 digit";
+        } else {
+
+            if ($roleClean == "Groomer" || $roleClean == "Assistant") {
+
+                $e = '--------';
+                $p = '--------';
+
+                $query = "UPDATE staffs SET name = '$nameClean', role = '$roleClean', contact = '$contactClean', email = '$e', password = '$p' WHERE cliniId = '$id'";
+                mysqli_query($conn, $query);
+                mysqli_close($conn);
+                echo "Staff updated successfully";
+            } else {
+                $query = "UPDATE staffs SET name = '$nameClean', role = '$roleClean', contact = '$contactClean', email = '$emailClean', password = '$passwordClean' WHERE cliniId = '$id'";
+                mysqli_query($conn, $query);
+                mysqli_close($conn);
+                echo "Staff updated successfully";
+            }
+        }
     } else {
-        /*
-            echo $idClean;
-            echo $nameClean;
-            echo $roleClean;
-            echo $contactClean;
-            echo $emailClean;
-            echo $passwordClean;
-            */
+        // Validate input
+        if (empty($idClean) || empty($nameClean) || empty($roleClean) || empty($contactClean) || empty($emailClean) || empty($passwordClean)) {
+            echo "Empty Fields Detected";
+        } else if (strlen($contactClean) !== 11 || !ctype_alnum($contactClean)) {
+            echo "Contact must be 11 digit";
+        } else if (strlen($passwordClean) !== 8 || !ctype_alnum($passwordClean)) {
+            echo "Password must be at least 8 characters";
+        } else if (substr($email, -10) !== "@gmail.com") {
+            echo "Invalid Email";
+        } else {
 
-        // $query = "SELECT email, contact FROM staffs";
-        // $result = mysqli_query($conn, $query);
+            if ($roleClean == "Groomer" || $roleClean == "Assistant") {
 
-        // $idArray = array();
-        // $contactArray = array();
+                $e = '--------';
+                $p = '--------';
 
-        // while ($row = mysqli_fetch_assoc($result)) {
-        //     $idArray[] = $row['cliniId'];
-        //     $contactArray[] = $row['contact'];
-        // }
-
-        // if (in_array($id, $idArray)) {
-        //     echo "Contact is already used.";
-        //     return;
-        // }
-        
-        $query = "UPDATE staffs SET name = '$nameClean', role = '$roleClean', contact = '$contactClean', email = '$emailClean', password = '$passwordClean' WHERE cliniId = '$id'";
-        mysqli_query($conn, $query);
-        mysqli_close($conn);
-        echo "Staff updated successfully";
+                $query = "UPDATE staffs SET name = '$nameClean', role = '$roleClean', contact = '$contactClean', email = '$e', password = '$p' WHERE cliniId = '$id'";
+                mysqli_query($conn, $query);
+                mysqli_close($conn);
+                echo "Staff updated successfully";
+            } else {
+                $query = "UPDATE staffs SET name = '$nameClean', role = '$roleClean', contact = '$contactClean', email = '$emailClean', password = '$passwordClean' WHERE cliniId = '$id'";
+                mysqli_query($conn, $query);
+                mysqli_close($conn);
+                echo "Staff updated successfully";
+            }
+        }
     }
 }
 

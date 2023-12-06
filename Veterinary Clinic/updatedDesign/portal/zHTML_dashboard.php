@@ -20,8 +20,33 @@
 
   <?php require 'alert-notif-function.php'; ?>
 
-  <!-- pagenation css -->
-  <link rel="stylesheet" href="pagenation.css">
+  <!-- pagenation design -->
+  <style>
+    .pagination-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .pagination-button {
+      background-color: #ffffff;
+      border: 1px solid #5a81fa;
+      border-radius: 8px;
+      box-sizing: border-box;
+      color: #5a81fa;
+      cursor: pointer;
+      font-size: 13px;
+      line-height: 29px;
+      padding: 0 10px;
+      margin: 0 5px;
+    }
+
+    .pagination-button.active {
+      background-color: #5a81fa;
+      color: #ffffff;
+    }
+  </style>
 
   <!--=====Change name mo na lang====-->
   <title>Admin Dashboard Panel</title>
@@ -134,7 +159,7 @@
 
         <!--=====Table for today schedule====-->
         <div class="today-clinic-schedule-responsive">
-          <table class="clinic-schedule" width=100%>
+          <table class="clinic-schedule" width=100% id="todayApp">
             <thead>
               <tr>
                 <!-- <th scope="col" width=5%></th> -->
@@ -146,9 +171,74 @@
             <tbody id="table-body1"></tbody>
             <?php require 'dashboard-schedule.php'; ?>
           </table>
-          <!-- pagenation buttons -->
-          <?php require 'pagenation-btn.php'; ?>
         </div>
+
+        <div id="pagination-container" class="pagination"></div>
+
+        <script>
+          var rowsPerPage = 5; // Adjust this to your desired number of rows per page
+          var currentPage = 1;
+
+          function showPage(pageNumber) {
+            var startIndex = (pageNumber - 1) * rowsPerPage;
+            var endIndex = startIndex + rowsPerPage;
+
+            var rows = document.getElementById('todayApp').rows;
+
+            for (var i = 1; i < rows.length; i++) {
+              rows[i].style.display = (i > startIndex && i <= endIndex) ? '' : 'none';
+            }
+
+            updatePaginationButtons(pageNumber);
+            currentPage = pageNumber;
+          }
+
+          function updatePaginationButtons(activePage) {
+            var buttons = document.getElementsByClassName('pagination-button');
+
+            for (var i = 0; i < buttons.length; i++) {
+              buttons[i].classList.remove('active');
+            }
+
+            var activeButton = document.getElementById('pageBtn' + activePage);
+
+            if (activeButton) {
+              activeButton.classList.add('active');
+            }
+          }
+
+          function generatePaginationControls() {
+            var paginationContainer = document.getElementById('pagination-container');
+            var pageCount = Math.ceil((document.getElementById('todayApp').rows.length - 1) / rowsPerPage);
+
+            var paginationHtml = '<button class="pagination-button" onclick="previousPage()">Previous</button>';
+
+            for (var i = 1; i <= pageCount; i++) {
+              paginationHtml += '<button id="pageBtn' + i + '" class="pagination-button ' + (i === currentPage ? 'active' : '') + '" onclick="showPage(' + i + ')">' + i + '</button>';
+            }
+
+            paginationHtml += '<button class="pagination-button" onclick="nextPage()">Next</button>';
+
+            paginationContainer.innerHTML = paginationHtml;
+          }
+
+
+          function previousPage() {
+            if (currentPage > 1) {
+              showPage(currentPage - 1);
+            }
+          }
+
+          function nextPage() {
+            var pageCount = Math.ceil((document.getElementById('todayApp').rows.length - 1) / rowsPerPage);
+            if (currentPage < pageCount) {
+              showPage(currentPage + 1);
+            }
+          }
+
+          generatePaginationControls();
+          showPage(1);
+        </script>
 
         <!-- reprot analytics -->
 

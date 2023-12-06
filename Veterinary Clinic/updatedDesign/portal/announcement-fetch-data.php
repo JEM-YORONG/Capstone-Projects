@@ -1,6 +1,6 @@
 <?php
 require 'database-conn.php';
-$filter = $_GET["id"];
+
 $query = "SELECT * FROM announcement ORDER BY id DESC";
 
 $result = mysqli_query($conn, $query);

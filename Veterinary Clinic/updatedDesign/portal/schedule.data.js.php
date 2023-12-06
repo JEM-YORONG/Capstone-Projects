@@ -1,5 +1,39 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script>
+    var rowsPerPage = 5;
+    var currentPage = 1;
+
+    function refreshContent1() {
+        $.ajax({
+            url: window.location.href,
+            type: 'GET',
+            success: function(data) {
+                $('#todaySched').html($(data).find('#todaySched').html());
+                generatePaginationControls1(); // Update function name
+                showPage1(currentPage); // Update function name
+            },
+            error: function() {
+                console.error("Failed to refresh content");
+            }
+        });
+    }
+
+    function refreshContent2() {
+        $.ajax({
+            url: window.location.href,
+            type: 'GET',
+            success: function(data) {
+                $('#upcomingSched').html($(data).find('#upcomingSched').html());
+                generatePaginationControls2(); // Update function name
+                showPage2(currentPage); // Update function name
+            },
+            error: function() {
+                console.error("Failed to refresh content");
+            }
+        });
+    }
+
+
     function submitData(action) {
         $(document).ready(function() {
             var data = {
@@ -85,6 +119,9 @@
                             $("#pet1, #pet2, #pet3, #pet4, #pet5, #s1, #s2, #s3, #myForm").hide();
 
                             successAlert("Schedule added successfully");
+
+                            refreshContent1();
+                            refreshContent2();
                         }
 
                         if (response == "ScheduleUpdatedSuccessfully") {
@@ -99,11 +136,17 @@
                             document.getElementById("pet5U").style.display = "none";
 
                             document.getElementById("updateForm").style.display = "none";
+
+                            refreshContent1();
+                            refreshContent2();
                         }
 
                         if (response == "ScheduleDeletedSuccessfully") {
                             errorAlert("Schedule deleted successfully");
                             document.getElementById("myForm-delete").style.display = "none";
+
+                            refreshContent1();
+                            refreshContent2();
                         }
 
                         if (response == "Please fill in all the fields") {
@@ -122,4 +165,190 @@
             });
         });
     }
+
+    function showPage1(pageNumber) {
+        var startIndex = (pageNumber - 1) * rowsPerPage1;
+        var endIndex = startIndex + rowsPerPage1;
+
+        var rows = document.getElementById('todaySched').rows;
+
+        for (var i = 1; i < rows.length; i++) {
+            rows[i].style.display = (i > startIndex && i <= endIndex) ? '' : 'none';
+        }
+
+        updatePaginationButtons1(pageNumber);
+        currentPage1 = pageNumber;
+    }
+
+    function updatePaginationButtons1(activePage) {
+        var buttons = document.getElementsByClassName('pagination-button');
+
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].classList.remove('active');
+        }
+
+        var activeButton = document.getElementById('pageBtn1' + activePage);
+
+        if (activeButton) {
+            activeButton.classList.add('active');
+        }
+    }
+
+    function generatePaginationControls1() {
+        var paginationContainer = document.getElementById('pagination-container1');
+        var pageCount = Math.ceil((document.getElementById('todaySched').rows.length - 1) / rowsPerPage1);
+
+        var paginationHtml = '<button class="pagination-button" onclick="previousPage1()">Previous</button>';
+
+        for (var i = 1; i <= pageCount; i++) {
+            paginationHtml += '<button id="pageBtn1' + i + '" class="pagination-button ' + (i === currentPage1 ? 'active' : '') + '" onclick="showPage1(' + i + ')">' + i + '</button>';
+        }
+
+        paginationHtml += '<button class="pagination-button" onclick="nextPage1()">Next</button>';
+
+        paginationContainer.innerHTML = paginationHtml;
+    }
+
+    function previousPage1() {
+        if (currentPage1 > 1) {
+            showPage1(currentPage1 - 1);
+        }
+    }
+
+    function nextPage1() {
+        var pageCount = Math.ceil((document.getElementById('todaySched').rows.length - 1) / rowsPerPage1);
+        if (currentPage1 < pageCount) {
+            showPage1(currentPage1 + 1);
+        }
+    }
+
+    function filterTable() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("search1");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("todaySched");
+        tr = table.getElementsByTagName("tr");
+
+        if (filter === "") {
+            showPage1(1);
+            return;
+        }
+
+        for (i = 1; i < tr.length; i++) {
+            var visible = false;
+            for (var j = 0; j < tr[i].cells.length; j++) {
+                td = tr[i].cells[j];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        visible = true;
+                        break;
+                    }
+                }
+            }
+            tr[i].style.display = visible ? "" : "none";
+        }
+    }
+
+    generatePaginationControls1();
+    showPage1(1);
+
+    function showPage2(pageNumber) {
+        var startIndex = (pageNumber - 1) * rowsPerPage2;
+        var endIndex = startIndex + rowsPerPage2;
+
+        var rows = document.getElementById('upcomingSched').rows;
+
+        for (var i = 1; i < rows.length; i++) {
+            rows[i].style.display = (i > startIndex && i <= endIndex) ? '' : 'none';
+        }
+
+        updatePaginationButtons2(pageNumber);
+        currentPage2 = pageNumber;
+    }
+
+    function updatePaginationButtons2(activePage) {
+        var buttons = document.getElementsByClassName('pagination-button');
+
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].classList.remove('active');
+        }
+
+        var activeButton = document.getElementById('pageBtn2' + activePage);
+
+        if (activeButton) {
+            activeButton.classList.add('active');
+        }
+    }
+
+    function generatePaginationControls2() {
+        var paginationContainer = document.getElementById('pagination-container2');
+        var pageCount = Math.ceil((document.getElementById('upcomingSched').rows.length - 1) / rowsPerPage2);
+
+        var paginationHtml = '<button class="pagination-button" onclick="previousPage2()">Previous</button>';
+
+        for (var i = 1; i <= pageCount; i++) {
+            paginationHtml += '<button id="pageBtn2' + i + '" class="pagination-button ' + (i === currentPage2 ? 'active' : '') + '" onclick="showPage2(' + i + ')">' + i + '</button>';
+        }
+
+        paginationHtml += '<button class="pagination-button" onclick="nextPage2()">Next</button>';
+
+        paginationContainer.innerHTML = paginationHtml;
+    }
+
+    function previousPage2() {
+        if (currentPage2 > 1) {
+            showPage2(currentPage2 - 1);
+        }
+    }
+
+    function nextPage2() {
+        var pageCount = Math.ceil((document.getElementById('upcomingSched').rows.length - 1) / rowsPerPage2);
+        if (currentPage2 < pageCount) {
+            showPage2(currentPage2 + 1);
+        }
+    }
+
+    function onSelect() {
+        const dateVal = document.getElementById("sortDate").value;
+        if (dateVal === "") {
+            document.getElementById("search2").value = "";
+            showPage2(1);
+        } else {
+            document.getElementById("search2").value = dateVal;
+            filterTable2();
+        }
+    }
+
+    function filterTable2() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("search2");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("upcomingSched");
+        tr = table.getElementsByTagName("tr");
+
+        if (filter === "") {
+            showPage2(1);
+            return;
+        }
+
+        for (i = 1; i < tr.length; i++) {
+            var visible = false;
+            for (var j = 0; j < tr[i].cells.length; j++) {
+                td = tr[i].cells[j];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        visible = true;
+                        break;
+                    }
+                }
+            }
+            tr[i].style.display = visible ? "" : "none";
+        }
+    }
+
+
+    generatePaginationControls2();
+    showPage2(1);
 </script>

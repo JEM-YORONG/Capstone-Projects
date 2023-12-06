@@ -20,6 +20,40 @@
   <!----===== Icons ===== -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
+  <!-- pagenation design -->
+  <style>
+    .pagination-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .pagination-button {
+      background-color: #ffffff;
+      border: 1px solid #5a81fa;
+      border-radius: 8px;
+      box-sizing: border-box;
+      color: #5a81fa;
+      cursor: pointer;
+      font-size: 13px;
+      line-height: 29px;
+      padding: 0 10px;
+      margin: 0 5px;
+    }
+
+    .pagination-button.active {
+      background-color: #5a81fa;
+      color: #ffffff;
+    }
+  </style>
+
+  <style>
+    .box {
+      display: block;
+    }
+  </style>
+
   <?php require 'alert-notif-function.php'; ?>
   <!--=====Change name mo na lang====-->
   <title>Admin Clinic Information Panel</title>
@@ -42,21 +76,115 @@
     <div class="web-content">
       <div class="ss-menu">
         <div class="bttn">
-          <button class="viewAll-button" onclick="clearRadio()">View All</button>
-          <button class="services-button" onclick="serviceOnly()">Services Only</button>
-          <button class="product-button" onclick="displayFilter()">Products Only</button>
+          <button class="viewAll-button" onclick="clearRadio(); filterContent('');">View All</button>
+          <button class="services-button" onclick="serviceOnly(); filterContent('Services');">Services Only</button>
+          <button class="product-button" onclick="displayFilter(); filterContent('Products')">Products Only</button>
           <button class="filter" id="filterbttn" onclick="openFormFilter()" style="display: none; color: #ffffff; background-color: #5a81fa;">
             <span class="material-symbols-outlined">filter_list</span>
           </button>
           <button class="add-button1" onclick="openAddServProd()">Add New</button>
-          <input type="text" id="filterValue" style="display: none;">
+          <input type="text" id="filterValue" oninput="filterTable()" style="display: none;">
         </div>
       </div>
+
       <div class="boxes-overview" id="refresh">
         <!-- product boxes -->
-        <?php require 'service-product-autorefresh.js.php'; ?>
+        <?php require 'service-product-fetch-data.php'; ?>
         <!--End of display-->
       </div>
+
+      <div id="pagination-container" class="pagination"></div>
+
+      <script>
+        var rowsPerPage = 12; // Adjust this to your desired number of rows per page
+        var currentPage = 1;
+
+        function showPage(pageNumber) {
+          var startIndex = (pageNumber - 1) * rowsPerPage;
+          var endIndex = startIndex + rowsPerPage;
+
+          var rows = document.getElementById('refresh').querySelectorAll('.box');
+
+          for (var i = 0; i < rows.length; i++) {
+            rows[i].style.display = (i >= startIndex && i < endIndex) ? '' : 'none';
+          }
+
+          updatePaginationButtons(pageNumber);
+          currentPage = pageNumber;
+        }
+
+        function updatePaginationButtons(activePage) {
+          var buttons = document.getElementsByClassName('pagination-button');
+
+          for (var i = 0; i < buttons.length; i++) {
+            buttons[i].classList.remove('active');
+          }
+
+          var activeButton = document.getElementById('pageBtn' + activePage);
+
+          if (activeButton) {
+            activeButton.classList.add('active');
+          }
+        }
+
+        function generatePaginationControls() {
+          var paginationContainer = document.getElementById('pagination-container');
+          var rowCount = document.getElementById('refresh').querySelectorAll('.box').length;
+          var pageCount = Math.ceil(rowCount / rowsPerPage);
+
+          var paginationHtml = '<button class="pagination-button" onclick="previousPage()">Previous</button>';
+
+          for (var i = 1; i <= pageCount; i++) {
+            paginationHtml += '<button id="pageBtn' + i + '" class="pagination-button ' + (i === currentPage ? 'active' : '') + '" onclick="showPage(' + i + ')">' + i + '</button>';
+          }
+
+          paginationHtml += '<button class="pagination-button" onclick="nextPage()">Next</button>';
+
+          paginationContainer.innerHTML = paginationHtml;
+        }
+
+        function previousPage() {
+          if (currentPage > 1) {
+            showPage(currentPage - 1);
+          }
+        }
+
+        function nextPage() {
+          var rowCount = document.getElementById('refresh').querySelectorAll('.box').length;
+          var pageCount = Math.ceil(rowCount / rowsPerPage);
+
+          if (currentPage < pageCount) {
+            showPage(currentPage + 1);
+          }
+        }
+
+        function filterContent(filterCategory) {
+          handleFilter(filterCategory);
+        }
+
+        function handleFilter(filterCategory) {
+          var container = document.getElementById("refresh");
+          var boxes = container.querySelectorAll('.box');
+
+          if (!filterCategory) {
+            generatePaginationControls();
+            showPage(1);
+            return;
+          }
+
+          boxes.forEach(function(box) {
+            var category = box.querySelector('h6').innerText.trim();
+            var isVisible = category.toUpperCase().includes(filterCategory.toUpperCase());
+
+            box.style.display = isVisible ? 'block' : 'none';
+
+            category.style.textAlign = 'center';
+          });
+        }
+
+        generatePaginationControls();
+        showPage(1);
+      </script>
 
       <!--Add Data-->
       <div class="form-popup-servprod" id="myForm-servprod">
@@ -241,8 +369,10 @@
       var ele = document.getElementsByName('category');
 
       for (i = 0; i < ele.length; i++) {
-        if (ele[i].checked)
+        if (ele[i].checked) {
           document.getElementById("filterValue").value = ele[i].value;
+          filterContent(ele[i].value);
+        }
       }
     }
 
@@ -333,7 +463,6 @@
     function closeFormFilter() {
       document.getElementById("myForm-filter").style.display = "none";
     }
-
   </script>
 </body>
 

@@ -205,6 +205,18 @@
 
                             //close form
                             document.getElementById("myform-records").style.display = "none";
+
+                            $.ajax({
+                                url: window.location.href,
+                                type: 'GET',
+                                success: function(data) {
+                                    $('#visitTable').html($(data).find('#visitTable').html());
+                                    $('#nextVisitTable').html($(data).find('#nextVisitTable').html());
+                                },
+                                error: function() {
+                                    console.error("Failed to refresh content");
+                                }
+                            });
                         } else if (response == 'ePetRecord') {
                             alert("Error adding pet record");
                         } else {

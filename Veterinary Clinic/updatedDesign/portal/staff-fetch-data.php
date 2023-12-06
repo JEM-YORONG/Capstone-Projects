@@ -1,14 +1,14 @@
 <?php
 require 'database-conn.php';
 
-$search = $_GET['search'];
+//$search = $_GET['search'];
 
 $query = "SELECT * FROM staffs";
 
-// If search input is not empty, add a WHERE clause to filter the data
-if (!empty($search)) {
-    $query .= " WHERE cliniId LIKE '%$search%' OR name LIKE '%$search%' OR role LIKE '%$search%' OR contact LIKE '%$search%' OR email LIKE '%$search%'";
-}
+// // If search input is not empty, add a WHERE clause to filter the data
+// if (!empty($search)) {
+//     $query .= " WHERE cliniId LIKE '%$search%' OR name LIKE '%$search%' OR role LIKE '%$search%' OR contact LIKE '%$search%' OR email LIKE '%$search%'";
+// }
 
 $result = mysqli_query($conn, $query);
 

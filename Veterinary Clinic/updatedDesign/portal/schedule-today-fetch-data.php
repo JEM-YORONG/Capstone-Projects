@@ -4,18 +4,10 @@ require 'schedule-checker.php';
 
 statusChecker();
 
-$search = $_GET['search1'];
-
 // Set the timezone to 'Asia/Manila'
 date_default_timezone_set('Asia/Manila');
 
 $query = "SELECT * FROM schedule WHERE status != 'Done'";
-
-// If search input is not empty
-if (!empty($search)) {
-    $search = mysqli_real_escape_string($conn, $search);
-    $query .= " AND (ownername LIKE '%$search%' OR date LIKE '%$search%' OR number LIKE '%$search%')";
-}
 
 $result = mysqli_query($conn, $query);
 

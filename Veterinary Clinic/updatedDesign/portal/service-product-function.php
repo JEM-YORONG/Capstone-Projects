@@ -99,7 +99,7 @@ function addData()
 function EditData()
 {
     global $conn;
-    if (isset($_FILES['addImage']) && !empty($_FILES['addImage']['name'])) {
+    if (isset($_FILES['AddImage']) && !empty($_FILES['AddImage']['name'])) {
         $img = $_FILES['AddImage'];
         $title = $_POST['Title'];
         $imageExtension = strtolower(pathinfo($img['name'], PATHINFO_EXTENSION)); // Get the file extension

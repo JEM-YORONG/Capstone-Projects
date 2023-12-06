@@ -1,14 +1,7 @@
 <?php
-session_start();
 require 'database-conn.php';
 
-$search = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : '';
-
 $query = "SELECT * FROM pet";
-// If search input is not empty, add a WHERE clause to filter the data
-if (!empty($search)) {
-    $query .= " WHERE petname LIKE ? OR ownerfirstname LIKE ? OR ownerlastname LIKE ? OR ownercontact LIKE ? OR owneraddress LIKE ? OR birthdate LIKE ? OR type LIKE ? OR breed LIKE ? OR species LIKE ? OR gender LIKE ?";
-}
 
 $stmt = mysqli_prepare($conn, $query);
 

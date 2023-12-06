@@ -1,20 +1,6 @@
 <?php
 require 'database-conn.php';
-$filter = $_GET["filterValue"];
 $query = "SELECT * FROM serviceandproduct";
-
-// Check if $filter is not empty
-if (!empty($filter)) {
-    // Add WHERE clause with LIKE condition
-    $query .= " WHERE categories LIKE '%$filter%'";
-
-    // If the filter is "Product," further filter by specific categories
-    if ($filter == "Product") {
-        $categories = ["Pet Foods", "Bath Products", "Accessories", "Others"];
-        $categoriesStr = implode("', '", $categories);
-        $query .= " AND categories IN ('$categoriesStr')";
-    }
-}
 
 // Add ORDER BY clause to sort in descending order by id
 $query .= " ORDER BY id DESC";

@@ -1,8 +1,8 @@
 <script>
 // today and upcoming SMS
         function smsSend() {
-            const accountSid = 'AC20c0069aebe8d5850e8ca0d0c4898f5e';
-            const authToken = '385012cf27dde80e524389e5381ad5f4';
+            const accountSid = 'AC68cb6727c28048ac5888969757c82353';
+            const authToken = '7d8fab558404da713ecb0a6a092f8714';
 
             const url = 'https://api.twilio.com/2010-04-01/Accounts/' + accountSid + '/Messages.json';
 
@@ -12,7 +12,7 @@
 
             const body = new URLSearchParams();
             body.append('To', '+639217214912');
-            body.append('From', '+12059007971');
+            body.append('From', '+12674332907');
             body.append('Body', filtered);
 
             fetch(url, {

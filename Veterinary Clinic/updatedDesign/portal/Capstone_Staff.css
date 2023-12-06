@@ -18,7 +18,6 @@
 body {
     min-height: 100vh;
     background-color: #5782fa;
-
 }
 
 .item-table .view-button {
@@ -362,9 +361,9 @@ nav.close~.Contents .top {
     margin-top: 20px;
 }
 
-.staff-table {
+/* .staff-table {
     overflow-x: auto;
-}
+} */
 
 .staff-table th {
     text-align: center;

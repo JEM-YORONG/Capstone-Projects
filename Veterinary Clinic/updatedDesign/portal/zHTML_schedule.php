@@ -19,6 +19,34 @@
 
     <?php require 'alert-notif-function.php'; ?>
 
+    <!-- pagenation design -->
+    <style>
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .pagination-button {
+            background-color: #ffffff;
+            border: 1px solid #5a81fa;
+            border-radius: 8px;
+            box-sizing: border-box;
+            color: #5a81fa;
+            cursor: pointer;
+            font-size: 13px;
+            line-height: 29px;
+            padding: 0 10px;
+            margin: 0 5px;
+        }
+
+        .pagination-button.active {
+            background-color: #5a81fa;
+            color: #ffffff;
+        }
+    </style>
+
     <!-- drop down names -->
     <style>
         .select-dropdown {
@@ -305,7 +333,7 @@
 
             <!--=====Today Schedule and Search====-->
             <div class="bttn">
-                        <button class="missed-button" onclick="" style="  background-color: #5a81fa;
+                <button class="missed-button" onclick="" style="  background-color: #5a81fa;
                             border: 1px solid #21305d00;
                             border-radius: 8px;
                             box-sizing: border-box;
@@ -318,11 +346,11 @@
                             margin-right: 3%;
                             font-weight: bold;
                             ">
-                            <a href="Capstone_MissedSchedule.php" style="text-decoration: none; color: white;">
-                                Missed Schedules
-                            </a>
-                        </button>
-                    </div>
+                    <a href="Capstone_MissedSchedule.php" style="text-decoration: none; color: white;">
+                        Missed Schedules
+                    </a>
+                </button>
+            </div>
             <div class="activity">
                 <div class="table-1">
                     <div class="title-clinic-schedule">
@@ -330,7 +358,7 @@
                         <input type="text" id="statusId" style="display: none;">
                         <div class="search-box" style="width: 100%;">
                             <br>
-                            <input type="text" placeholder="Search here..." id="search1" name="search1">
+                            <input type="text" placeholder="Search here..." id="search1" oninput="filterTable();" name="search1">
                         </div>
                     </div>
                 </div>
@@ -338,21 +366,115 @@
                 <br><br>
                 <!--=====Table for today schedule====-->
                 <div class="today-clinic-schedule-responsive">
-                    <table class="clinic-schedule" width=100%>
+                    <table class="clinic-schedule" width=100% id="todaySched">
                         <thead>
                             <tr>
                                 <th scope="col" width=5%></th>
                                 <th scope="col" width=5%>Status</th>
-                                <th scope="col"width=5%> Notify </th>
-                                <th scope="col"width=10%>Date</th>
-                                <th scope="col" width= 20%>Name</th>
-                                <th scope="col"width=15% colspan="3">Actions</th>
+                                <th scope="col" width=5%> Notify </th>
+                                <th scope="col" width=10%>Date</th>
+                                <th scope="col" width=20%>Name</th>
+                                <th scope="col" width=15% colspan="3">Actions</th>
                             </tr>
                         </thead>
                         <tbody id="table-body1"></tbody>
-                        <?php require 'schedule-today-refresh.js..php'; ?>
+                        <?php require 'schedule-today-fetch-data.php'; ?>
                     </table>
                 </div>
+
+                <div id="pagination-container1" class="pagination"></div>
+
+                <script>
+                    var rowsPerPage1 = 5; // Adjust this to your desired number of rows per page
+                    var currentPage1 = 1;
+
+                    function showPage1(pageNumber) {
+                        var startIndex = (pageNumber - 1) * rowsPerPage1;
+                        var endIndex = startIndex + rowsPerPage1;
+
+                        var rows = document.getElementById('todaySched').rows;
+
+                        for (var i = 1; i < rows.length; i++) {
+                            rows[i].style.display = (i > startIndex && i <= endIndex) ? '' : 'none';
+                        }
+
+                        updatePaginationButtons1(pageNumber);
+                        currentPage1 = pageNumber;
+                    }
+
+                    function updatePaginationButtons1(activePage) {
+                        var buttons = document.getElementsByClassName('pagination-button');
+
+                        for (var i = 0; i < buttons.length; i++) {
+                            buttons[i].classList.remove('active');
+                        }
+
+                        var activeButton = document.getElementById('pageBtn1' + activePage);
+
+                        if (activeButton) {
+                            activeButton.classList.add('active');
+                        }
+                    }
+
+                    function generatePaginationControls1() {
+                        var paginationContainer = document.getElementById('pagination-container1');
+                        var pageCount = Math.ceil((document.getElementById('todaySched').rows.length - 1) / rowsPerPage1);
+
+                        var paginationHtml = '<button class="pagination-button" onclick="previousPage1()">Previous</button>';
+
+                        for (var i = 1; i <= pageCount; i++) {
+                            paginationHtml += '<button id="pageBtn1' + i + '" class="pagination-button ' + (i === currentPage1 ? 'active' : '') + '" onclick="showPage1(' + i + ')">' + i + '</button>';
+                        }
+
+                        paginationHtml += '<button class="pagination-button" onclick="nextPage1()">Next</button>';
+
+                        paginationContainer.innerHTML = paginationHtml;
+                    }
+
+                    function previousPage1() {
+                        if (currentPage1 > 1) {
+                            showPage1(currentPage1 - 1);
+                        }
+                    }
+
+                    function nextPage1() {
+                        var pageCount = Math.ceil((document.getElementById('todaySched').rows.length - 1) / rowsPerPage1);
+                        if (currentPage1 < pageCount) {
+                            showPage1(currentPage1 + 1);
+                        }
+                    }
+
+                    function filterTable() {
+                        var input, filter, table, tr, td, i, txtValue;
+                        input = document.getElementById("search1");
+                        filter = input.value.toUpperCase();
+                        table = document.getElementById("todaySched");
+                        tr = table.getElementsByTagName("tr");
+
+                        if (filter === "") {
+                            showPage1(1);
+                            return;
+                        }
+
+                        for (i = 1; i < tr.length; i++) {
+                            var visible = false;
+                            for (var j = 0; j < tr[i].cells.length; j++) {
+                                td = tr[i].cells[j];
+                                if (td) {
+                                    txtValue = td.textContent || td.innerText;
+                                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                        visible = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            tr[i].style.display = visible ? "" : "none";
+                        }
+                    }
+
+                    generatePaginationControls1();
+                    showPage1(1);
+                </script>
 
                 <div class="table-2">
                     <div class="title-clinic-schedule">
@@ -363,7 +485,7 @@
                 <!--Search and sort-->
                 <div class="table-2">
                     <div class="search-box">
-                        <input type="text" placeholder="Search here..." id="search2" name="search2">
+                        <input type="text" placeholder="Search here..." oninput="filterTable2();" id="search2" name="search2">
                     </div>
                     <div class="date-picker">
                         <label>Sort by Date:</label>
@@ -376,7 +498,7 @@
 
                 <!--=====Upcoming for today schedule====-->
                 <div class="upcoming-clinic-schedule">
-                    <table>
+                    <table id="upcomingSched">
                         <thead>
                             <tr>
                                 <th scope="col"> Notify </th>
@@ -386,9 +508,116 @@
                             </tr>
                         </thead>
                         <tbody id="table-body2"></tbody>
-                        <?php require 'schedule-upcoming-refresh.js.php'; ?>
+                        <?php require 'schedule-upcoming-fetch-data.php'; ?>
                     </table>
                 </div>
+
+                <div id="pagination-container2" class="pagination"></div>
+
+                <script>
+                    var rowsPerPage2 = 5; // Adjust this to your desired number of rows per page
+                    var currentPage2 = 1;
+
+                    function showPage2(pageNumber) {
+                        var startIndex = (pageNumber - 1) * rowsPerPage2;
+                        var endIndex = startIndex + rowsPerPage2;
+
+                        var rows = document.getElementById('upcomingSched').rows;
+
+                        for (var i = 1; i < rows.length; i++) {
+                            rows[i].style.display = (i > startIndex && i <= endIndex) ? '' : 'none';
+                        }
+
+                        updatePaginationButtons2(pageNumber);
+                        currentPage2 = pageNumber;
+                    }
+
+                    function updatePaginationButtons2(activePage) {
+                        var buttons = document.getElementsByClassName('pagination-button');
+
+                        for (var i = 0; i < buttons.length; i++) {
+                            buttons[i].classList.remove('active');
+                        }
+
+                        var activeButton = document.getElementById('pageBtn2' + activePage);
+
+                        if (activeButton) {
+                            activeButton.classList.add('active');
+                        }
+                    }
+
+                    function generatePaginationControls2() {
+                        var paginationContainer = document.getElementById('pagination-container2');
+                        var pageCount = Math.ceil((document.getElementById('upcomingSched').rows.length - 1) / rowsPerPage2);
+
+                        var paginationHtml = '<button class="pagination-button" onclick="previousPage2()">Previous</button>';
+
+                        for (var i = 1; i <= pageCount; i++) {
+                            paginationHtml += '<button id="pageBtn2' + i + '" class="pagination-button ' + (i === currentPage2 ? 'active' : '') + '" onclick="showPage2(' + i + ')">' + i + '</button>';
+                        }
+
+                        paginationHtml += '<button class="pagination-button" onclick="nextPage2()">Next</button>';
+
+                        paginationContainer.innerHTML = paginationHtml;
+                    }
+
+                    function previousPage2() {
+                        if (currentPage2 > 1) {
+                            showPage2(currentPage2 - 1);
+                        }
+                    }
+
+                    function nextPage2() {
+                        var pageCount = Math.ceil((document.getElementById('upcomingSched').rows.length - 1) / rowsPerPage2);
+                        if (currentPage2 < pageCount) {
+                            showPage2(currentPage2 + 1);
+                        }
+                    }
+
+                    function onSelect() {
+                        const dateVal = document.getElementById("sortDate").value;
+                        if (dateVal === "") {
+                            document.getElementById("search2").value = "";
+                            showPage2(1);
+                        } else {
+                            document.getElementById("search2").value = dateVal;
+                            filterTable2();
+                        }
+                    }
+
+                    function filterTable2() {
+                        var input, filter, table, tr, td, i, txtValue;
+                        input = document.getElementById("search2");
+                        filter = input.value.toUpperCase();
+                        table = document.getElementById("upcomingSched");
+                        tr = table.getElementsByTagName("tr");
+
+                        if (filter === "") {
+                            showPage2(1);
+                            return;
+                        }
+
+                        for (i = 1; i < tr.length; i++) {
+                            var visible = false;
+                            for (var j = 0; j < tr[i].cells.length; j++) {
+                                td = tr[i].cells[j];
+                                if (td) {
+                                    txtValue = td.textContent || td.innerText;
+                                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                        visible = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            tr[i].style.display = visible ? "" : "none";
+                        }
+                    }
+
+
+                    generatePaginationControls2();
+                    showPage2(1);
+                </script>
+
 
                 <!--=====Add New Appointment====-->
                 <div class="add-button">
@@ -651,7 +880,7 @@
                                     <label for="name">Name</label>
                                     <div class="custom_select">
                                         <div class="select-dropdown">
-                                            <input type="text" class="input" id="nameUpdate" name="name" oninput="filterOptions()" autocomplete="off"  disabled>
+                                            <input type="text" class="input" id="nameUpdate" name="name" oninput="filterOptions()" autocomplete="off" disabled>
                                             <ul class="dropdown-options" id="customerNamesUpdate">
                                                 <?php
                                                 require 'database-conn.php';
@@ -696,7 +925,7 @@
                             </div>
 
                             <div class="inputfield">
-                            <input type="button" class="viewpet-bttn" value="View Petnames" onclick="viewPets(); submitData('getName');" id="viewBtn">
+                                <input type="button" class="viewpet-bttn" value="View Petnames" onclick="viewPets(); submitData('getName');" id="viewBtn">
                                 <table>
                                     <tr>
                                         <td>
@@ -1000,11 +1229,12 @@
                 </div>
 
                 <script>
-                    function sent(){
+                    function sent() {
                         successAlert("Message sent successfully.");
                         closeFormsms();
                     }
-                    function statusDone(){
+
+                    function statusDone() {
                         successAlert("Appointments marked as completed.");
                         closeConfirmForm();
                     }
@@ -1580,14 +1810,6 @@ Doc Lenon Veterinary Clinic`;
             document.getElementById("smsPetname").value = petname;
         }
 
-        function onSelect() {
-            const dateVal = document.getElementById("sortDate").value;
-            if (dateVal === "") {
-                document.getElementById("search2").value = "";
-            } else {
-                document.getElementById("search2").value = dateVal;
-            }
-        }
 
         function deleteRow(rowId) {
             document.getElementById("rowId").value = rowId;
